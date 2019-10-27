@@ -1,6 +1,9 @@
+//#ifndef _INGREDIENTE_
+#define _INGREDIENTE_
+
 #include <iostream>
 #include <string>
-//#include "VD.h"
+#include "VD.h"
 
 using namespace std;
 

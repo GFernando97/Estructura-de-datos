@@ -28,6 +28,8 @@ void VD<T>::Copiar (const VD<T> &v){
 template <class T>
 void VD<T>::Liberar(){
   delete[] datos;
+  n = 0;
+  reservados = 0;
 }
 
 template <class T>

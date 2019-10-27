@@ -1,9 +1,13 @@
+//#ifndef _INGREDIENTES_
+#define _INGREDIENTES_
+
 #include <iostream>
 #include <fstream>
 #include <utility>
 #include <list>
 #include "VD.h"
 #include "ingrediente.h"
+
 
 using namespace std;
 
@@ -40,24 +44,31 @@ private:
   VD<Ingrediente> datos;
   VD<int> indice;
 
-  pair<bool, int> estaEnIndice(Ingrediente &ing);
+  //IMPLEMENTADO -- REVISAR POR SI ACASO
+  pair<bool, int> estaEnIndice(int posEnDatos);
+  //IMPLEMENTADO
   pair<bool, int> estaEnDatos(Ingrediente &ing);
-//
+  //IMPLEMENTADO
   void Copiar(const Ingredientes & ing);//
-//
+  //IMPLEMENTADO
   void Clear();
-  //
+  //IMPLEMENTADO -- REVISAR SI NO FUNCIONA
   void ordenarPorNombre();
 
 public:
+
+  //IMPLEMENTADO
   Ingredientes(){};
-  Ingredientes(const Ingredientes &ing);//
+  //IMPLEMENTADO
+  Ingredientes(const Ingredientes &ing);
 
-
-  list<Ingrediente> getIngredienteTipo(string tipo);//
+  //IMPLEMENTADO
+  Ingredientes getIngredienteTipo(string tipo);
+  //IMPLEMENTADO
   void addIngrediente(const Ingrediente &ing);
-  void deleteIngrediente(const string &nombreIng);
-
+  //IMPLEMENTADO
+  void deleteIngrediente(const Ingrediente &ing);
+  //IMPLEMENTADO
   int size()const{return datos.size();}//
 
 /*
@@ -69,13 +80,20 @@ public:
   void setGrasasIngrediente(int indice, int nuevoValor);
   void setFibraIngrediente(int indice, int nuevoValor);*/
 
+  //IMPLEMENTADO
   Ingrediente get(int indice);
+
+  //IMPLEMENTADO
   Ingredientes &operator=(const Ingredientes &lista);
-  Ingrediente &operator[](int i)const;
-
+  //IMPLEMENTADO
+  Ingrediente &operator[](int i)const{return datos[i]};
+  //IMPLEMENTADO --POR SI ACASO, INCLUIR LA PARTE DE NOMBRE - CALORIAS ... AL PRINCIPIO
   friend ostream &operator<<(ostream &o, const Ingredientes &lista);
-  friend istream &operator>>(istream &i, Ingredientes & lista);
+  //IMPLEMENTADO
+  friend istream &operator>>(istream &i, Ingredientes &lista);
 
-  void ImprimirPorTipo( ostream& out);
+  void ImprimirPorTipo( ostream &out);
+
+//  void calcularEstadisticas(const Ingredientes &listaTipo);
 
 };

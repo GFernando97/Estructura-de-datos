@@ -1,3 +1,5 @@
+#ifndef _VD_
+#define _VD_
 
 using namespace std;
 

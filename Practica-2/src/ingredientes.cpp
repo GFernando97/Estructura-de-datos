@@ -1,47 +1,3 @@
-/*• Insertar y Borrar un ingrediente. Estas operaciones tienen que preservar
- el orden tras
-su ejecución. Recordar que el orden que tenemos en Ingredientes es doble 1)
-Solamente por nombre 2) Por tipo y nombre.
-
-• Obtener el ingrediente en la posición i según el orden del nombre.
-• Obtener la información de un ingrediente dando su nombre
-• Obtener todas los ingredientes de un tipo
-• Sobrecargas el operator [] para realizar consultas
-de la posición i
-• Operadores de modificación: modificar el ingrediente
-ingrediente
-• Además se deberá sobrecargar los operadores de escritura y lectura en flujos.
-por otro
-
-
-pareja Conjunto :: Esta (int x) const {
-//Al estar ordenado podemos hacer una busqueda binaria
-int n = d.size();
-int inicio = 0, fin = n;
-
-while (inicio < fin) {
-  int mitad = (inicio + fin)/2;
-  if (d[mitad] == x) {
-    pareja p = {mitad, true};
-    return p;
-  }
-
-  else {
-    if (x > d[mitad])
-      inicio = mitad + 1;
-    else
-    fin = mitad;
-  }
-
-  pareja p = {inicio, false};
-  return p;
-}
-}
-
-*/
-
-
-
 #include <iostream>
 #include <fstream>
 #include <utility>
@@ -51,8 +7,6 @@ while (inicio < fin) {
 #include "ingredientes.h"
 
 using namespace std;
-
-
 
   pair<bool, int>Ingredientes::estaEnIndice(int posEnDatos){
     int tam = indice.size();
@@ -93,7 +47,6 @@ using namespace std;
       if(datos[mitad] == ing){
         encontradoEnPos.first = true;
         encontradoEnPos.second = mitad;
-      //  return encontradoEnPos;
       }
 
       else{
@@ -121,25 +74,8 @@ using namespace std;
   }
 
   void Ingredientes::Clear(){
-  }
-
-
-  Ingredientes Ingredientes::Ingredientes(const Ingredientes &ing){
-    Clear();
-    Copiar(&ing);
-  }
-
-  list<Ingrediente> Ingredientes::getIngredienteTipo(string tipo){
-    list<Ingrediente> ingredientesTipo;
-
-
-    ingredientesTipo.clear();
-    for(int i = 0; i < datos.size(); i++){
-      if(datos[i].getTipo() == tipo){}
-        ingredientesTipo.insert(datos[i]);
-    }
-
-    return ingredientesTipo;
+    datos.liberar();
+    indice.liberar();
   }
 
   void Ingredientes::ordenarPorNombre(){
@@ -158,6 +94,22 @@ using namespace std;
       }
   }
 
+  Ingredientes Ingredientes::Ingredientes(const Ingredientes &ing){
+    Clear();
+    Copiar(&ing);
+  }
+
+  Ingredientes Ingredientes::getIngredienteTipo(string tipo){
+    Ingrediente ingredientesTipo;
+
+    ingredientesTipo.clear();
+    for(int i = 0; i < datos.size(); i++){
+      if(datos[i].getTipo() == tipo){}
+        ingredientesTipo.addIngrediente(datos[i]);
+    }
+
+    return ingredientesTipo;
+  }
 
 
   void Ingredientes::addIngrediente(const Ingrediente &ing){
@@ -175,6 +127,101 @@ using namespace std;
     }
   }
 
-  void deleteIngrediente(const string &nombreIng){
-    
+  void deleteIngrediente(const Ingrediente &ing){
+    pair <bool, int> estaEnPos = estaEnDatos(ing);
+    int pos;
+
+    if(estaEnPos.first = true){
+      pos = estaEnPos.second;
+      datos.Borrar(pos);
+
+      if(estaEnIndice(pos).first == true){
+        pos = estaEnIndice(pos).second;
+        indice.Borrar(pos);
+      }
+    }
   }
+//-------------------------------------------------------------------
+//                GETTERS Y SETTERS SE IMPLEMENTARÁN AQUÍ
+//
+//
+//
+//
+//
+//
+//
+//-------------------------------------------------------------------
+
+  Ingrediente Ingredientes:: get(int indice){
+    if(indice <= datos.size() && indice >= 0)
+      return datos[indice];
+  }
+
+  Ingredientes Ingredientes::&operator=(const Ingredientes &lista){
+    if(this != &lista){
+      clear();
+      copiar(lista);
+    }
+    return *this;
+  }
+
+  ostream &operator <<(ostream &o, const Ingredientes &lista){
+    int n = lista.size();
+
+    for(int i = 0; i < n; i++){
+      os << lista.datos[i].getNombre() << ";"
+         << lista.datos[i].getCalorias() << ";"
+         << lista.datos[i].getHc() << ";"
+         << lista.datos[i].getProteinas() << ";"
+         << lista.datos[i].getGrasas() << ";"
+         << lista.datos[i].getFibra() << ";"
+         << lista.datos[i].getTipo() << endl;
+    }
+
+    return os;
+  }
+
+  istream &operator>>(istream&i, Ingredientes &lista){
+    string aux;
+    Ingrediente ingAux;
+    string nombre, tipo, calorias, hc, proteinas, grasa, fibra;
+    int nveces =0;
+
+    while(!i.eof()){
+      getline(i,aux,'\n');
+      if(nveces == 0){
+        nveces++;
+      }
+      else{
+        getline(aux, nombre,';');
+        getline(aux,calorias,';');
+        getline(aux,hc,';');
+        getline(aux,proteinas,';');
+        getline(aux,grasa,';');
+        getline(aux,fibra,';');
+        getline(aux,tipo);
+
+        ingAux.setNombre(nombre);
+        ingAux.setCalorias(stoi(calorias, nullptr, 10));
+        ingAux.setHc(stoi(hc, nullptr, 10));
+        ingAux.setProteinas(stoi(proteinas, nullptr, 10));
+        ingAux.setGrasas(stoi(grasa, nullptr, 10));
+        ingAux.setFibra(stoi(fibra, nullptr,10));
+        ingAux.setTipo(tipo);
+
+        lista.addIngrediente(ingAux);
+        nveces++;
+      }
+    }
+
+    return i;
+  }
+
+    void Ingredientes::ImprimirPorTipo(ostream &out){
+
+      for (int i = o; i < indice.size(); i++){
+        out << datos[indice[i]] << endl;
+      }
+
+      return out;
+    }
