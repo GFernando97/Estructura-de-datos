@@ -1,0 +1,61 @@
+practica 2 de ED
+
+Para la pirmera parte, hay que comentar la seccion 2 y 5 del archivo de pruebas test ingrediente.cpp
+  la coleccion de ingredientes debe tener un orden po:
+    nombre de ingerdiente
+    Por tipo y en iguldad de tipo por nombre
+
+    Hay que usar el VD implementado en clase
+
+    class ingredientes{
+    private:
+      VD<Ingrediente> datos;
+      VD<Int> indice;
+
+    }
+
+
+    TDA INGREDIENTE DEBE tener
+    nombre, caloria, HC, Proteina, Grasa, Fibra, Tipo
+
+    operaciones ->
+
+
+    Test VD.cpp
+
+    entrada de datos e insercion de elementos
+       vs.insertar('platano', )
+
+    test de salida con cout y salida de vector por indice corrdcot
+
+
+    class Ingredientes{
+    private :.
+    vd<Ingrediente> datos; --> ordenados por nombre
+    vd<Int> indice; --> por tipo, setNombre
+    public:
+
+    void Insetar(const INgediente ing)
+    --> BUscar donde insertar en datos en nuevo ingredientes
+      --> <bool,int> --> false,5, true,2 .......
+    --> Buscar el ingrediente en indice
+      --> <bool,int> false, 2
+    --> Incrementar en 1 todos aquellos valores de indice con un valor mayor o igual a a posD.
+    --> Insertar dato en Ingredientes
+    --> Insertar dato en la pos de indice.s
+
+
+    void Borrar(const String )
+    }
+
+    friend istream &operator>>(istream &is, Ingredientes &I){
+    Lectura de datos y ua vez leidos, crear un objeto Ingrediente e Insertar en El vector de ingredientes
+
+    }
+
+    crer un clear para eliminar los datos de
+
+    I.clear();
+    Ingrediente IG;
+
+    WHILE is >> ING;
