@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	  return 0;
  }
  /******************************************************************************************/
- /*//SECTION 1: Test sobre la lectura de un Ingrediente
+ //SECTION 1: Test sobre la lectura de un Ingrediente
  //Ingrediente debe tener operadores de consulta y de modificacion por cada parametros
  //ademas de sobrecarga de lectura y escritura
  string nf =argv[1];
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
  cout<<endl<<"Ahora probamos la sobrecarga de salida:\t"<<i<<endl;
 
  cout<<"\n Pulsa una tecla para continuar...."<<endl;
- cin.get();*/
+ cin.get();
  /******************************************************************************************/
  //SECTION 2: Test sobre el objeto Ingredientes. En primer lugar comprobamos que la sobrecarga de entrada/salida
  //esta bien. Y por lo tanto la operación de insertar
@@ -96,13 +96,13 @@ int main(int argc, char *argv[])
   cin.get();
   /******************************************************************************************/
   //SECTION 5: Obtiene los tipos diferentes y los  Ingredientes de un tipo concreto
-   VD<string> tipos=all_ingre.getTipos();
+   /*VD<string> tipos=all_ingre.getTipos();
    cout<<"Los tipos de alimentos son:"<<endl;
    for (int i=0;i<tipos.size(); ++i){
       cout<<tipos[i]<<endl;
    }
    cout<<"Pulse una tecla para continuar "<<endl;
-   cin.get();
+   cin.get();*/
 
    string tipo="Molusco";
    Ingredientes ingre_tipo=all_ingre.getIngredienteTipo(tipo);

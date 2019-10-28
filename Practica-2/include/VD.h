@@ -30,6 +30,7 @@ class VD{
     void Liberar();
 
   public:
+
     /**
     *@brief Crea un vetor dinamico
     *@param tam tamaño del vector, por defecto 10.
@@ -94,3 +95,5 @@ class VD{
 };
 
 #include "VD.cpp"
+
+#endif

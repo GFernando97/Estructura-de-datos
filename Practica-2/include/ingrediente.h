@@ -1,12 +1,11 @@
-//#ifndef _INGREDIENTE_
+#ifndef _INGREDIENTE_
 #define _INGREDIENTE_
 
 #include <iostream>
 #include <string>
-#include "VD.h"
+#include <fstream>
 
 using namespace std;
-
 
 class Ingrediente{
 private:
@@ -31,7 +30,7 @@ public:
   /**
   *@brief consructor vacío
   **/
-  Ingrediente();
+  Ingrediente(){}
 
 
   /**
@@ -63,6 +62,9 @@ public:
   **/
   Ingrediente &operator= (const Ingrediente &ing);
 
+  ////////////////////////////////////////////////////
+  bool operator ==(const Ingrediente &ing);
+
 
   /**
   *@brief Obtener el nombre del ingrediente
@@ -79,6 +81,9 @@ public:
   **/
   string getTipo() const{return this->tipo;}
 
+
+  friend ostream &operator <<(ostream &o, const Ingrediente &ing);
+  friend istream &operator >>(istream &i, Ingrediente &ing);
 
   /**
   *@brief Metodo get de calorias
@@ -109,4 +114,7 @@ public:
 
   void setFibra(int fibra){this->fibra = fibra;}
 
+
 };
+
+#endif

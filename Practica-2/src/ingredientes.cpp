@@ -1,10 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include <utility>
-#include <cmath>
-#include <list>
-#include <cstring>
 #include "ingredientes.h"
+
 
 using namespace std;
 
@@ -23,13 +18,13 @@ using namespace std;
       }
 
       else{
-        if(strcmp(datos[mitad].getTipo(), datos[posEnDatos].getTipo() >= 0))
+        if(datos[mitad].getTipo().compare(datos[posEnDatos].getTipo())>= 0)
           inicio = mitad+1;
 
         else fin = mitad;
       }
 
-      econtradoEnPos.first = false;
+      encontradoEnPos.first = false;
       encontradoEnPos.second = inicio;
     }
 
@@ -40,7 +35,7 @@ using namespace std;
     int tam = datos.size();
     int inicio = 0;
     int fin = tam;
-    pair<bool,int> econtradoEnPos;
+    pair<bool,int> encontradoEnPos;
 
     while(inicio < fin){
       int mitad = (inicio + fin)/2;
@@ -50,7 +45,7 @@ using namespace std;
       }
 
       else{
-        if(strcmp(ing.getNombre(), datos[mitad]).getNombre() > 0)
+        if(ing.getNombre().compare(datos[mitad].getNombre()) > 0)
           inicio = mitad+1;
 
         else fin = mitad;
@@ -74,8 +69,8 @@ using namespace std;
   }
 
   void Ingredientes::Clear(){
-    datos.liberar();
-    indice.liberar();
+  /*  delete this->datos);
+    delete this->indice);*/
   }
 
   void Ingredientes::ordenarPorNombre(){
@@ -83,26 +78,26 @@ using namespace std;
 
       for(int i = 0; i < datos.size()-1; i++){
         for(int j= 0; j < datos.size()-i-1; j++){
-          if(strcmp(datos[j], datos[j+1]) > 0){
+          if(datos[j].getNombre().compare(datos[j+1].getNombre()) > 0){
             aux = datos[j+1];
-            datos.borrar(j+1);
-            datos.insert(datos[j], j+1);
-            datos.borrar(j);
-            datos.insert(aux, j);
+            datos.Borrar(j+1);
+            datos.Insertar(datos[j], j+1);
+            datos.Borrar(j);
+            datos.Insertar(aux, j);
           }
         }
       }
   }
 
-  Ingredientes Ingredientes::Ingredientes(const Ingredientes &ing){
+  Ingredientes::Ingredientes(const Ingredientes &ing){
     Clear();
-    Copiar(&ing);
+    Copiar(ing);
   }
 
   Ingredientes Ingredientes::getIngredienteTipo(string tipo){
-    Ingrediente ingredientesTipo;
+    Ingredientes ingredientesTipo;
 
-    ingredientesTipo.clear();
+    ingredientesTipo.Clear();
     for(int i = 0; i < datos.size(); i++){
       if(datos[i].getTipo() == tipo){}
         ingredientesTipo.addIngrediente(datos[i]);
@@ -112,22 +107,22 @@ using namespace std;
   }
 
 
-  void Ingredientes::addIngrediente(const Ingrediente &ing){
+  void Ingredientes::addIngrediente(Ingrediente &ing){
     pair<bool, int> posDatos = estaEnDatos(ing);
     pair<bool, int> posIndice = estaEnIndice(posDatos.second);
 
     if(posDatos.first == false){
-      datos.insert(ing, posDatos.second);
-      indice.insert(posDatos.second, posIndice.second);
+      datos.Insertar(ing, posDatos.second);
+      indice.Insertar(posDatos.second, posIndice.second);
     }
 
-    else if(pos.first == true ){
-      if(datos[pos.second].getTipo() != ing.getTipo())
-        datos.insert(ing, pos.second + 1);
+    else if(posIndice.first == true ){
+      if(datos[posIndice.second].getTipo() != ing.getTipo())
+        datos.Insertar(ing, posIndice.second + 1);
     }
   }
 
-  void deleteIngrediente(const Ingrediente &ing){
+  void Ingredientes::deleteIngrediente(Ingrediente &ing){
     pair <bool, int> estaEnPos = estaEnDatos(ing);
     int pos;
 
@@ -152,15 +147,32 @@ using namespace std;
 //
 //-------------------------------------------------------------------
 
-  Ingrediente Ingredientes:: get(int indice){
-    if(indice <= datos.size() && indice >= 0)
-      return datos[indice];
+  Ingrediente Ingredientes:: get(string nombreIng){
+    for(int i = 0; i < datos.size(); i++)
+      if(datos[i].getNombre()== nombreIng)
+        return datos[i];
   }
 
-  Ingredientes Ingredientes::&operator=(const Ingredientes &lista){
+  void Ingredientes::borrar(string nombreIng){
+    Ingrediente ing = get(nombreIng);
+    pair <bool, int> estaEnPos = estaEnDatos(ing);
+    int pos;
+
+    if(estaEnPos.first == true){
+      pos = estaEnPos.second;
+      datos.Borrar(pos);
+
+      if(estaEnIndice(pos).first == true){
+        pos = estaEnIndice(pos).second;
+        indice.Borrar(pos);
+      }
+    }
+  }
+
+  Ingredientes& Ingredientes::operator=(const Ingredientes &lista){
     if(this != &lista){
-      clear();
-      copiar(lista);
+      Clear();
+      Copiar(lista);
     }
     return *this;
   }
@@ -169,7 +181,7 @@ using namespace std;
     int n = lista.size();
 
     for(int i = 0; i < n; i++){
-      os << lista.datos[i].getNombre() << ";"
+      o << lista.datos[i].getNombre() << ";"
          << lista.datos[i].getCalorias() << ";"
          << lista.datos[i].getHc() << ";"
          << lista.datos[i].getProteinas() << ";"
@@ -178,21 +190,19 @@ using namespace std;
          << lista.datos[i].getTipo() << endl;
     }
 
-    return os;
+    return o;
   }
 
   istream &operator>>(istream&i, Ingredientes &lista){
-    string aux;
+    string linea;
     Ingrediente ingAux;
     string nombre, tipo, calorias, hc, proteinas, grasa, fibra;
-    int nveces =0;
 
+    getline(i, linea, '\n');
     while(!i.eof()){
-      getline(i,aux,'\n');
-      if(nveces == 0){
-        nveces++;
-      }
-      else{
+      getline(i,linea,'\n');
+
+        stringstream aux(linea);
         getline(aux, nombre,';');
         getline(aux,calorias,';');
         getline(aux,hc,';');
@@ -210,8 +220,6 @@ using namespace std;
         ingAux.setTipo(tipo);
 
         lista.addIngrediente(ingAux);
-        nveces++;
-      }
     }
 
     return i;
@@ -219,9 +227,8 @@ using namespace std;
 
     void Ingredientes::ImprimirPorTipo(ostream &out){
 
-      for (int i = o; i < indice.size(); i++){
-        out << datos[indice[i]] << endl;
+      for (int i = 0; i < indice.size(); i++){
+        cout << datos[indice[i]] << endl;
       }
 
-      return out;
     }

@@ -1,43 +1,18 @@
-//#ifndef _INGREDIENTES_
+#ifndef _INGREDIENTES_
 #define _INGREDIENTES_
 
 #include <iostream>
 #include <fstream>
 #include <utility>
-#include <list>
+#include <cmath>
+#include <cstring>
+#include <string>
+#include <sstream>
 #include "VD.h"
 #include "ingrediente.h"
 
 
 using namespace std;
-
-/*
-int tam = datos.size();
-int inicio = 0;
-int fin = tam;
-pair<bool,int> econtradoEnPos;
-
-while(inicio < fin){
-  int mitad = (inicio + fin)/2;
-  if(datos[mitad] == ing){
-    encontradoEnPos.first = true;
-    encontradoEnPos.second = mitad;
-  //  return encontradoEnPos;
-  }
-
-  else{
-    if(strcmp(ing.getNombre(), datos[mitad]).getNombre() > 0)
-      inicio = mitad+1;
-
-    else fin = mitad;
-  }
-
-  encontradoEnPos.first = false;
-  encontradoEnPos.second = inicio;
-
-}
-return encontradoEnPos;
-*/
 
 class Ingredientes{
 private:
@@ -58,16 +33,16 @@ private:
 public:
 
   //IMPLEMENTADO
-  Ingredientes(){};
+  Ingredientes(){}
   //IMPLEMENTADO
   Ingredientes(const Ingredientes &ing);
 
   //IMPLEMENTADO
   Ingredientes getIngredienteTipo(string tipo);
   //IMPLEMENTADO
-  void addIngrediente(const Ingrediente &ing);
+  void addIngrediente(Ingrediente &ing);
   //IMPLEMENTADO
-  void deleteIngrediente(const Ingrediente &ing);
+  void deleteIngrediente(Ingrediente &ing);
   //IMPLEMENTADO
   int size()const{return datos.size();}//
 
@@ -81,19 +56,23 @@ public:
   void setFibraIngrediente(int indice, int nuevoValor);*/
 
   //IMPLEMENTADO
-  Ingrediente get(int indice);
+  Ingrediente get(string nombreIng);
+
+  void borrar(string nombreIng);
 
   //IMPLEMENTADO
-  Ingredientes &operator=(const Ingredientes &lista);
+  Ingredientes& operator=(const Ingredientes &lista);
   //IMPLEMENTADO
-  Ingrediente &operator[](int i)const{return datos[i]};
+  Ingrediente &operator[](int i){return datos[i];}
   //IMPLEMENTADO --POR SI ACASO, INCLUIR LA PARTE DE NOMBRE - CALORIAS ... AL PRINCIPIO
-  friend ostream &operator<<(ostream &o, const Ingredientes &lista);
+  friend ostream & operator<<(ostream &o, const Ingredientes &lista);
   //IMPLEMENTADO
-  friend istream &operator>>(istream &i, Ingredientes &lista);
+  friend istream & operator>>(istream &i, Ingredientes &lista);
 
   void ImprimirPorTipo( ostream &out);
 
 //  void calcularEstadisticas(const Ingredientes &listaTipo);
 
 };
+
+#endif
