@@ -32,8 +32,8 @@ void VD<T>::Liberar(){
 }
 
 template <class T>
-VD<T>::VD(int tam){
-  reservados = tam;
+VD<T>::VD(){
+  reservados = 0;
   datos = new T[reservados];
   n=0;
 }
@@ -60,11 +60,19 @@ VD<T> & VD<T>::operator=(const VD<T> &v){
 
 template <class T>
 void VD<T>::Insertar(const T &d, int pos){
-  if(n >= (reservados/2))
-    resize(2*reservados);
+  cout << d;
+  cout << "Voy a intentar acceder a los datos de VD" << endl;
+  cout << "valor de n: " << reservados;
 
-  for(int i = n; i > pos; i--)
+  if(n >= (reservados/2)){
+    resize(2*reservados);
+  }
+    cout << "--reservados ahora: " << reservados;
+    cout << "--valor de n: " << n;
+
+  for(int i = n; i > pos; i--){
     datos[i] = datos[i-1];
+  }
 
   datos[pos] = d;
   n++;

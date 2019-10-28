@@ -82,8 +82,8 @@ public:
   string getTipo() const{return this->tipo;}
 
 
-  friend ostream &operator <<(ostream &o, const Ingrediente &ing);
-  friend istream &operator >>(istream &i, Ingrediente &ing);
+  friend ostream& operator << (ostream &o, const Ingrediente &ing);
+  friend istream& operator >> (istream &i, Ingrediente &ing);
 
   /**
   *@brief Metodo get de calorias

@@ -29,13 +29,14 @@ class VD{
     **/
     void Liberar();
 
+
   public:
 
     /**
     *@brief Crea un vetor dinamico
     *@param tam tamaño del vector, por defecto 10.
     **/
-    VD(int tam=10);
+    VD();
 
 
     /**
@@ -91,6 +92,7 @@ class VD{
      *@param pos: posicion en el vector cuyo dato se va a eliminar
      **/
      void Borrar (int pos);
+
 
 };
 

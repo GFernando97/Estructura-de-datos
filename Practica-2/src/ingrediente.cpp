@@ -22,8 +22,9 @@ Ingrediente::Ingrediente(string nombre, int calorias, int hidratos, int proteina
 
 
 Ingrediente& Ingrediente:: operator=(const Ingrediente &ing){
-  if(this != &ing)
+  if(this != &ing){
     Copiar(ing);
+  }
 
     return *this;
 }
@@ -39,7 +40,7 @@ bool Ingrediente::operator ==(const Ingrediente &ing){
 }
 
 
-ostream &operator <<(ostream &o, const Ingrediente &ing){
+ostream& operator << (ostream &o, const Ingrediente &ing){
 
    o << ing.getNombre() << ";"
      << ing.getCalorias() << ";"
@@ -47,12 +48,12 @@ ostream &operator <<(ostream &o, const Ingrediente &ing){
      << ing.getProteinas() << ";"
      << ing.getGrasas() << ";"
      << ing.getFibra() << ";"
-     << ing.getTipo() << endl;
+     << ing.getTipo();
 
      return o;
 }
 
-istream &operator >>(istream &i, Ingrediente &ing){
+istream& operator >> (istream &i, Ingrediente &ing){
   string nombre, tipo, calorias, hc, proteinas, grasa, fibra;
 
   getline(i, nombre,';');
@@ -61,7 +62,7 @@ istream &operator >>(istream &i, Ingrediente &ing){
   getline(i,proteinas,';');
   getline(i,grasa,';');
   getline(i,fibra,';');
-  getline(i,tipo);
+  getline(i,tipo,'\n');
 
   ing.setNombre(nombre);
   ing.setCalorias(stoi(calorias, nullptr, 10));

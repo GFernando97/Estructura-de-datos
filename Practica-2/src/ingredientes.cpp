@@ -1,5 +1,6 @@
 #include "ingredientes.h"
-
+#include "ingrediente.h"
+#include "VD.h"
 
 using namespace std;
 
@@ -7,10 +8,11 @@ using namespace std;
     int tam = indice.size();
     int inicio = 0;
     int fin = tam;
+    int mitad;
     pair<bool,int> encontradoEnPos;
 
     while(inicio < fin){
-      int mitad = (inicio + fin)/2;
+      mitad = inicio + (inicio + fin) / 2;
 
       if(indice[mitad] == posEnDatos){
         encontradoEnPos.first = true;
@@ -18,10 +20,11 @@ using namespace std;
       }
 
       else{
-        if(datos[mitad].getTipo().compare(datos[posEnDatos].getTipo())>= 0)
-          inicio = mitad+1;
+        if(datos[mitad].getTipo().compare(datos[posEnDatos].getTipo())>= 0){
+          fin = mitad - 1 ;
+        }
 
-        else fin = mitad;
+        else {inicio = mitad +1;}
       }
 
       encontradoEnPos.first = false;
@@ -31,14 +34,16 @@ using namespace std;
     return encontradoEnPos;
   }
 
-  pair <bool, int> Ingredientes::estaEnDatos(Ingrediente &ing){
+  pair <bool, int> Ingredientes::estaEnDatos(const Ingrediente &ing){
     int tam = datos.size();
-    int inicio = 0;
+    int inicio = 1;
     int fin = tam;
+    int mitad;
     pair<bool,int> encontradoEnPos;
 
-    while(inicio < fin){
-      int mitad = (inicio + fin)/2;
+    while(inicio <= fin){
+      mitad = inicio + (inicio + fin) / 2;
+
       if(datos[mitad] == ing){
         encontradoEnPos.first = true;
         encontradoEnPos.second = mitad;
@@ -46,9 +51,10 @@ using namespace std;
 
       else{
         if(ing.getNombre().compare(datos[mitad].getNombre()) > 0)
-          inicio = mitad+1;
+          fin = mitad-1;
 
-        else fin = mitad;
+        else  inicio = mitad+1;
+
       }
 
       encontradoEnPos.first = false;
@@ -107,18 +113,47 @@ using namespace std;
   }
 
 
-  void Ingredientes::addIngrediente(Ingrediente &ing){
+  void Ingredientes::addIngrediente(const Ingrediente &ing){
     pair<bool, int> posDatos = estaEnDatos(ing);
+
+    /*/////////////////////////////////////////////////////////////
+    cout << "esta en datos--" << posDatos.second << endl;
+    cout << "esta en datos(tue-false)--" << posDatos.first << endl;
+    ///////////////////////////////////////////////////////////*/
+
+
     pair<bool, int> posIndice = estaEnIndice(posDatos.second);
 
+    /*///////////////////////////////////////////////////////////
+    cout << "Esta en indice--" << posIndice.second << endl;
+    cout << "Esta en indice(true-false)--" << posIndice.first << endl;
+    ///////////////////////////////////////////////////////////*/
+
+
     if(posDatos.first == false){
+
+      /*//////////////////////////////////////////////////////////////////////////
+      cout << "Intentando Insertar datos por que no se encuentra....." << endl;
+      /////////////////////////////////////////////////////////////////////////*/
+
       datos.Insertar(ing, posDatos.second);
+
+      /*//////////////////////////////////////////////////////////////////////////
+      cout<< "Intentado Insertar en Indice tambien....." << endl;
+      /////////////////////////////////////////////////////////////////////////*/
+
       indice.Insertar(posDatos.second, posIndice.second);
     }
 
     else if(posIndice.first == true ){
-      if(datos[posIndice.second].getTipo() != ing.getTipo())
-        datos.Insertar(ing, posIndice.second + 1);
+
+      /*//////////////////////////////////////////////////////////////////////////
+      cout << "Intentando insertar en datos...." << endl;
+      ///////////////////////////////////////////////////////////////////*/
+      if(datos[posIndice.second].getTipo() != ing.getTipo()){
+        datos.Insertar(ing, posIndice.second);
+        indice.Insertar(posIndice.second, posDatos.second);
+      }
     }
   }
 
@@ -126,7 +161,7 @@ using namespace std;
     pair <bool, int> estaEnPos = estaEnDatos(ing);
     int pos;
 
-    if(estaEnPos.first = true){
+    if(estaEnPos.first == true){
       pos = estaEnPos.second;
       datos.Borrar(pos);
 
@@ -151,6 +186,7 @@ using namespace std;
     for(int i = 0; i < datos.size(); i++)
       if(datos[i].getNombre()== nombreIng)
         return datos[i];
+
   }
 
   void Ingredientes::borrar(string nombreIng){
@@ -196,31 +232,14 @@ using namespace std;
   istream &operator>>(istream&i, Ingredientes &lista){
     string linea;
     Ingrediente ingAux;
-    string nombre, tipo, calorias, hc, proteinas, grasa, fibra;
 
     getline(i, linea, '\n');
     while(!i.eof()){
-      getline(i,linea,'\n');
-
-        stringstream aux(linea);
-        getline(aux, nombre,';');
-        getline(aux,calorias,';');
-        getline(aux,hc,';');
-        getline(aux,proteinas,';');
-        getline(aux,grasa,';');
-        getline(aux,fibra,';');
-        getline(aux,tipo);
-
-        ingAux.setNombre(nombre);
-        ingAux.setCalorias(stoi(calorias, nullptr, 10));
-        ingAux.setHc(stoi(hc, nullptr, 10));
-        ingAux.setProteinas(stoi(proteinas, nullptr, 10));
-        ingAux.setGrasas(stoi(grasa, nullptr, 10));
-        ingAux.setFibra(stoi(fibra, nullptr,10));
-        ingAux.setTipo(tipo);
-
+        i >> ingAux;
         lista.addIngrediente(ingAux);
     }
+
+    lista.ordenarPorNombre();
 
     return i;
   }
