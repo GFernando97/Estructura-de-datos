@@ -85,7 +85,7 @@ public:
   friend ostream& operator << (ostream &o, const Ingrediente &ing);
   friend istream& operator >> (istream &i, Ingrediente &ing);
 
-  /**
+  /** 
   *@brief Metodo get de calorias
   *@return numero de calorias del ingrediente
   *IMPLEMENTADO
