@@ -3,7 +3,13 @@
 using namespace std;
 
 void Ingrediente::Copiar(const Ingrediente &ing){
-  *this = ing;
+  setNombre(ing.getNombre());
+  setTipo(ing.getTipo());
+  setCalorias(ing.getCalorias());
+  setHc(ing.getHc());
+  setProteinas(ing.getProteinas());
+  setGrasas(ing.getGrasas());
+  setFibra(ing.getFibra());
 }
 
 Ingrediente::Ingrediente(const Ingrediente &original){

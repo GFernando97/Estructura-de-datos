@@ -59,29 +59,19 @@ VD<T> & VD<T>::operator=(const VD<T> & v){
 
 template <class T>
 void VD<T>::Insertar(const T &d, int pos){
-  cout << "Ha entrado en la funcion insertar en la posicion\n";
-  cout << pos <<"\n";
-  cout << n << "   " << reservados << "\n";
-  cout << "lerolero\n";
+  cout << "Ha entrado en la funcion insertar en la posicion, el valor de n es: " << n <<  "\n";
   if(n >= (reservados/2)){
     resize(2*reservados);
   }
 
-  if(n == 0 && pos == 0){
-     cout << size() << "\n";
-    datos[pos] = d;
-    n++;
-  }
-  else{
     for(int i = n; i >= pos; i--){
-      cout << i << "maria no es realidad\n";
-      datos[i+1] = datos[i];
+      cout << "Maria no es realidad\n";
+      datos[i] = datos[i-1];
     }
 
   datos[pos] = d;
   n++;
-}
-  cout << "Ha llegado hasta aqui\n";
+
 }
 
 template <class T>
