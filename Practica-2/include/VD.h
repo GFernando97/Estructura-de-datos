@@ -36,7 +36,7 @@ class VD{
     *@brief Crea un vetor dinamico
     *@param tam tamaño del vector, por defecto 10.
     **/
-    VD();
+    VD(int tam = 10);
 
 
     /**
@@ -59,7 +59,7 @@ class VD{
     *@param v, vector dinamico del cual se van a copiar los datos
     *@return devuelve un puntero apuntando al objeto actual.
     **/
-    VD<T> &operator= (const VD<T> &v);
+    VD<T> &operator= (const VD<T> & v);
 
 
     int size() const {return n;}
@@ -70,7 +70,7 @@ class VD{
      *@param i, valor del indice del valor que vamos a consultar dentro del vector
      *@return devuelve el valor almacenado dentro del vector disperso con indice i
      **/
-     T &operator[] (int i) {return datos[i];}
+     T & operator[] (int i) {return datos[i];}
 
 
     /**
@@ -78,14 +78,14 @@ class VD{
     *@param i, valor del indice del valor que vamos a consultar dentro del vector
     *@return devuelve el valor almacenado dentro del vector disperso con indice i
     **/
-     const T &operator[] (int i) const {return datos[i];}
+     const T & operator[] (int i) const {return datos[i];}
 
 
      /**
      *@brief Añade un nuevo valor en la posicion deseada
      *@param d: dato que se va a añadir, pos: posicion en el vector en el cual se va a introducir el nuevo dato
      **/
-     void Insertar (const T &d, int pos);
+     void Insertar (const T & d, int pos);
 
      /**
      *@brief Borra el elemento de una determinada posicion

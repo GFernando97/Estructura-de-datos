@@ -22,7 +22,7 @@ private:
   //IMPLEMENTADO -- REVISAR POR SI ACASO
   pair<bool, int> estaEnIndice(int posEnDatos);
   //IMPLEMENTADO
-  pair<bool, int> estaEnDatos(const Ingrediente &ing);
+  pair<bool, int> estaEnDatos(string nombreIng);
   //IMPLEMENTADO
   void Copiar(const Ingredientes & ing);//
   //IMPLEMENTADO
@@ -40,7 +40,7 @@ public:
   //IMPLEMENTADO
   Ingredientes getIngredienteTipo(string tipo);
   //IMPLEMENTADO
-  void addIngrediente(const Ingrediente &ing);
+  void addIngrediente(const Ingrediente & ing);
   //IMPLEMENTADO
   void deleteIngrediente(Ingrediente &ing);
   //IMPLEMENTADO

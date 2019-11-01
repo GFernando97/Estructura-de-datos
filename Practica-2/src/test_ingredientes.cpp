@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
  cout<<"Tipo "<<i.getTipo()<<endl;
  cout<<endl<<"Ahora probamos la sobrecarga de salida:\t"<<i<<endl;
 
+
  cout<<"\n Pulsa una tecla para continuar...."<<endl;
  cin.get();
  /******************************************************************************************/
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
  //Ponemos el puntero del fichero al principio
  f.seekg(0);
  Ingredientes all_ingre;
+
  cout<<"Lectura de todos los Ingredientes"<<endl;
  f>>all_ingre;
 

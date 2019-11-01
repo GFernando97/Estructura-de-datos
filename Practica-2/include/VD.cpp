@@ -3,7 +3,7 @@ using namespace std;
 template <class T>
 void VD<T>::resize(int nuevoTam){
   T* aux = new T[nuevoTam];
-  int minimo = (n<nuevoTam)?n:nuevoTam;
+  int minimo = (n<nuevoTam) ? n:nuevoTam;
 
   for(int i=0; i<minimo;i++)
     aux[i]=datos[i];
@@ -11,7 +11,6 @@ void VD<T>::resize(int nuevoTam){
   reservados = nuevoTam;
   n = minimo;
   delete[] datos;
-
   datos =aux;
 }
 
@@ -26,15 +25,15 @@ void VD<T>::Copiar (const VD<T> &v){
 
 template <class T>
 void VD<T>::Liberar(){
-  delete[] datos;
-  n = 0;
-  reservados = 0;
+  if(datos != 0){
+    delete[] datos;
+  }
 }
 
 template <class T>
-VD<T>::VD(){
-  reservados = 0;
-  datos = new T[reservados];
+VD<T>::VD(int tam){
+  datos = new T[tam];
+  reservados = tam;
   n=0;
 }
 
@@ -49,7 +48,7 @@ VD<T>::~VD(){
 }
 
 template <class T>
-VD<T> & VD<T>::operator=(const VD<T> &v){
+VD<T> & VD<T>::operator=(const VD<T> & v){
   if(this != &v){
     Liberar();
     Copiar(v);
@@ -60,22 +59,29 @@ VD<T> & VD<T>::operator=(const VD<T> &v){
 
 template <class T>
 void VD<T>::Insertar(const T &d, int pos){
-  cout << d;
-  cout << "Voy a intentar acceder a los datos de VD" << endl;
-  cout << "valor de n: " << reservados;
-
+  cout << "Ha entrado en la funcion insertar en la posicion\n";
+  cout << pos <<"\n";
+  cout << n << "   " << reservados << "\n";
+  cout << "lerolero\n";
   if(n >= (reservados/2)){
     resize(2*reservados);
   }
-    cout << "--reservados ahora: " << reservados;
-    cout << "--valor de n: " << n;
 
-  for(int i = n; i > pos; i--){
-    datos[i] = datos[i-1];
+  if(n == 0 && pos == 0){
+     cout << size() << "\n";
+    datos[pos] = d;
+    n++;
   }
+  else{
+    for(int i = n; i >= pos; i--){
+      cout << i << "maria no es realidad\n";
+      datos[i+1] = datos[i];
+    }
 
   datos[pos] = d;
   n++;
+}
+  cout << "Ha llegado hasta aqui\n";
 }
 
 template <class T>
@@ -85,6 +91,6 @@ void VD<T>::Borrar(int pos){
 
   n--;
 
-  if(n < (reservados/4))
+  if(n < reservados/4)
     resize(reservados/2);
 }
