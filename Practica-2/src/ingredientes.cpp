@@ -12,24 +12,25 @@ using namespace std;
     pair<bool,int> encontradoEnPos;
 
     while(inicio < fin){
-      mitad = inicio + (inicio + fin) / 2;
+      mitad = (inicio + fin) / 2;
 
       if(indice[mitad] == posEnDatos){
         encontradoEnPos.first = true;
         encontradoEnPos.second = mitad;
+        return encontradoEnPos;
       }
 
       else{
-        if(datos[mitad].getTipo().compare(datos[posEnDatos].getTipo())>= 0){
-          fin = mitad - 1 ;
+        if(datos[mitad].getTipo().compare(datos[posEnDatos].getTipo())> 0){
+          inicio = mitad + 1 ;
         }
 
-        else {inicio = mitad +1;}
+        else {fin = mitad;}
       }
 
-      encontradoEnPos.first = false;
-      encontradoEnPos.second = inicio;
     }
+    encontradoEnPos.first = false;
+    encontradoEnPos.second = inicio;
 
     return encontradoEnPos;
   }
@@ -41,26 +42,26 @@ using namespace std;
     int mitad;
     pair<bool,int> encontradoEnPos;
 
-    while(inicio <= fin){
-      mitad = inicio + (inicio + fin) / 2;
+    while(inicio < fin){
+      mitad =(inicio + fin) / 2;
 
       if(datos[mitad].getNombre() == nombreIng){
         encontradoEnPos.first = true;
         encontradoEnPos.second = mitad;
+        return encontradoEnPos;
       }
 
       else{
         if(nombreIng.compare(datos[mitad].getNombre()) > 0)
-          fin = mitad-1;
+          inicio = mitad+1;
 
-        else  inicio = mitad+1;
+        else  fin = mitad;
 
       }
 
-      encontradoEnPos.first = false;
-      encontradoEnPos.second = inicio;
-
     }
+    encontradoEnPos.first = false;
+    encontradoEnPos.second = inicio;
     return encontradoEnPos;
 
   }
@@ -114,34 +115,36 @@ using namespace std;
 
 
   void Ingredientes::addIngrediente(const Ingrediente & ing){
+    cout <<"Ingrediente-" << ing << endl;
+    cout << "Voy a intentar descubrir si se encuentra en datos...\n";
     pair<bool, int> posDatos = estaEnDatos(ing.getNombre());
 
-    /*/////////////////////////////////////////////////////////////
-    cout << "el tamaño actual es: " << indice.size() << endl;
-    cout << "esta en datos--" << posDatos.second << endl;
+    //////////////////////////////////////////////////////////////
     cout << "esta en datos(tue-false)--" << posDatos.first << endl;
-    ///////////////////////////////////////////////////////////*/
+
+    cout << "esta en datos--" << posDatos.second <<  endl;
+    ////////////////////////////////////////////////////////////
 
 
     pair<bool, int> posIndice = estaEnIndice(posDatos.second);
 
-    /*///////////////////////////////////////////////////////////
-    cout << "Esta en indice--" << posIndice.second << endl;
+    ////////////////////////////////////////////////////////////
     cout << "Esta en indice(true-false)--" << posIndice.first << endl;
-    ///////////////////////////////////////////////////////////*/
+    cout << "Esta en indice--" << posIndice.second << endl << endl;
+    ////////////////////////////////////////////////////////////
 
 
     if(posDatos.first == false){
 
-      /*//////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////
       cout << "Intentando Insertar datos por que no se encuentra....." << endl;
-      /////////////////////////////////////////////////////////////////////////*/
+      //////////////////////////////////////////////////////////////////////////
 
       datos.Insertar(ing, posDatos.second);
 
-      /*//////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////
       cout<< "Intentado Insertar en Indice tambien....." << endl;
-      /////////////////////////////////////////////////////////////////////////*/
+      //////////////////////////////////////////////////////////////////////////
 
       indice.Insertar(posDatos.second, posIndice.second);
     }
@@ -156,6 +159,10 @@ using namespace std;
         indice.Insertar(posDatos.second, posIndice.second);
       }
     }
+
+    cout << "Maria no es realidad " << datos.size() << "\n";
+    cout << "--------------------------------------------------\n";
+
   }
 
   void Ingredientes::deleteIngrediente(Ingrediente &ing){
@@ -242,9 +249,10 @@ using namespace std;
     while(!i.eof()){
         i >> ingAux;
         lista.addIngrediente(ingAux);
+
     }
 
-    lista.ordenarPorNombre();
+    //lista.ordenarPorNombre();
 
     return i;
   }

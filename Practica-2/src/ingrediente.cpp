@@ -60,7 +60,7 @@ ostream& operator << (ostream &o, const Ingrediente &ing){
 }
 
 istream& operator >> (istream &i, Ingrediente &ing){
-  string nombre, tipo, calorias, hc, proteinas, grasa, fibra;
+  string nombre, tipo, calorias, hc, proteinas, grasa, fibra, aux;
 
   getline(i, nombre,';');
   getline(i,calorias,';');
@@ -68,7 +68,8 @@ istream& operator >> (istream &i, Ingrediente &ing){
   getline(i,proteinas,';');
   getline(i,grasa,';');
   getline(i,fibra,';');
-  getline(i,tipo,'\n');
+  getline(i,tipo, '\r');
+  getline(i, aux, '\n');
 
   ing.setNombre(nombre);
   ing.setCalorias(stoi(calorias, nullptr, 10));
