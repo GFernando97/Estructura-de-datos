@@ -17,4 +17,3 @@ Mantequilla;740;0;0;82;0;Aceite
 Yogur Liquido;78;11;3;2;0;Leche-Derivados
 Cacao Polvo;357;11;20;24;38;Semillas
 Arenque Ahumado;205;0;26;11;0;Pescado
-Pepinillos en vinagre;12;2.1;0.7;0.1;1;Verdura
