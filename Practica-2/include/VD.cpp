@@ -62,8 +62,7 @@ void VD<T>::Insertar(const T &d, int pos){
   if(n >= (reservados/2)){
     resize(2*reservados);
   }
-
-    for(int i = n; i >= pos; i--){
+    for(int i = n; i > pos; i--){
       datos[i] = datos[i-1];
     }
 
@@ -73,7 +72,7 @@ void VD<T>::Insertar(const T &d, int pos){
 
 template <class T>
 void VD<T>::Borrar(int pos){
-  for(int i = 0; i < n-1; i++)
+  for(int i = pos; i < n-1; i++)
     datos[i] = datos[i+1];
 
   n--;

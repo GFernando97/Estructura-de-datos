@@ -20,9 +20,9 @@ private:
   VD<int> indice;
 
   //IMPLEMENTADO -- REVISAR POR SI ACASO
-  pair<bool, int> estaEnIndice(int posEnDatos);
+  pair<bool, int> estaEnIndice(int posEnDatos) const;
   //IMPLEMENTADO
-  pair<bool, int> estaEnDatos(string nombreIng);
+  pair<bool, int> estaEnDatos(string nombreIng) const;
   //IMPLEMENTADO
   void Copiar(const Ingredientes & ing);//
   //IMPLEMENTADO
@@ -38,7 +38,7 @@ public:
   Ingredientes(const Ingredientes &ing);
 
   //IMPLEMENTADO
-  Ingredientes getIngredienteTipo(string tipo);
+  Ingredientes getIngredienteTipo(string tipo) const;
   //IMPLEMENTADO
   void addIngrediente(const Ingrediente & ing);
   //IMPLEMENTADO
