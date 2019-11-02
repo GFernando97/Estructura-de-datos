@@ -80,3 +80,12 @@ void VD<T>::Borrar(int pos){
   if(n < reservados/4)
     resize(reservados/2);
 }
+
+template <class T>
+bool VD<T>::Esta(T &d){
+  for(int i = 0; i < n; i++){
+    if(datos[i] == d)
+      return true;
+  }
+  return false;
+}

@@ -11,8 +11,7 @@ using namespace std;
     int mitad;
     pair<bool,int> encontradoEnPos;
     while(inicio < fin){
-      mitad = (inicio + fin) / 2;
-
+      mitad =(inicio + fin) / 2;
       if(indice[mitad] == posEnDatos){
         encontradoEnPos.first = true;
         encontradoEnPos.second = mitad;
@@ -21,11 +20,31 @@ using namespace std;
 
       else{
         if(datos[posEnDatos].getTipo().compare(datos[indice[mitad]].getTipo()) >= 0){
-          inicio = mitad+1;
+          if(datos[posEnDatos].getTipo().compare(datos[indice[mitad]].getTipo()) == 0){
+            if(datos[posEnDatos].getNombre().compare(datos[indice[mitad]].getNombre()) <= 0){
+              if(datos[posEnDatos].getTipo().compare(datos[indice[mitad-1]].getTipo()) == 0){
+                if(datos[posEnDatos].getNombre().compare(datos[indice[mitad-1]].getNombre()) > 0){
+                  encontradoEnPos.first = false;
+                  encontradoEnPos.second = mitad;
+                  return encontradoEnPos;
+                }
+                else fin = mitad;
+              }
+              else if(datos[posEnDatos].getTipo().compare(datos[indice[mitad-1]].getTipo()) > 0){
+                encontradoEnPos.first = false;
+                encontradoEnPos.second = mitad;
+                return encontradoEnPos;
+              }
+              else inicio = mitad+1;
+            }
+            else inicio = mitad+1;
+          }
+          else inicio = mitad+1;
         }
         else fin = mitad;
       }
     }
+
     encontradoEnPos.first = false;
     encontradoEnPos.second = inicio;
 
@@ -115,7 +134,7 @@ using namespace std;
     if(posDatos.first == false){
       datos.Insertar(ing, posDatos.second);
 
-      actualizarPosDatos(posDatos.second);
+      actualizarPosDatosInsertar(posDatos.second);
       posIndice = estaEnIndice(posDatos.second);
       indice.Insertar(posDatos.second, posIndice.second);
     }
@@ -146,7 +165,7 @@ using namespace std;
     }
   }
 
-  void Ingredientes::actualizarPosDatos(int desde){
+  void Ingredientes::actualizarPosDatosInsertar(int desde){
 
     for(int i =0; i< indice.size(); i++ ){
       if(indice[i]>=desde){
@@ -154,15 +173,59 @@ using namespace std;
       }
     }
   }
+
+  void Ingredientes::actualizarPosDatosBorrar(int desde){
+    for(int i = 0; i< indice.size(); i++){
+      if(indice[i]>=desde){
+        this->indice[i]--;
+      }
+    }
+  }
 //-------------------------------------------------------------------
 //                GETTERS Y SETTERS SE IMPLEMENTARÁN AQUÍ
-//
-//
-//
-//
-//
-//
-//
+  void Ingredientes::setNombreIngrediente(int indice, string nuevoNombre){
+    datos[indice].setNombre(nuevoNombre);
+  }
+
+  void Ingredientes::setTipoIngrediente(int indice, string nuevoTipo){
+    datos[indice].setTipo(nuevoTipo);
+  }
+
+  void Ingredientes::setCaloriasIngrediente(int indice, int nuevoValor){
+    datos[indice].setCalorias(nuevoValor);
+  }
+
+  void Ingredientes::setHcIngrediente(int indice, int nuevoValor){
+    datos[indice].setHc(nuevoValor);
+  }
+
+  void Ingredientes::setProteinasIngrediente(int indice, int nuevoValor){
+    datos[indice].setProteinas(nuevoValor);
+  }
+
+  void Ingredientes::setGrasasIngrediente(int indice, int nuevoValor){
+    datos[indice].setGrasas(nuevoValor);
+  }
+
+  void Ingredientes::setFibraIngrediente(int indice, int nuevoValor){
+    datos[indice].setFibra(nuevoValor);
+  }
+
+  VD<string> Ingredientes::getTipos(){
+    VD<string> aux;
+    int contador = 0;
+    string Saux;
+
+    for(int i = 0; i < indice.size(); i++){
+      Saux = datos[indice[i]].getTipo();
+      if(aux.Esta(Saux) == false){
+        aux.Insertar(Saux, contador);
+        contador++;
+      }
+    }
+
+    return aux;
+  }
 //-------------------------------------------------------------------
 
   Ingrediente Ingredientes:: get(string nombreIng){
@@ -178,17 +241,14 @@ using namespace std;
 
   void Ingredientes::borrar(string nombreIng){
     pair <bool, int> estaEnPos = estaEnDatos(nombreIng);
-    int pos;
+    int pos = estaEnPos.second;
+    pair <bool,int> estaEnPosIndice = estaEnIndice(pos);
 
     if(estaEnPos.first == true){
-      pos = estaEnPos.second;
-      datos.Borrar(pos);
-
-      if(estaEnIndice(pos).first == true){
-        pos = estaEnIndice(pos).second;
-        indice.Borrar(pos);
+      datos.Borrar(estaEnPos.second);
+      indice.Borrar(estaEnPosIndice.second);
+      actualizarPosDatosBorrar(pos);
       }
-    }
   }
 
   Ingredientes& Ingredientes::operator=(const Ingredientes &lista){
@@ -225,15 +285,39 @@ using namespace std;
         lista.addIngrediente(ingAux);
 
     }
-
-    //lista.ordenarPorNombre();
-
     return i;
   }
 
-    void Ingredientes::ImprimirPorTipo(ostream &out){
+  void Ingredientes::ImprimirPorTipo(ostream &out){
       for (int i = 0; i < indice.size(); i++){
         out << datos[indice[i]]  << endl;
       }
 
     }
+
+  void Ingredientes::getEstadistica(const string tipo){
+    Ingredientes ingredientes_tipo = getIngredienteTipo(tipo);
+    float prom_cal, prom_hid, prom_pro, prom_gras, prom_fib = 0;
+
+    for(int i=0; i<ingredientes_tipo.size(); i++){
+        prom_cal += ingredientes_tipo.getCaloriasIngrediente(i);
+        prom_hid += ingredientes_tipo.getHcIngrediente(i);
+        prom_pro += ingredientes_tipo.getProteinasIngrediente(i);
+        prom_gras += ingredientes_tipo.getGrasasIngrediente(i);
+        prom_fib += ingredientes_tipo.getFibraIngrediente(i);
+    }
+
+    prom_cal = prom_cal/ingredientes_tipo.size();
+    prom_hid = prom_hid/ingredientes_tipo.size();
+    prom_pro = prom_pro/ingredientes_tipo.size();
+    prom_gras = prom_gras/ingredientes_tipo.size();
+    prom_fib = prom_fib/ingredientes_tipo.size();
+
+    cout << "Estadística____________________________" << endl;
+    cout << "Tipo de alimento " << tipo << endl;
+    cout << "Promedio +-Desviación" << endl;
+    cout << "Calorías" << "\tHidratos de Carb." << "\tProteínas" << "\tGrasas" << "\tFibra" << endl;
+    cout << prom_cal << "\t\t" << prom_hid << "\t\t" << prom_pro << "\t\t" << prom_gras << "\t\t" << prom_fib << endl;
+
+
+  }

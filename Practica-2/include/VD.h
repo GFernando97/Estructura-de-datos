@@ -93,6 +93,8 @@ class VD{
      **/
      void Borrar (int pos);
 
+     bool Esta( T &d);
+
 
 };
 

@@ -46,16 +46,41 @@ public:
   //IMPLEMENTADO
   int size()const{return datos.size();}//
 
-  void actualizarPosDatos(int desde);
+  void actualizarPosDatosInsertar(int desde);
 
-/*
+  void actualizarPosDatosBorrar(int desde);
+
   void setNombreIngrediente(int indice, string nuevoNombre);
+
   void setTipoIngrediente(int indice, string nuevoTipo);
-  void setCaloriasIngrediente(int indice, string nuevoValor);
+
+  void setCaloriasIngrediente(int indice, int nuevoValor);
+
   void setHcIngrediente(int indice, int nuevoValor);
+
   void setProteinasIngrediente(int indice, int nuevoValor);
+
   void setGrasasIngrediente(int indice, int nuevoValor);
-  void setFibraIngrediente(int indice, int nuevoValor);*/
+
+  void setFibraIngrediente(int indice, int nuevoValor);
+
+  Ingrediente getIngrediente(int indice)const{return datos[indice];}
+
+  string getNombreIngrediente(int indice)const{return datos[indice].getNombre();}
+
+  string getTipoIngrediente(int indice) const{return datos[indice].getTipo();}
+
+  int getCaloriasIngrediente(int indice) const{return datos[indice].getCalorias();}
+
+  int getHcIngrediente(int indice) const{return datos[indice].getHc();}
+
+  int getProteinasIngrediente(int indice) const{return datos[indice].getProteinas();}
+
+  int getGrasasIngrediente(int indice) const{return datos[indice].getGrasas();}
+
+  int getFibraIngrediente(int indice) const{return datos[indice].getFibra();}
+
+  VD<string> getTipos();
 
   //IMPLEMENTADO
   Ingrediente get(string nombreIng);
@@ -72,6 +97,8 @@ public:
   friend istream & operator>>(istream &i, Ingredientes &lista);
 
   void ImprimirPorTipo( ostream &out);
+
+  void getEstadistica(const string tipo);
 
 
 };
