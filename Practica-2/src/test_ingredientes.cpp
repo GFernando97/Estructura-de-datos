@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
    cout<<"Pulse una tecla para continuar "<<endl;
    cin.get();*/
 
-   string tipo="Cereal";
+   string tipo="Molusco";
    Ingredientes ingre_tipo=all_ingre.getIngredienteTipo(tipo);
    cout<<"Los Ingredientes de tipo "<<tipo<<" son: "<<endl<<ingre_tipo<<endl;
 

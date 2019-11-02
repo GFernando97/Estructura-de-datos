@@ -20,17 +20,11 @@ using namespace std;
       }
 
       else{
-
-        cout << datos[posEnDatos].getTipo() << " > " << datos[mitad].getTipo() << "?\n";
         if(datos[posEnDatos].getTipo().compare(datos[indice[mitad]].getTipo()) >= 0){
           inicio = mitad+1;
-
         }
-
-
         else fin = mitad;
       }
-
     }
     encontradoEnPos.first = false;
     encontradoEnPos.second = inicio;
@@ -118,48 +112,22 @@ using namespace std;
     pair<bool, int> posDatos = estaEnDatos(ing.getNombre());
     pair<bool, int> posIndice;
 
-
-    //////////////////////////////////////////////////////////////
-    //cout << "esta en datos(tue-false)--" << posDatos.first << endl;
-
-    //cout << "esta en datos--" << posDatos.second <<  endl;
-    cout << "Insertar " << ing.getNombre() << " en el indice " << posDatos.second << endl;
-    ////////////////////////////////////////////////////////////
     if(posDatos.first == false){
       datos.Insertar(ing, posDatos.second);
+
       actualizarPosDatos(posDatos.second);
       posIndice = estaEnIndice(posDatos.second);
-
-      cout << "el tipo es: " << datos[posDatos.second].getTipo();
-      //cout << "Esta en indice(true-false)--" << posIndice.first << endl;
-      //cout << "Esta en indice--" << posIndice.second << endl;
-      cout << " insertar el valor " << posDatos.second
-           << " en pos " << posIndice.second << endl;
-      cout << "--------------------------------------------------\n";
-      //////////////////////////////////////////////////////////////////////
-
       indice.Insertar(posDatos.second, posIndice.second);
-      for (int i = 0; i < indice.size(); i++){
-        cout << datos[indice[i]]  << endl;
-      }
-      cout << "--------------------------------------------------\n\n";
-
-
     }
 
     else if(posIndice.first == true ){
 
-      /*//////////////////////////////////////////////////////////////////////////
-      cout << "Intentando insertar en datos...." << endl;
-      ///////////////////////////////////////////////////////////////////*/
       if(datos[posDatos.second].getTipo() != ing.getTipo()){
         datos.Insertar(ing, posDatos.second);
         indice.Insertar(posDatos.second, posIndice.second);
       }
     }
 
-    //cout << "Maria no es realidad " << datos.size() << "\n";
-    //cout << "--------------------------------------------------\n";
 
   }
 
@@ -180,12 +148,10 @@ using namespace std;
 
   void Ingredientes::actualizarPosDatos(int desde){
 
-    cout <<"los datos de indice son ahora\n" ;
     for(int i =0; i< indice.size(); i++ ){
       if(indice[i]>=desde){
         this->indice[i]++;
       }
-      cout << " para i:" << i << " el valor es: " <<indice[i] << endl;
     }
   }
 //-------------------------------------------------------------------
