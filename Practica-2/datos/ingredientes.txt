@@ -8,24 +8,3 @@ Cerezas;47;12;0;2;0;Fruta
 Gatorade;39;10;0;0;0;Bebida
 Salsa Ketchup;98;24;2;0;0;Procesado
 Esparragos Enlatados;14;1;2;0;0;Verdura
-Endibias;11;1;2;0;0;Verdura
-Harina Trigo, Panificada;337;75;11;1;3;Cereal
-Nuez Brasil;617;4;12;62;9;Frutos Secos
-Gofio Millo;377;83;6;5;0;Cereal
-Pavo;107;0;22;2;0;Carne
-Mantequilla;740;0;0;82;0;Aceite
-Yogur Liquido;78;11;3;2;0;Leche-Derivados
-Cacao Polvo;357;11;20;24;38;Semillas
-Arenque Ahumado;205;0;26;11;0;Pescado
-Pepinillos en vinagre;12;2.1;0.7;0.1;1;Verdura
-Besugo;118;0;16;6;0;Pescado
-Bacon;427;0;14;41;0;Carne
-Aguacate;223;2;4;22;3;Fruta
-Coco;646;16;6;62;14;Fruta
-Chirimoya;178;0;19;11;0;Fruta
-Leche Vaca, Entera;60;5;3;3;0;Leche-Derivados
-Fresas;26;6;1;0;2;Fruta
-Mango;57;12.45;0.6;0.47;1.7;Fruta
-Sesos Cordero;110;0;10;8;0;Carne
-Ancas Rana, De;68;0;16;0;0;Carne
-Pan Tostado, Blanco;297;65;10;2;3;Cereal

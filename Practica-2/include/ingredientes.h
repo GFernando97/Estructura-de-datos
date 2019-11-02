@@ -46,6 +46,8 @@ public:
   //IMPLEMENTADO
   int size()const{return datos.size();}//
 
+  void actualizarPosDatos(int desde);
+
 /*
   void setNombreIngrediente(int indice, string nuevoNombre);
   void setTipoIngrediente(int indice, string nuevoTipo);
