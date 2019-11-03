@@ -1,8 +1,11 @@
-
+/**
+ * @file ingrediente.cpp
+ * @brief Implementación de la clase ingrediente::ingrediente.
+ */
 #include "ingrediente.h"
 using namespace std;
 
-void Ingrediente::Copiar(const Ingrediente &ing){
+void ingrediente::Copiar(const ingrediente &ing){
   setNombre(ing.getNombre());
   setTipo(ing.getTipo());
   setCalorias(ing.getCalorias());
@@ -12,11 +15,11 @@ void Ingrediente::Copiar(const Ingrediente &ing){
   setFibra(ing.getFibra());
 }
 
-Ingrediente::Ingrediente(const Ingrediente &original){
+ingrediente::ingrediente(const ingrediente &original){
   Copiar(original);
 }
 
-Ingrediente::Ingrediente(string nombre, int calorias, int hidratos, int proteinas, int grasas, int fibra, string tipo){
+ingrediente::ingrediente(string nombre, int calorias, int hidratos, int proteinas, int grasas, int fibra, string tipo){
   setNombre(nombre);
   setTipo(tipo);
   setGrasas(grasas);
@@ -27,7 +30,7 @@ Ingrediente::Ingrediente(string nombre, int calorias, int hidratos, int proteina
 }
 
 
-Ingrediente& Ingrediente:: operator=(const Ingrediente &ing){
+ingrediente& ingrediente:: operator=(const ingrediente &ing){
   if(this != &ing){
     Copiar(ing);
   }
@@ -35,7 +38,7 @@ Ingrediente& Ingrediente:: operator=(const Ingrediente &ing){
     return *this;
 }
 
-bool Ingrediente::operator ==(const Ingrediente &ing){
+bool ingrediente::operator ==(const ingrediente &ing){
   if(this->getNombre() == ing.getNombre() && this->getTipo() == ing.getTipo()
   && this->getCalorias() == ing.getCalorias() && this->getHc()== ing.getHc()
   && this->getProteinas() == ing.getProteinas() && this->getGrasas() == ing.getGrasas()
@@ -46,7 +49,7 @@ bool Ingrediente::operator ==(const Ingrediente &ing){
 }
 
 
-ostream& operator << (ostream &o, const Ingrediente &ing){
+ostream& operator << (ostream &o, const ingrediente &ing){
 
    o << ing.getNombre() << ";"
      << ing.getCalorias() << ";"
@@ -59,7 +62,7 @@ ostream& operator << (ostream &o, const Ingrediente &ing){
      return o;
 }
 
-istream& operator >> (istream &i, Ingrediente &ing){
+istream& operator >> (istream &i, ingrediente &ing){
   string nombre, tipo, calorias, hc, proteinas, grasa, fibra, aux;
 
   getline(i, nombre,';');

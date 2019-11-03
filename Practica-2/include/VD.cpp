@@ -1,3 +1,7 @@
+/**
+ * @file VD.cpp
+ * @brief Implementación de la clase @c VD.
+ */
 using namespace std;
 
 template <class T>

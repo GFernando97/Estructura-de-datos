@@ -1,3 +1,11 @@
+/**
+ * @file tipos_ingredientes.cpp
+ * @brief programa para obtener determinada informacion sobre algún determindo tipo de ingrediente
+ *
+ * Este programa toma una lista de ingredientes y un tipo de ingredientes como argumento
+ * y devuelve información detallada de los ingredientes de dicho tipo.
+ *
+ **/
 #include <iostream>
 #include "ingrediente.h"
 #include "ingredientes.h"
@@ -8,7 +16,6 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
-	/// Primeramente se comprueba si los argumentos son correctos.
 	if (argc != 3) {
     cout << "\tNúmero de parámetros incorrecto." << endl;
   	cout << "\tUso correcto: " << endl;
@@ -16,8 +23,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	/// Después se abre el archivo con los controles de seguridad correspondientes, y
-	/// se cargan los datos en memoria.
+
 	string archivo=argv[1];
 	string tipo=argv[2];
 	ifstream f(archivo);
@@ -27,11 +33,10 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	Ingredientes all_ingre;
+	ingredientes all_ingre;
 	f >> all_ingre;
 
-	/// Luego se muestran por pantalla los tipos encontrados y los ingredientes del tipo
-	/// pedido.
+
 	VD<string> tipos=all_ingre.getTipos();
 
   cout<<"Los tipos de alimentos son:"<<endl;
@@ -40,7 +45,7 @@ int main(int argc, char *argv[]) {
   }
 
   if(tipos.Esta(tipo) == true){
-	Ingredientes tipoPedido(all_ingre.getIngredienteTipo(tipo));
+	ingredientes tipoPedido(all_ingre.getingredienteTipo(tipo));
 
 	cout << endl << "Los ingredientes de tipo " << tipo << " son: " << endl;
 	cout << tipoPedido << endl;

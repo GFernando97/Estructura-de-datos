@@ -1,10 +1,14 @@
+/**
+ * @file ingredientes.cpp
+ * @brief Implementación de la clase @c ingredientes::ingredientes.
+ */
 #include "ingredientes.h"
 #include "ingrediente.h"
 #include "VD.h"
 
 using namespace std;
 
-  pair<bool, int>Ingredientes::estaEnIndice(int posEnDatos) const{
+  pair<bool, int>ingredientes::estaEnIndice(int posEnDatos) const{
     int tam = indice.size();
     int inicio = 0;
     int fin = tam;
@@ -51,7 +55,7 @@ using namespace std;
     return encontradoEnPos;
   }
 
-  pair <bool, int> Ingredientes::estaEnDatos(string nombreIng) const{
+  pair <bool, int> ingredientes::estaEnDatos(string nombreIng) const{
     int tam = datos.size();
     int inicio = 0;
     int fin = tam;
@@ -82,7 +86,7 @@ using namespace std;
 
   }
 
-  void Ingredientes::Copiar(const Ingredientes &ing){
+  void ingredientes::Copiar(const ingredientes &ing){
     Clear();
 
     datos = ing.datos;
@@ -90,13 +94,13 @@ using namespace std;
 
   }
 
-  void Ingredientes::Clear(){
+  void ingredientes::Clear(){
   /*  delete this->datos);
     delete this->indice);*/
   }
 
-  void Ingredientes::ordenarPorNombre(){
-    Ingrediente aux;
+  void ingredientes::ordenarPorNombre(){
+    ingrediente aux;
 
       for(int i = 0; i < datos.size()-1; i++){
         for(int j= 0; j < datos.size()-i-1; j++){
@@ -111,23 +115,23 @@ using namespace std;
       }
   }
 
-  Ingredientes::Ingredientes(const Ingredientes &ing){
+  ingredientes::ingredientes(const ingredientes &ing){
     Clear();
     Copiar(ing);
   }
 
-  Ingredientes Ingredientes::getIngredienteTipo(string tipo) const{
-    Ingredientes ingredientesTipo;
+  ingredientes ingredientes::getingredienteTipo(string tipo) const{
+    ingredientes ingredientesTipo;
 
     for(int i = 0; i < datos.size(); i++){
       if(datos[i].getTipo() == tipo)
-        ingredientesTipo.addIngrediente(datos[i]);
+        ingredientesTipo.addingrediente(datos[i]);
     }
 
     return ingredientesTipo;
   }
 
-  void Ingredientes::addIngrediente(const Ingrediente & ing){
+  void ingredientes::addingrediente(const ingrediente & ing){
     pair<bool, int> posDatos = estaEnDatos(ing.getNombre());
     pair<bool, int> posIndice;
 
@@ -150,7 +154,7 @@ using namespace std;
 
   }
 
-  void Ingredientes::deleteIngrediente(Ingrediente &ing){
+  void ingredientes::deleteingrediente(ingrediente &ing){
     pair <bool, int> estaEnPos = estaEnDatos(ing.getNombre());
     int pos;
 
@@ -165,7 +169,7 @@ using namespace std;
     }
   }
 
-  void Ingredientes::actualizarPosDatosInsertar(int desde){
+  void ingredientes::actualizarPosDatosInsertar(int desde){
 
     for(int i =0; i< indice.size(); i++ ){
       if(indice[i]>=desde){
@@ -174,7 +178,7 @@ using namespace std;
     }
   }
 
-  void Ingredientes::actualizarPosDatosBorrar(int desde){
+  void ingredientes::actualizarPosDatosBorrar(int desde){
     for(int i = 0; i< indice.size(); i++){
       if(indice[i]>=desde){
         this->indice[i]--;
@@ -183,35 +187,35 @@ using namespace std;
   }
 //-------------------------------------------------------------------
 //                GETTERS Y SETTERS SE IMPLEMENTARÁN AQUÍ
-  void Ingredientes::setNombreIngrediente(int indice, string nuevoNombre){
+  void ingredientes::setNombreingrediente(int indice, string nuevoNombre){
     datos[indice].setNombre(nuevoNombre);
   }
 
-  void Ingredientes::setTipoIngrediente(int indice, string nuevoTipo){
+  void ingredientes::setTipoingrediente(int indice, string nuevoTipo){
     datos[indice].setTipo(nuevoTipo);
   }
 
-  void Ingredientes::setCaloriasIngrediente(int indice, int nuevoValor){
+  void ingredientes::setCaloriasingrediente(int indice, int nuevoValor){
     datos[indice].setCalorias(nuevoValor);
   }
 
-  void Ingredientes::setHcIngrediente(int indice, int nuevoValor){
+  void ingredientes::setHcingrediente(int indice, int nuevoValor){
     datos[indice].setHc(nuevoValor);
   }
 
-  void Ingredientes::setProteinasIngrediente(int indice, int nuevoValor){
+  void ingredientes::setProteinasingrediente(int indice, int nuevoValor){
     datos[indice].setProteinas(nuevoValor);
   }
 
-  void Ingredientes::setGrasasIngrediente(int indice, int nuevoValor){
+  void ingredientes::setGrasasingrediente(int indice, int nuevoValor){
     datos[indice].setGrasas(nuevoValor);
   }
 
-  void Ingredientes::setFibraIngrediente(int indice, int nuevoValor){
+  void ingredientes::setFibraingrediente(int indice, int nuevoValor){
     datos[indice].setFibra(nuevoValor);
   }
 
-  VD<string> Ingredientes::getTipos(){
+  VD<string> ingredientes::getTipos(){
     VD<string> aux;
     int contador = 0;
     string Saux;
@@ -228,8 +232,8 @@ using namespace std;
   }
 //-------------------------------------------------------------------
 
-  Ingrediente Ingredientes:: get(string nombreIng){
-    Ingrediente vacio;
+  ingrediente ingredientes:: get(string nombreIng){
+    ingrediente vacio;
     for(int i = 0; i < datos.size(); i++){
       if(datos[i].getNombre()== nombreIng){
         vacio = datos[i];
@@ -239,7 +243,7 @@ using namespace std;
     return vacio;
   }
 
-  void Ingredientes::borrar(string nombreIng){
+  void ingredientes::borrar(string nombreIng){
     pair <bool, int> estaEnPos = estaEnDatos(nombreIng);
     int pos = estaEnPos.second;
     pair <bool,int> estaEnPosIndice = estaEnIndice(pos);
@@ -251,7 +255,7 @@ using namespace std;
       }
   }
 
-  Ingredientes& Ingredientes::operator=(const Ingredientes &lista){
+  ingredientes& ingredientes::operator=(const ingredientes &lista){
     if(this != &lista){
       Clear();
       Copiar(lista);
@@ -259,7 +263,7 @@ using namespace std;
     return *this;
   }
 
-  ostream &operator <<(ostream &o, const Ingredientes &lista){
+  ostream &operator <<(ostream &o, const ingredientes &lista){
     int n = lista.size();
 
     for(int i = 0; i < n; i++){
@@ -275,20 +279,20 @@ using namespace std;
     return o;
   }
 
-  istream &operator>>(istream&i, Ingredientes &lista){
+  istream &operator>>(istream&i, ingredientes &lista){
     string linea;
-    Ingrediente ingAux;
+    ingrediente ingAux;
 
     getline(i, linea, '\n');
     while(!i.eof()){
         i >> ingAux;
-        lista.addIngrediente(ingAux);
+        lista.addingrediente(ingAux);
 
     }
     return i;
   }
 
-  void Ingredientes::ImprimirPorTipo(ostream &out){
+  void ingredientes::ImprimirPorTipo(ostream &out){
       for (int i = 0; i < indice.size(); i++){
         out << datos[indice[i]]  << endl;
       }
@@ -298,15 +302,15 @@ using namespace std;
   //---------------------------------------------------------------------------------
   //---------------------------------------------------------------------------------
   //METODOS NECESARIOS PARA CALCULAR LA ESTADISTICA
-  //DE UN TIPO DE INGREDIENTE
+  //DE UN TIPO DE ingrediente
   //---------------------------------------------------------------------------------
   //---------------------------------------------------------------------------------
-  void Ingredientes::getEstadistica(const string tipo){
-    Ingredientes ingredientes_tipo = getIngredienteTipo(tipo);
+  void ingredientes::getEstadistica(const string tipo){
+    ingredientes ingredientes_tipo = getingredienteTipo(tipo);
     float proCal, proHc, proProt, proGra, proFi,
           desCal, desHc, desProt, desGra, desFi= 0;
-    VD<Ingrediente> maximos;
-    VD<Ingrediente> minimos;
+    VD<ingrediente> maximos;
+    VD<ingrediente> minimos;
     VD<int> datosCalorias;
     VD<int> datosHc;
     VD<int> datosProteinas;
@@ -366,7 +370,7 @@ using namespace std;
 
   }
 
-  float Ingredientes::getPromedio(const VD<int> &datosIng){
+  float ingredientes::getPromedio(const VD<int> &datosIng){
     float promedioMacro = 0;
     for(int i = 0; i < datosIng.size(); i++)
       promedioMacro += datosIng[i];
@@ -377,7 +381,7 @@ using namespace std;
     return promedioMacro;
   }
 
-  float Ingredientes::getDesviacion(const VD<int> &datosIng){
+  float ingredientes::getDesviacion(const VD<int> &datosIng){
     float promedioDatos = getPromedio(datosIng);
     VD<int> aux = datosIng;
 
@@ -389,7 +393,7 @@ using namespace std;
     return sqrt(resultado);
   }
 
-  VD<Ingrediente> Ingredientes::getMaximos(const Ingredientes & ing){
+  VD<ingrediente> ingredientes::getMaximos(const ingredientes & ing){
     int iCalorias = 0, iHc = 0, iProteinas = 0, iGrasas = 0, iFibra = 0;
     int maxCalorias = ing[0].getCalorias();
     int maxHc = ing[0].getHc();
@@ -419,7 +423,7 @@ using namespace std;
         iFibra = i;
       }
     }
-    VD<Ingrediente> aux;
+    VD<ingrediente> aux;
     aux.Insertar(ing[iCalorias],0);
     aux.Insertar(ing[iHc],1);
     aux.Insertar(ing[iProteinas],2);
@@ -428,7 +432,7 @@ using namespace std;
     return aux;
   }
 
-  VD<Ingrediente> Ingredientes::getMinimos(const Ingredientes &ing){
+  VD<ingrediente> ingredientes::getMinimos(const ingredientes &ing){
     int iCalorias = 0, iHc = 0, iProteinas = 0, iGrasas = 0, iFibra = 0;
     int minCalorias = ing[0].getCalorias();
     int minHc = ing[0].getHc();
@@ -460,7 +464,7 @@ using namespace std;
     }
 
 
-    VD<Ingrediente> aux2;
+    VD<ingrediente> aux2;
     aux2.Insertar(ing[iCalorias],0);
     aux2.Insertar(ing[iHc],1);
     aux2.Insertar(ing[iProteinas],2);
