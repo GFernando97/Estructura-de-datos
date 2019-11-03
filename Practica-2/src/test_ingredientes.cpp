@@ -109,6 +109,4 @@ int main(int argc, char *argv[])
    string tipo="Molusco";
    Ingredientes ingre_tipo=all_ingre.getIngredienteTipo(tipo);
    cout<<"Los Ingredientes de tipo "<<tipo<<" son: "<<endl<<ingre_tipo<<endl;
-	 all_ingre.getEstadistica(tipo);
-
 }

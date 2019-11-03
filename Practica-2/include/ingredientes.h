@@ -91,6 +91,9 @@ public:
   Ingredientes& operator=(const Ingredientes &lista);
   //IMPLEMENTADO
   Ingrediente &operator[](int i){return datos[i];}
+
+  const Ingrediente &operator[](int i) const {return datos[i];}
+
   //IMPLEMENTADO --POR SI ACASO, INCLUIR LA PARTE DE NOMBRE - CALORIAS ... AL PRINCIPIO
   friend ostream & operator<<(ostream &o, const Ingredientes &lista);
   //IMPLEMENTADO
@@ -98,8 +101,17 @@ public:
 
   void ImprimirPorTipo( ostream &out);
 
+  //---------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------
+  //METODOS NECESARIOS PARA CALCULAR LA ESTADISTICA
+  //DE UN TIPO DE INGREDIENTE
+  //---------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------
   void getEstadistica(const string tipo);
-
+  float getPromedio(const VD<int> &datosIng);
+  float getDesviacion(const VD<int> &datosIng);
+  VD<Ingrediente> getMaximos(const Ingredientes & ing);
+  VD<Ingrediente> getMinimos(const Ingredientes &ing);
 
 };
 
