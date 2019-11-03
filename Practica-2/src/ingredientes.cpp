@@ -302,7 +302,6 @@ using namespace std;
   //---------------------------------------------------------------------------------
   //---------------------------------------------------------------------------------
   void Ingredientes::getEstadistica(const string tipo){
-    cout << "Ha entrado en el metodo de Estadistica..\n";
     Ingredientes ingredientes_tipo = getIngredienteTipo(tipo);
     float proCal, proHc, proProt, proGra, proFi,
           desCal, desHc, desProt, desGra, desFi= 0;
@@ -314,40 +313,28 @@ using namespace std;
     VD<int> datosGrasas;
     VD<int> datosFibra;
 
-    cout << "Declaro bien los datos...\n";
-    cout << "Tamanio del vector ingredientes: " << ingredientes_tipo.size() << "\n";
     for(int i = 0; i < ingredientes_tipo.size(); i++){
-      cout << "iteracion: " << i <<"\n";
       datosCalorias.Insertar(ingredientes_tipo[i].getCalorias(),i);
       datosHc.Insertar(ingredientes_tipo[i].getHc(),i);
       datosProteinas.Insertar(ingredientes_tipo[i].getProteinas(),i);
       datosGrasas.Insertar(ingredientes_tipo[i].getGrasas(),i);
       datosFibra.Insertar(ingredientes_tipo[i].getFibra(),i);
     }
-    cout << "Ha acabado de crear los datos para analizar...\n";
 
-    cout << "Va a calcular los promedios de los datos...\n";
     proCal = getPromedio(datosCalorias);
     proHc = getPromedio(datosHc);
     proProt = getPromedio(datosProteinas);
     proGra = getPromedio(datosGrasas);
     proFi = getPromedio(datosFibra);
 
-    cout << "Va a calcular las desviaciones de los datos...\n";
     desCal = getDesviacion(datosCalorias);
     desHc = getDesviacion(datosHc);
     desProt = getDesviacion(datosProteinas);
     desGra = getDesviacion(datosGrasas);
     desFi = getDesviacion(datosFibra);
 
-    cout << "Va a calcular los max de los datos...\n";
     maximos = getMaximos(ingredientes_tipo);
-    cout << "Va a calcular los mins de los datos...\n";
     minimos = getMinimos(ingredientes_tipo);
-
-    cout << "Ha terminado de realizar los calculos, pasamos a presentarlos...\n";
-
-
 
 
     cout << "Estadística____________________________" << endl;
@@ -448,10 +435,8 @@ using namespace std;
     int minProteinas = ing[0].getProteinas();
     int minGrasas = ing[0].getGrasas();
     int minFibra = ing[0].getFibra();
-    cout << "Ha entrado en el metodo de minimos y ha declarado bien los datos\n";
-    cout <<"El tamanio de los ingredientes es: " << ing.size() << endl;
+
     for(int i = 1; i < ing.size(); i++){
-      cout << " iteracion: " << i << endl;
       if(ing[i].getCalorias() < minCalorias){
         minCalorias = ing[i].getCalorias();
         iCalorias = i;
@@ -467,7 +452,6 @@ using namespace std;
       if(ing[i].getGrasas() < minGrasas){
         minGrasas = ing[i].getGrasas();
         iGrasas = i;
-        cout << "iGrasas: " << iGrasas << endl;
       }
       if(ing[i].getFibra() < minFibra){
         minFibra = ing[i].getFibra();
@@ -475,20 +459,13 @@ using namespace std;
       }
     }
 
-    cout << "Ha terminado de analizar mins, pasa a introducirlos en aux\n";
 
     VD<Ingrediente> aux2;
     aux2.Insertar(ing[iCalorias],0);
-    cout << "Insertado min calorias\n";
     aux2.Insertar(ing[iHc],1);
-    cout << "Insertado min hc\n";
     aux2.Insertar(ing[iProteinas],2);
-    cout << "Insertado min Proteinas\n";
-    cout << "sobre min grasas: " << minGrasas << " en indice " << iGrasas << endl;
     aux2.Insertar(ing[iGrasas],3);
-    cout << "Insertado min grasas\n";
     aux2.Insertar(ing[iFibra],4);
-    cout << "Insertado min Fibra\n";
 
     return aux2;
 }
