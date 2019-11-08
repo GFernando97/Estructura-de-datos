@@ -1,0 +1,21 @@
+Notas practica 3
+
+  cambiar declaracion de ingredientes:
+    class Ingredietes{
+    private:
+      vector<Ingrediente> datos;
+      vector<int> indice;
+    }
+
+  public :
+  class iterator{
+  vector<Ingrediete>:: iterador it;
+  .....
+
+  friend class Ingredietes:
+  }
+
+
+  vector <Ingrediente>:: iterador i;
+  i= datos.begin()+posD;
+  datos
