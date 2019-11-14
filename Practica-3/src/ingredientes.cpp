@@ -4,7 +4,7 @@
  */
 #include "ingredientes.h"
 #include "ingrediente.h"
-#include "VD.h"
+//#include "VD.h"
 
 using namespace std;
 
@@ -106,10 +106,10 @@ using namespace std;
         for(int j= 0; j < datos.size()-i-1; j++){
           if(datos[j].getNombre().compare(datos[j+1].getNombre()) > 0){
             aux = datos[j+1];
-            datos.Borrar(j+1);
-            datos.Insertar(datos[j], j+1);
-            datos.Borrar(j);
-            datos.Insertar(aux, j);
+            datos.erase(j+1);
+            datos.insert(datos[j], j+1);
+            datos.erase(j);
+            datos.insert(aux, j);
           }
         }
       }
@@ -120,7 +120,7 @@ using namespace std;
     Copiar(ing);
   }
 
-  ingredientes ingredientes::getingredienteTipo(string tipo) const{
+  ingredientes ingredientes::getIngredienteTipo(string tipo) const{
     ingredientes ingredientesTipo;
 
     for(int i = 0; i < datos.size(); i++){
@@ -136,18 +136,18 @@ using namespace std;
     pair<bool, int> posIndice;
 
     if(posDatos.first == false){
-      datos.Insertar(ing, posDatos.second);
+      datos.insert(ing, posDatos.second);
 
-      actualizarPosDatosInsertar(posDatos.second);
+      actualizarPosDatosinsert(posDatos.second);
       posIndice = estaEnIndice(posDatos.second);
-      indice.Insertar(posDatos.second, posIndice.second);
+      indice.insert(posDatos.second, posIndice.second);
     }
 
     else if(posIndice.first == true ){
 
       if(datos[posDatos.second].getTipo() != ing.getTipo()){
-        datos.Insertar(ing, posDatos.second);
-        indice.Insertar(posDatos.second, posIndice.second);
+        datos.insert(ing, posDatos.second);
+        indice.insert(posDatos.second, posIndice.second);
       }
     }
 
@@ -160,16 +160,16 @@ using namespace std;
 
     if(estaEnPos.first == true){
       pos = estaEnPos.second;
-      datos.Borrar(pos);
+      datos.erase(pos);
 
       if(estaEnIndice(pos).first == true){
         pos = estaEnIndice(pos).second;
-        indice.Borrar(pos);
+        indice.erase(pos);
       }
     }
   }
 
-  void ingredientes::actualizarPosDatosInsertar(int desde){
+  void ingredientes::actualizarPosDatosinsert(int desde){
 
     for(int i =0; i< indice.size(); i++ ){
       if(indice[i]>=desde){
@@ -215,15 +215,15 @@ using namespace std;
     datos[indice].setFibra(nuevoValor);
   }
 
-  VD<string> ingredientes::getTipos(){
-    VD<string> aux;
+  vector<string> ingredientes::getTipos(){
+    vector<string> aux;
     int contador = 0;
     string Saux;
 
     for(int i = 0; i < indice.size(); i++){
       Saux = datos[indice[i]].getTipo();
       if(aux.Esta(Saux) == false){
-        aux.Insertar(Saux, contador);
+        aux.insert(Saux, contador);
         contador++;
       }
     }
@@ -249,8 +249,8 @@ using namespace std;
     pair <bool,int> estaEnPosIndice = estaEnIndice(pos);
 
     if(estaEnPos.first == true){
-      datos.Borrar(estaEnPos.second);
-      indice.Borrar(estaEnPosIndice.second);
+      datos.erase(estaEnPos.second);
+      indice.erase(estaEnPosIndice.second);
       actualizarPosDatosBorrar(pos);
       }
   }
@@ -306,23 +306,23 @@ using namespace std;
   //---------------------------------------------------------------------------------
   //---------------------------------------------------------------------------------
   void ingredientes::getEstadistica(const string tipo){
-    ingredientes ingredientes_tipo = getingredienteTipo(tipo);
+    ingredientes ingredientes_tipo = getIngredienteTipo(tipo);
     float proCal, proHc, proProt, proGra, proFi,
           desCal, desHc, desProt, desGra, desFi= 0;
-    VD<ingrediente> maximos;
-    VD<ingrediente> minimos;
-    VD<int> datosCalorias;
-    VD<int> datosHc;
-    VD<int> datosProteinas;
-    VD<int> datosGrasas;
-    VD<int> datosFibra;
+    vector<ingrediente> maximos;
+    vector<ingrediente> minimos;
+    vector<int> datosCalorias;
+    vector<int> datosHc;
+    vector<int> datosProteinas;
+    vector<int> datosGrasas;
+    vector<int> datosFibra;
 
     for(int i = 0; i < ingredientes_tipo.size(); i++){
-      datosCalorias.Insertar(ingredientes_tipo[i].getCalorias(),i);
-      datosHc.Insertar(ingredientes_tipo[i].getHc(),i);
-      datosProteinas.Insertar(ingredientes_tipo[i].getProteinas(),i);
-      datosGrasas.Insertar(ingredientes_tipo[i].getGrasas(),i);
-      datosFibra.Insertar(ingredientes_tipo[i].getFibra(),i);
+      datosCalorias.insert(ingredientes_tipo[i].getCalorias(),i);
+      datosHc.insert(ingredientes_tipo[i].getHc(),i);
+      datosProteinas.insert(ingredientes_tipo[i].getProteinas(),i);
+      datosGrasas.insert(ingredientes_tipo[i].getGrasas(),i);
+      datosFibra.insert(ingredientes_tipo[i].getFibra(),i);
     }
 
     proCal = getPromedio(datosCalorias);
@@ -370,7 +370,7 @@ using namespace std;
 
   }
 
-  float ingredientes::getPromedio(const VD<int> &datosIng){
+  float ingredientes::getPromedio(const vector<int> &datosIng){
     float promedioMacro = 0;
     for(int i = 0; i < datosIng.size(); i++)
       promedioMacro += datosIng[i];
@@ -381,9 +381,9 @@ using namespace std;
     return promedioMacro;
   }
 
-  float ingredientes::getDesviacion(const VD<int> &datosIng){
+  float ingredientes::getDesviacion(const vector<int> &datosIng){
     float promedioDatos = getPromedio(datosIng);
-    VD<int> aux = datosIng;
+    vector<int> aux = datosIng;
 
     for(int i = 0; i < aux.size(); i++)
       aux[i] = (aux[i]-promedioDatos)*(aux[i]-promedioDatos);
@@ -393,7 +393,7 @@ using namespace std;
     return sqrt(resultado);
   }
 
-  VD<ingrediente> ingredientes::getMaximos(const ingredientes & ing){
+  vector<ingrediente> ingredientes::getMaximos(const ingredientes & ing){
     int iCalorias = 0, iHc = 0, iProteinas = 0, iGrasas = 0, iFibra = 0;
     int maxCalorias = ing[0].getCalorias();
     int maxHc = ing[0].getHc();
@@ -423,16 +423,16 @@ using namespace std;
         iFibra = i;
       }
     }
-    VD<ingrediente> aux;
-    aux.Insertar(ing[iCalorias],0);
-    aux.Insertar(ing[iHc],1);
-    aux.Insertar(ing[iProteinas],2);
-    aux.Insertar(ing[iGrasas],3);
-    aux.Insertar(ing[iFibra],4);
+    vector<ingrediente> aux;
+    aux.insert(ing[iCalorias],0);
+    aux.insert(ing[iHc],1);
+    aux.insert(ing[iProteinas],2);
+    aux.insert(ing[iGrasas],3);
+    aux.insert(ing[iFibra],4);
     return aux;
   }
 
-  VD<ingrediente> ingredientes::getMinimos(const ingredientes &ing){
+  vector<ingrediente> ingredientes::getMinimos(const ingredientes &ing){
     int iCalorias = 0, iHc = 0, iProteinas = 0, iGrasas = 0, iFibra = 0;
     int minCalorias = ing[0].getCalorias();
     int minHc = ing[0].getHc();
@@ -464,12 +464,12 @@ using namespace std;
     }
 
 
-    VD<ingrediente> aux2;
-    aux2.Insertar(ing[iCalorias],0);
-    aux2.Insertar(ing[iHc],1);
-    aux2.Insertar(ing[iProteinas],2);
-    aux2.Insertar(ing[iGrasas],3);
-    aux2.Insertar(ing[iFibra],4);
+    vector<ingrediente> aux2;
+    aux2.insert(ing[iCalorias],0);
+    aux2.insert(ing[iHc],1);
+    aux2.insert(ing[iProteinas],2);
+    aux2.insert(ing[iGrasas],3);
+    aux2.insert(ing[iFibra],4);
 
     return aux2;
 }

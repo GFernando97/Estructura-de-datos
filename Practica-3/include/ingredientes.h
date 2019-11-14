@@ -13,7 +13,7 @@
 #include <cstring>
 #include <string>
 #include <sstream>
-#include "VD.h"
+#include <vector>
 #include "ingrediente.h"
 
 
@@ -22,7 +22,7 @@ using namespace std;
  * @brief Clase que representa un conjunto de ingredientes.
  *
  * Esta clase representa un conjunto de ingredientes valiéndose de dos vectores dispersos
- * de la clase @c VD. Los ingredientes se mantienen ordenados por nombre
+ * de la clase @c vector. Los ingredientes se mantienen ordenados por nombre
  * en el primer vector y por nombre y tipo en el segundo.
  *
  */
@@ -36,7 +36,7 @@ private:
   * Los ingredientes que contiene se encuentran ordenados por orden alfabético de
   * nombre.
   **/
-  VD<ingrediente> datos;
+  vector<ingrediente> datos;
 
   /**
 	* @brief Vector de índices.
@@ -44,7 +44,7 @@ private:
   * En este vector se mantienen los ingredientes ordenados por orden alfabético
   * pero por el tipo.
 	**/
-  VD<int> indice;
+  vector<int> indice;
 
   /**
   * @brief Metodo que comprueba si una posicion del vector primario daots se
@@ -113,7 +113,7 @@ public:
   * @return Nuevo objeto ingrediente que contiene unicamente los ingedientes de un tipo
   * determinado
   **/
-  ingredientes getingredienteTipo(string tipo) const;
+  ingredientes getIngredienteTipo(string tipo) const;
 
   /**
   * @brief Metodo para introducir un nuevo ingrediente en los vectores
@@ -293,7 +293,7 @@ public:
   * @return Devuelve un vector disperso de String que contiene los tipos de ingredientes
   * encontrados en el vector principal de datos.
   **/
-  VD<string> getTipos();
+  vector<string> getTipos();
 
   /**
   * @brief Metodo get de ingrediente
@@ -385,14 +385,14 @@ public:
   * @param datosIng datos sobre los cuales se va a obtener el promedio.
   * @return valor promedio en float.
   **/
-  float getPromedio(const VD<int> &datosIng);
+  float getPromedio(const vector<int> &datosIng);
 
   /**
   * @brief Metodo que obtiene la desviación de varios valores.
   * @param datosIng datos sobre los cuales se va a obtener la desviación.
   * @return valor de la desviación en float.
   **/
-  float getDesviacion(const VD<int> &datosIng);
+  float getDesviacion(const vector<int> &datosIng);
 
   /**
   * @brief Metodo que obtiene los valores maximos de un conjunto de ingredientes
@@ -400,7 +400,7 @@ public:
   * @return devuelve un vector disperso que contiene a los ingredientes cuyos valores de
   * calorias, hidratos, proteinas, grasas y fibra han sido máximos.
   **/
-  VD<ingrediente> getMaximos(const ingredientes & ing);
+  vector<ingrediente> getMaximos(const ingredientes & ing);
 
   /**
   * @brief Metodo que obtiene los valores minimos de un conjunto de ingredientes
@@ -408,8 +408,38 @@ public:
   * @return devuelve un vector disperso que contiene a los ingredientes cuyos valores de
   * calorias, hidratos, proteinas, grasas y fibra han sido minimos.
   **/
-  VD<ingrediente> getMinimos(const ingredientes &ing);
+  vector<ingrediente> getMinimos(const ingredientes &ing);
 
+
+///*****************************************************************************
+//          Nuevas clases
+
+  class iterator{
+  private:
+    vector<ingrediente>::iterator it;
+
+  public:
+    iterator(){}
+
+    bool operator == (const iterator &i) const {return it == i.it;}
+    bool operator != (const iterator &i) const {return it != i.it;}
+
+    ingrediente& operator *(){ return *it;}
+
+    iterator& operator ++(){ ++it; return *this;}
+
+    iterator& operator --(){--it; return *this;}
+
+    friend class ingredientes;
+  };
+
+
+  class const_iterator{
+    private:
+       vector<ingrediente>::iterator it;
+
+    public
+  }
 };
 
 #endif
