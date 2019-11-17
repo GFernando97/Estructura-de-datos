@@ -99,6 +99,8 @@ using namespace std;
     delete this->indice);*/
   }
 
+//De momento, vamos a descartar esta función, puesto que no se usa para nada
+/*
   void ingredientes::ordenarPorNombre(){
     ingrediente aux;
 
@@ -114,6 +116,7 @@ using namespace std;
         }
       }
   }
+*/
 
   ingredientes::ingredientes(const ingredientes &ing){
     Clear();
