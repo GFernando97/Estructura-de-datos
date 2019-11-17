@@ -74,13 +74,15 @@ istream& operator >> (istream &i, ingrediente &ing){
   getline(i,tipo, '\r');
   getline(i, aux, '\n');
 
-  ing.setNombre(nombre);
-  ing.setCalorias(stoi(calorias, nullptr, 10));
-  ing.setHc(stoi(hc, nullptr, 10));
-  ing.setProteinas(stoi(proteinas, nullptr, 10));
-  ing.setGrasas(stoi(grasa, nullptr, 10));
-  ing.setFibra(stoi(fibra, nullptr,10));
-  ing.setTipo(tipo);
+  if(nombre != ""){
+    ing.setNombre(nombre);
+    ing.setCalorias(stoi(calorias, nullptr, 10));
+    ing.setHc(stoi(hc, nullptr, 10));
+    ing.setProteinas(stoi(proteinas, nullptr, 10));
+    ing.setGrasas(stoi(grasa, nullptr, 10));
+    ing.setFibra(stoi(fibra, nullptr,10));
+    ing.setTipo(tipo);
+  }
 
   return i;
 }
