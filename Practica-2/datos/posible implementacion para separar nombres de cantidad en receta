@@ -1,0 +1,73 @@
+#include<vector>
+#include <fstream>
+#include <sstream>
+#include <utility>
+
+
+using namespace std;
+
+list<pair <string, unsigned int>> extraerIngredientes(const string &cadena){
+//Lechuga 200;Tomate 50;Pepino 50;Cebolla 50;Aceite Oliva 5
+istringstream iss(cadena);
+string subcadena;
+vector<string> palabrasAlmacenadas;
+list<pair<string, unsigned int>> aux2;
+
+cout << cadena << endl;
+
+while(!iss.eof()){
+  getline(iss, subcadena, ';');
+  istringstream issSplitter(subcadena);
+  string palabraSuelta;
+  int cantidad;
+    cout << subcadena << endl;
+  while(!issSplitter.eof()){
+      cantidad = 0;
+    getline(issSplitter, palabraSuelta, ' ');
+    cout << palabraSuelta << endl;
+    palabrasAlmacenadas.push_back(palabraSuelta);
+    for (int i= 0; i < palabrasAlmacenadas.size(); i++){
+        cout << palabrasAlmacenadas[i] << endl;
+    }
+  }
+
+  vector<string>::const_iterator it;
+  string nombre;
+  for(it = palabrasAlmacenadas.cend(); it != palabrasAlmacenadas.cbegin(); --it){
+      cout << *it << endl;
+    if(it == palabrasAlmacenadas.cend()){
+      cantidad = stoul(*it, nullptr, 10);
+      cout << " cantidad == " << cantidad << endl;
+    }
+    else  nombre += *it;
+  }
+
+  pair <string, unsigned int> aux;
+  cout << nombre << endl;
+  cout << cantidad;
+  aux.first = nombre;
+  aux.second = cantidad;
+  aux2.push_back(aux);
+
+  nombre.clear();
+  palabrasAlmacenadas.clear();
+  }
+
+  return aux2;
+
+}
+int main()
+{
+    string cadena = "Lechuga 200;Tomate 50;Pepino 50;Cebolla 50;Aceite Oliva 5";
+    list<pair <string, unsigned int>> sol;
+    
+    sol = extraerIngredientes(cadena);
+    
+    list<pair <string, unsigned int>>::const_iterator it;
+    
+    for(it = sol.cbegin(); it!=sol.cend(); ++it){
+        cout << (*it).first <<  " " << (*it).second << endl;
+    }
+    
+
+}

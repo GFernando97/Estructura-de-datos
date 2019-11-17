@@ -415,63 +415,62 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////Nuevas clases//////////////////////////////////////
 
-  class const_iterator;
+class const_iterator;
 
-  class iterator{
-  private:
-    vector<ingrediente>::iterator it;
-  public:
-    iterator(){}
-    bool operator== (const iterator &i) const {return i.it == it;}
-    bool operator!= (const iterator &i) const {return i.it != it;}
-    ingrediente& operator*(){ return *it;}
+class iterator{
+private:
+  vector<ingrediente>::iterator it;
+public:
+  iterator(){}
+  bool operator== (const iterator &i) const {return i.it == it;}
+  bool operator!= (const iterator &i) const {return i.it != it;}
+  ingrediente& operator*(){ return *it;}
 
-    iterator& operator++(){++it; return *this;}
-    iterator& operator--(){--it; return *this;}
+  iterator& operator++(){++it; return *this;}
+  iterator& operator--(){--it; return *this;}
+friend class ingredientes;
+friend  class const_iterator;
+};
+
+class const_iterator{
+private:
+  vector<ingrediente>::const_iterator it;
+
+public:
+  const_iterator(){}
+  bool operator== (const const_iterator &i) const{return i.it == it;}
+  bool operator!= (const const_iterator &i) const {return i.it != it;}
+
+  const ingrediente& operator*()const{return *it;}
+
+  const_iterator & operator++(){++it; return *this;}
+  const_iterator & operator--(){--it; return *this;}
   friend class ingredientes;
-  friend  class const_iterator;
-  };
+};
 
-  class const_iterator{
-    private:
-       vector<ingrediente>::const_iterator it;
-
-    public:
-      const_iterator(){}
-      bool operator== (const const_iterator &i) const{return i.it == it;}
-      bool operator!= (const const_iterator &i) const {return i.it != it;}
-
-      const ingrediente& operator*()const{return *it;}
-
-      const_iterator & operator++(){++it; return *this;}
-      const_iterator & operator--(){--it; return *this;}
-      friend class ingredientes;
-    };
-
-    iterator begin(){
+  iterator begin(){
       iterator iter;
       iter.it = datos.begin();
       return iter;
     }
 
-    iterator end(){
+  iterator end(){
       iterator iter;
       iter.it = datos.end();
       return iter;
     }
 
-    const_iterator cbegin()const{
+  const_iterator cbegin()const{
       const_iterator citer;
       citer.it = datos.begin();
       return citer;
     }
 
-    const_iterator cend()const{
+  const_iterator cend()const{
       const_iterator citer;
       citer.it = datos.end();
       return citer;
     }
-
 
 /////////////////////////Fin de Implementacion/////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
