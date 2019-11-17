@@ -139,18 +139,18 @@ using namespace std;
     pair<bool, int> posIndice;
 
     if(posDatos.first == false){
-      datos.insert(ing, posDatos.second);
+      datos.insert(datos.begin()+posDatos.second, ing);
 
-      actualizarPosDatosinsert(posDatos.second);
+      actualizarPosDatosInsert(posDatos.second);
       posIndice = estaEnIndice(posDatos.second);
-      indice.insert(posDatos.second, posIndice.second);
+      indice.insert(indice.begin()+posIndice.second ,posDatos.second);
     }
 
     else if(posIndice.first == true ){
 
       if(datos[posDatos.second].getTipo() != ing.getTipo()){
-        datos.insert(ing, posDatos.second);
-        indice.insert(posDatos.second, posIndice.second);
+        datos.insert( datos.begin()+posDatos.second ,ing);
+        indice.insert(indice.begin()+posIndice.second, posDatos.second);
       }
     }
 
@@ -163,16 +163,16 @@ using namespace std;
 
     if(estaEnPos.first == true){
       pos = estaEnPos.second;
-      datos.erase(pos);
+      datos.erase(datos.begin()+pos);
 
       if(estaEnIndice(pos).first == true){
         pos = estaEnIndice(pos).second;
-        indice.erase(pos);
+        indice.erase(indice.begin()+pos);
       }
     }
   }
 
-  void ingredientes::actualizarPosDatosinsert(int desde){
+  void ingredientes::actualizarPosDatosInsert(int desde){
 
     for(int i =0; i< indice.size(); i++ ){
       if(indice[i]>=desde){
@@ -182,7 +182,7 @@ using namespace std;
   }
 
   void ingredientes::actualizarPosDatosBorrar(int desde){
-    for(int i = 0; i< indice.size(); i++){
+    for(unsigned int i = 0; i< indice.size(); i++){
       if(indice[i]>=desde){
         this->indice[i]--;
       }
@@ -220,19 +220,39 @@ using namespace std;
 
   vector<string> ingredientes::getTipos(){
     vector<string> aux;
-    int contador = 0;
+    int indiceEnDatos;
     string Saux;
 
-    for(int i = 0; i < indice.size(); i++){
-      Saux = datos[indice[i]].getTipo();
-      if(aux.Esta(Saux) == false){
-        aux.insert(Saux, contador);
-        contador++;
+    vector<string>::iterator auxIt;
+    vector<int>::const_iterator indIt;
+
+    for(indIt = indice.cbegin(); indIt != indice.cend(); ++indIt){
+      bool contains = false;
+      indiceEnDatos = *indIt;
+      Saux = datos[indiceEnDatos].getTipo();
+      for(auxIt = aux.begin(); auxIt != aux.end() && !contains; ++auxIt){
+        if(Saux == *auxIt){
+          contains = true;
+        }
+      }
+
+      if(!contains) aux.push_back(Saux);
+    }
+    return aux;
+  }
+
+  bool ingredientes::contains(const string &nombreIng){
+     const_iterator it;
+     bool contains = false;
+     for(it = this->cbegin(); it!=this->cend(); ++it){
+       if((*it).getNombre()==nombreIng){
+        contains = true;
+        return contains;
       }
     }
 
-    return aux;
-  }
+     return contains;
+   }
 //-------------------------------------------------------------------
 
   ingrediente ingredientes:: get(string nombreIng){
@@ -252,8 +272,8 @@ using namespace std;
     pair <bool,int> estaEnPosIndice = estaEnIndice(pos);
 
     if(estaEnPos.first == true){
-      datos.erase(estaEnPos.second);
-      indice.erase(estaEnPosIndice.second);
+      datos.erase(datos.begin()+estaEnPos.second);
+      indice.erase(indice.begin()+estaEnPosIndice.second);
       actualizarPosDatosBorrar(pos);
       }
   }
@@ -285,18 +305,19 @@ using namespace std;
   istream &operator>>(istream&i, ingredientes &lista){
     string linea;
     ingrediente ingAux;
-
+    int it = 0;
     getline(i, linea, '\n');
     while(!i.eof()){
         i >> ingAux;
         lista.addingrediente(ingAux);
+
 
     }
     return i;
   }
 
   void ingredientes::ImprimirPorTipo(ostream &out){
-      for (int i = 0; i < indice.size(); i++){
+      for (unsigned int i = 0; i < indice.size(); i++){
         out << datos[indice[i]]  << endl;
       }
 
@@ -321,13 +342,14 @@ using namespace std;
     vector<int> datosFibra;
 
     for(int i = 0; i < ingredientes_tipo.size(); i++){
-      datosCalorias.insert(ingredientes_tipo[i].getCalorias(),i);
-      datosHc.insert(ingredientes_tipo[i].getHc(),i);
-      datosProteinas.insert(ingredientes_tipo[i].getProteinas(),i);
-      datosGrasas.insert(ingredientes_tipo[i].getGrasas(),i);
-      datosFibra.insert(ingredientes_tipo[i].getFibra(),i);
+      datosCalorias.insert(datosCalorias.begin()+i, ingredientes_tipo[i].getCalorias());
+      datosHc.insert(datosHc.begin()+i, ingredientes_tipo[i].getHc());
+      datosProteinas.insert(datosProteinas.begin()+i, ingredientes_tipo[i].getProteinas());
+      datosGrasas.insert(datosGrasas.begin()+i, ingredientes_tipo[i].getGrasas());
+      datosFibra.insert(datosFibra.begin()+i, ingredientes_tipo[i].getFibra());
     }
 
+    desFi = getDesviacion(datosFibra);
     proCal = getPromedio(datosCalorias);
     proHc = getPromedio(datosHc);
     proProt = getPromedio(datosProteinas);
@@ -427,11 +449,11 @@ using namespace std;
       }
     }
     vector<ingrediente> aux;
-    aux.insert(ing[iCalorias],0);
-    aux.insert(ing[iHc],1);
-    aux.insert(ing[iProteinas],2);
-    aux.insert(ing[iGrasas],3);
-    aux.insert(ing[iFibra],4);
+    aux.insert(aux.begin(), ing[iCalorias]);
+    aux.insert(aux.begin()+1, ing[iHc]);
+    aux.insert(aux.begin()+2, ing[iProteinas]);
+    aux.insert(aux.begin()+3, ing[iGrasas]);
+    aux.insert(aux.begin()+4, ing[iFibra]);
     return aux;
   }
 
@@ -468,11 +490,11 @@ using namespace std;
 
 
     vector<ingrediente> aux2;
-    aux2.insert(ing[iCalorias],0);
-    aux2.insert(ing[iHc],1);
-    aux2.insert(ing[iProteinas],2);
-    aux2.insert(ing[iGrasas],3);
-    aux2.insert(ing[iFibra],4);
+    aux2.insert(aux2.begin(), ing[iCalorias]);
+    aux2.insert(aux2.begin()+1, ing[iHc]);
+    aux2.insert(aux2.begin()+2, ing[iProteinas]);
+    aux2.insert(aux2.begin()+3, ing[iGrasas]);
+    aux2.insert(aux2.begin()+4, ing[iFibra]);
 
     return aux2;
 }

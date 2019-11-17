@@ -4,7 +4,7 @@
 #include <fstream>
 using namespace std;
 void MuestraParametros(){
-	
+
 	cout<<"1.- Dime el nombre del fichero con los ingredientes"<<endl;
 }
 
@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
   if (argc!=2){
 	  MuestraParametros();
 	  return 0;
- }	
- /******************************************************************************************/	
+ }
+ /******************************************************************************************/
  //SECTION 1: Test sobre la lectura de un ingrediente
  //Ingrediente debe tener operadores de consulta y de modificacion por cada parametros
  //ademas de sobrecarga de lectura y escritura
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
  cout<<"Fibra "<<i.getFibra()<<endl;
  cout<<"Tipo "<<i.getTipo()<<endl;
  cout<<endl<<"Ahora probamos la sobrecarga de salida:\t"<<i<<endl;
- 
+
  cout<<"\n Pulsa una tecla para continuar...."<<endl;
  cin.get();
  /******************************************************************************************/
@@ -58,18 +58,18 @@ int main(int argc, char *argv[])
  cin.get();
  /******************************************************************************************/
  //Section 3: Sobre ingredientes comprobamos  que la indexacion por tipo funciona
-  
+
   cout<<"Imprimos por tipo "<<endl;
   all_ingre.ImprimirPorTipo(cout);
-  
+
   cout<<endl<<"Pulse una tecla para continuar..."<<endl<<endl;
   cin.get();
-  
+
  /******************************************************************************************/
  //SECTION 4: Sobre ingredientes comprobamos consultar por nombre, size y borrar
   cout<<endl<<endl;
   cout<<"El numero de ingredientes son "<<all_ingre.size()<<endl;
-  
+
   cout<<"Dime un nombre de ingrediente:";
   string n;
   getline(cin,n);
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     cout<<"Información del ingrediente "<<ing<<endl;
     cout<<"Pulse una tecla para continuar...."<<endl;
     cin.get();
-    
+
     //borra por nombre del ingrediente
     all_ingre.borrar(n);
     cout<<"Tras el borrado de "<<ing.getNombre()<<" los ingredientes son:"<<endl<<all_ingre;
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
    }
    else{
 	   cout<<"El ingrediente "<<n<<" no aparece "<<endl;
-    
+
    }
   cout<<endl<<"Pulse una tecla para continuar..."<<endl<<endl;
   cin.get();
@@ -103,11 +103,11 @@ int main(int argc, char *argv[])
    }
    cout<<"Pulse una tecla para continuar "<<endl;
    cin.get();
-  
+
    string tipo="Molusco";
    ingredientes ingre_tipo=all_ingre.getIngredienteTipo(tipo);
    cout<<"Los ingredientes de tipo "<<tipo<<" son: "<<endl<<ingre_tipo<<endl;
-   
+
    /******************************************************************************************/
    //SECTION 6: Probamos el iterador de ingredientes
    cout<<endl<<"Impresión de los datos con el iterador"<<endl;
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
    cin.get();
    ingredientes::iterator it;
    for (it=all_ingre.begin();it!=all_ingre.end();++it){
-	   cout<<*it;
+	   cout<<*it << endl;
    }
    cout<<"Ahora imprimimos al contrario"<<endl;
    cin.get();
@@ -123,8 +123,8 @@ int main(int argc, char *argv[])
    if(all_ingre.begin()!=all_ingre.end()){
      do{
 	   --it;
-	   cout<<*it;
-	 
+	   cout<<*it << endl;
+
      }while(it!=all_ingre.begin());
    }
 

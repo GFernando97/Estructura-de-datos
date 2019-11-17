@@ -149,7 +149,7 @@ public:
   * almancena para poder mantener el orden establecido. Este metodo se
   * encarga de esto.
   **/
-  void actualizarPosDatosInsertar(int desde);
+  void actualizarPosDatosInsert(int desde);
 
   /**
   * @brief Metodo que actualiza los datos del vector secundario despues de
@@ -411,7 +411,7 @@ public:
   **/
   vector<ingrediente> getMinimos(const ingredientes &ing);
 
-
+  bool contains(const string &nombreIng);
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////Nuevas clases//////////////////////////////////////
 
@@ -460,19 +460,19 @@ public:
       return iter;
     }
 
-    const_iterator begin()const{
+    const_iterator cbegin()const{
       const_iterator citer;
       citer.it = datos.begin();
       return citer;
     }
 
-    const_iterator end()const{
+    const_iterator cend()const{
       const_iterator citer;
       citer.it = datos.end();
       return citer;
     }
 
-    
+
 /////////////////////////Fin de Implementacion/////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 };
