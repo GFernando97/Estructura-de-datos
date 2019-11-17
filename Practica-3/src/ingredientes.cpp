@@ -310,8 +310,6 @@ using namespace std;
     while(!i.eof()){
         i >> ingAux;
         lista.addingrediente(ingAux);
-
-
     }
     return i;
   }
