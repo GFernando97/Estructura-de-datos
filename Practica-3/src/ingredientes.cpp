@@ -126,7 +126,7 @@ using namespace std;
   ingredientes ingredientes::getIngredienteTipo(string tipo) const{
     ingredientes ingredientesTipo;
 
-    for(int i = 0; i < datos.size(); i++){
+    for(unsigned int i = 0; i < datos.size(); i++){
       if(datos[i].getTipo() == tipo)
         ingredientesTipo.addingrediente(datos[i]);
     }
@@ -173,8 +173,7 @@ using namespace std;
   }
 
   void ingredientes::actualizarPosDatosInsert(int desde){
-
-    for(int i =0; i< indice.size(); i++ ){
+    for(unsigned int i =0; i< indice.size(); i++ ){
       if(indice[i]>=desde){
         this->indice[i]++;
       }
@@ -257,12 +256,13 @@ using namespace std;
 
   ingrediente ingredientes:: get(string nombreIng){
     ingrediente vacio;
-    for(int i = 0; i < datos.size(); i++){
-      if(datos[i].getNombre()== nombreIng){
-        vacio = datos[i];
+    ingredientes::const_iterator it;
+
+    for(it = this->cbegin(); it != this->cend(); ++it){
+      if((*it).getNombre()==nombreIng){
+        vacio = *it;
       }
     }
-
     return vacio;
   }
 
@@ -305,7 +305,6 @@ using namespace std;
   istream &operator>>(istream&i, ingredientes &lista){
     string linea;
     ingrediente ingAux;
-    int it = 0;
     getline(i, linea, '\n');
     while(!i.eof()){
         i >> ingAux;
@@ -395,7 +394,7 @@ using namespace std;
 
   float ingredientes::getPromedio(const vector<int> &datosIng){
     float promedioMacro = 0;
-    for(int i = 0; i < datosIng.size(); i++)
+    for(unsigned int i = 0; i < datosIng.size(); i++)
       promedioMacro += datosIng[i];
 
     if(datosIng.size()!=0)
@@ -408,7 +407,7 @@ using namespace std;
     float promedioDatos = getPromedio(datosIng);
     vector<int> aux = datosIng;
 
-    for(int i = 0; i < aux.size(); i++)
+    for(unsigned int i = 0; i < aux.size(); i++)
       aux[i] = (aux[i]-promedioDatos)*(aux[i]-promedioDatos);
 
     float resultado = getPromedio(aux);
