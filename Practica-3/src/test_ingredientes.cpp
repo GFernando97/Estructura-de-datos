@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
   //SECTION 5: Obtiene los tipos diferentes y los  ingredientes de un tipo concreto
    vector<string> tipos=all_ingre.getTipos();
    cout<<"Los tipos de alimentos son:"<<endl;
-   for (int i=0;i<tipos.size(); ++i){
+   for (unsigned int i=0;i<tipos.size(); ++i){
       cout<<tipos[i]<<endl;
    }
    cout<<"Pulse una tecla para continuar "<<endl;

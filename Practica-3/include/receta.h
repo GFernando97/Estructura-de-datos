@@ -9,6 +9,7 @@
 
 #include <string>
 #include <list>
+#include<vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -29,7 +30,9 @@ private:
   float proteinas;
   float fibra;
 
-  void copiar(const receta &receta);
+  void copiar(const receta &rec);
+  //list< pair<string,unsigned int> > extraerIngredientes(const string &cadena);
+
 
 public:
   receta(){}
@@ -41,9 +44,11 @@ public:
 
 
   //getters
-  string getCode(){return this.code;}
-  unsigned int getPlato(){return this.plato;}
-  list<pair<string, unsigned int>> getIngs(){return this.ings;}
+  string getCode()const{return this->code;}
+  unsigned int getPlato()const{return this->plato;}
+  list<pair<string, unsigned int>> getIngs()const{return this->ings;}
+
+  string getNombre()const{return this->nombre;}
 
     /**
     * @brief Metodo get de calorias
@@ -57,7 +62,7 @@ public:
     * @return numero de Hidratos del ingrediente
     *
     **/
-    int getHc() const{return this->hidratos;}
+    int getHc() const{return this->hc;}
 
     /**
     * @brief Metodo get de Proteinas
@@ -89,10 +94,13 @@ public:
     **/
 
   //SETTERS
-  void setCode(string code){ this.code = code;}
-  void setPlato(unsigned int plato){this.plato = plato;}
-  void setIngs( list<pair<string, unsigned int>> ings){this.ings = ings;}
-  void setCalorias(float valor){this.calorias = valor;}
+  void setCode(string code){ this->code = code;}
+  void setPlato(unsigned int plato){this->plato = plato;}
+  void setIngs( list<pair<string, unsigned int>> ings){this->ings = ings;}
+  void setNombre(string nombre){this->nombre = nombre;}
+  void setCalorias(float valor){this->calorias = valor;}
+  int ningredientes()const{return ings.size();}
+
   /**
   * @brief Metodo set de Calorias
   * @param Calorias del ingrediente
@@ -109,7 +117,7 @@ public:
   * en el metodo.
   *
   **/
-  void setHc(int hidratos){this->hidratos = hidratos;}
+  void setHc(int hidratos){this->hc = hidratos;}
 
   /**
   * @brief Metodo set de Proteinas
@@ -139,8 +147,8 @@ public:
   void setFibra(int fibra){this->fibra = fibra;}
 
   //Sobrecarga de entrada y salida de datos
-  friend ostream& operator << (ostream &o, const receta &rec);
-  friend istream& operator >>(istream &i, receta &rec);
+  friend ostream & operator <<(ostream &o, const receta &rec);
+  friend istream & operator >>(istream &i, receta &rec);
 
   ////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////Nuevas clases//////////////////////////////////////
@@ -167,13 +175,13 @@ friend class const_iterator;
 
 class const_iterator{
 private:
-  list<pair<string, usigned int> >::const_iterator it;
+  list<pair<string, unsigned int> >::const_iterator it;
 
 public:
   const_iterator(){}
 
-  bool operator== (const const_iterator &i) const{return i.it==it;}
-  bool operator!= (const const_iterator &i) const{return i.it!=it;}
+  bool operator== (const const_iterator & i) const{return i.it==it;}
+  bool operator!= (const const_iterator & i) const{return i.it!=it;}
 
   const  pair<string, unsigned int>& operator*()const{return *it;}
 
@@ -183,7 +191,33 @@ public:
   friend class receta;
 };
 
+iterator begin(){
+  iterator iter;
+  iter.it = ings.begin();
+  return iter;
+}
 
+iterator end(){
+  iterator iter;
+  iter.it = ings.end();
+  return iter;
+
+}
+
+const_iterator cbegin(){
+  const_iterator citer;
+  citer.it = ings.cbegin();
+  return citer;
+}
+
+const_iterator cend(){
+  const_iterator citer;
+  citer.it = ings.cend();
+  return citer;
+}
+
+/////////////////////////Fin de Implementacion/////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 };
 #endif
