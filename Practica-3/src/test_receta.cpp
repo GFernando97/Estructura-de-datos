@@ -37,14 +37,14 @@ int main(int argc,char *argv[]){
   /***********************************************************************/
 
   //SECTION 3: Test sobre TDA recetas. Operadores de lectura y escritura
-  /*
+  
   recetas rall;
   f>>rall;
   cout<<"Todas las recetas: "<<endl<<rall<<endl;
   cout<<"Numero de recetas "<<rall.size()<<endl;
   cout<<"Pulse una tecla para continuar"<<endl;
   cin.get();
-  */
+
   /***********************************************************************/
 
   //SECTION 4: Consultar una receta por codigo

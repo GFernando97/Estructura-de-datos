@@ -46,7 +46,7 @@ list<pair <string, unsigned int>> extraerIngredientes(const string &cadena){
 
       tempPair.first =  nombre;
       tempPair.second = cantidad;
-      cout << cantidad << " " << nombre << endl;
+  //    cout << cantidad << " " << nombre << endl;
 
 
       tempList.push_back(tempPair);
@@ -74,14 +74,18 @@ receta& receta::operator=(const receta &rec){
 
 
 ostream &operator <<(ostream &o,  const receta &rec){
-  receta::iterator cit =this.begin();
-
   o << rec.getCode() << ";"
     << rec.getPlato() << ";"
     << rec.getNombre() << ";";
 
-    for(cit; cit != end(); ++cit)
+    for(receta::const_iterator cit = rec.cbegin(); cit != rec.cend(); ++cit)
+    if(cit == --rec.cend()){
+      o << (*cit).first << " " <<(*cit).second << endl;
+
+    }
+    else{
       o << (*cit).first << " " <<(*cit).second << ";";
+    }
 
   return o;
 }

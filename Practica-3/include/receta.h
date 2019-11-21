@@ -157,7 +157,7 @@ class const_iterator;
 
 class iterator{
 private:
-  list<pair<string,unsigned int>>::iterator it;
+   list<pair<string,unsigned int>>::iterator it;
 
 public:
   iterator(){}
@@ -175,7 +175,7 @@ friend class const_iterator;
 
 class const_iterator{
 private:
-  list<pair<string, unsigned int> >::const_iterator it;
+   list<pair<string, unsigned int> >::const_iterator it;
 
 public:
   const_iterator(){}
@@ -204,13 +204,13 @@ iterator end(){
 
 }
 
-const_iterator cbegin(){
+const_iterator cbegin()const{
   const_iterator citer;
   citer.it = ings.cbegin();
   return citer;
 }
 
-const_iterator cend(){
+const_iterator cend()const{
   const_iterator citer;
   citer.it = ings.cend();
   return citer;
