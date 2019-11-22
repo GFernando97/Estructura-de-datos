@@ -41,7 +41,7 @@ recetas& recetas::operator=(const recetas &rec){
 
 ostream &operator <<(ostream &o, recetas &rec){
   for(recetas::const_iterator cit = rec.cbegin(); cit != rec.cend(); ++cit){
-    o << (*cit).first <<";" << (*cit).second;
+    o << (*cit).first <<";" << (*cit).second << endl;
 //  o << (*cit).second;
   }
 
@@ -63,4 +63,10 @@ istream &operator >>(istream &i, recetas &rec){
 
   return i;
 
+}
+
+
+ostream &operator <<(ostream & os,const pair<const string, const receta> & d){
+  os<< d.first << ";" << d.second;
+  return os;
 }

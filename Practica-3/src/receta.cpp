@@ -88,7 +88,7 @@ ostream &operator <<(ostream &o,  const receta &rec){
 
     for(receta::const_iterator cit = rec.cbegin(); cit != rec.cend(); ++cit)
     if(cit == --rec.cend()){
-      o << (*cit).first << " " <<(*cit).second << endl;
+      o << (*cit).first << " " <<(*cit).second;
 
     }
     else{

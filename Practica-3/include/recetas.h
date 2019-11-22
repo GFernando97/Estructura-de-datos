@@ -17,11 +17,8 @@
 
 using namespace std;
 
+ostream &operator <<(ostream & os,const pair<const string, const receta> &d);
 
-ostream &operator <<(ostream & os,const pair<const string, receta> & d){
-  os<< d.first << ";" << d.second;
-  return os;
-}
 
 class recetas{
 private:
