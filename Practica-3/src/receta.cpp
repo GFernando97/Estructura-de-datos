@@ -14,7 +14,7 @@ void receta::copiar(const receta &rec){
 }
 
 
-list<pair <string, unsigned int>> extraerIngredientes(const string &cadena){
+list<pair <string,unsigned int>> receta::extraerIngredientes(const string &cadena){
   istringstream iss(cadena);
   string subcadena;
   string palabraSuelta;
@@ -41,9 +41,17 @@ list<pair <string, unsigned int>> extraerIngredientes(const string &cadena){
           }
           else nombre +=  palabrasAlmacenadas[i]+" " ;
         }
+    //    cout << "la palabra que almaceno es: " <<
+      //  palabrasAlmacenadas[palabrasAlmacenadas.size()-2] << endl;
 
-      cantidad = stoul(palabrasAlmacenadas[palabrasAlmacenadas.size()-1], nullptr, 10);
+        if(palabrasAlmacenadas[palabrasAlmacenadas.size()-1] != "")
+          cantidad = stoul(palabrasAlmacenadas[palabrasAlmacenadas.size()-1], nullptr, 10);
 
+        else
+          cantidad = stoul(palabrasAlmacenadas[palabrasAlmacenadas.size()-2], nullptr, 10);
+
+
+    //  cout << "Cantidades añadidas: " << cantidad << endl;
       tempPair.first =  nombre;
       tempPair.second = cantidad;
   //    cout << cantidad << " " << nombre << endl;
@@ -98,7 +106,7 @@ istream &operator >>(istream &i, receta &rec){
   getline(i, nombre,';');
   getline(i,ings,'\n');
 
-  list<pair <string, unsigned int>> listAux = extraerIngredientes(ings);
+  list<pair <string, unsigned int>> listAux = rec.extraerIngredientes(ings);
   rec.setCode(code);
   rec.setPlato(stoul(plato, nullptr, 10));
   rec.setNombre(nombre);

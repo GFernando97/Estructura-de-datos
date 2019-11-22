@@ -37,7 +37,7 @@ int main(int argc,char *argv[]){
   /***********************************************************************/
 
   //SECTION 3: Test sobre TDA recetas. Operadores de lectura y escritura
-  
+
   recetas rall;
   f>>rall;
   cout<<"Todas las recetas: "<<endl<<rall<<endl;
@@ -48,7 +48,7 @@ int main(int argc,char *argv[]){
   /***********************************************************************/
 
   //SECTION 4: Consultar una receta por codigo
-  /*cout<<"Dime el codigo de una receta:";
+  cout<<"Dime el codigo de una receta:";
   string c;
   cin>>c;
   if (rall[c].getNombre()!="Undefined"){
@@ -57,12 +57,12 @@ int main(int argc,char *argv[]){
   else{
 	  cout<<"La receta con codigo "<<c<<" no existe"<<endl;
   }
-  */
+
   /***********************************************************************/
 
   //SECTION 5: Borramos la receta con un código. Comprobamos el
   //funcionamiento del iterador de recetas
-  /*rall.borrar(c);
+  rall.borrar(c);
   cout<<"Tras el borrado "<<endl;
   recetas::iterator its;
   for (its=rall.begin();its!=rall.end();++its){
@@ -71,6 +71,6 @@ int main(int argc,char *argv[]){
   }
   cout<<endl;
   cout<<"Numero de recetas "<<rall.size()<<endl;
-  */
+
 
 }

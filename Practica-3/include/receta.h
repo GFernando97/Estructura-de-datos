@@ -9,7 +9,7 @@
 
 #include <string>
 #include <list>
-#include<vector>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -31,7 +31,7 @@ private:
   float fibra;
 
   void copiar(const receta &rec);
-  //list< pair<string,unsigned int> > extraerIngredientes(const string &cadena);
+  list<pair <string,unsigned int>> extraerIngredientes(const string &cadena);
 
 
 public:
@@ -165,6 +165,7 @@ public:
   bool operator!= (const iterator &i) const{return i.it!= it;}
 
   pair<string,unsigned int>& operator*(){ return *it;}
+
   iterator& operator++(){++it; return *this;}
   iterator& operator--(){--it; return *this;}
 
