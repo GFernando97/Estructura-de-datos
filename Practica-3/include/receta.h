@@ -154,13 +154,7 @@ public:
   friend istream & operator >>(istream &i, receta &rec);
 
   /////////////////////////////////////////////////////////////////////////////////
-  //////////////////////Clases para calculo de nutrientes//////////////////////////
-
-  float calcularCalorias(ingredientes &allIngre);
-  float calcularHc(ingredientes &allIngre);
-  float calcularGrasas(ingredientes &allIngre);
-  float calcularProteinas(ingredientes &allIngre);
-  float calcularFibra(ingredientes &allIngre);
+  //////////////////////Métodos para calculo de nutrientes//////////////////////////
   void calcularNutrientes(const ingredientes &allIngre);
 
 
