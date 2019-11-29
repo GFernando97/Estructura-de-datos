@@ -114,3 +114,108 @@ istream &operator >>(istream &i, receta &rec){
 
 return i;
 }
+
+
+float receta::calcularCalorias(ingredientes &allIngre){
+  string ingrBusq;
+  unsigned int cantidad;
+  ingrediente ingAux;
+  float resultado = 0;
+    for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit ){
+      ingrBusq = (*cit).first;
+      cantidad = (*cit).second;
+
+      ingAux = allIngre.get(ingrBusq);
+      resultado = resultado + ((ingAux.getCalorias()*cantidad)/100);
+    }
+
+    return resultado;
+}
+
+float receta::calcularHc(ingredientes &allIngre){
+  string ingrBusq;
+  unsigned int cantidad;
+  ingrediente ingAux;
+  float resultado = 0;
+    for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit ){
+      ingrBusq = (*cit).first;
+      cantidad = (*cit).second;
+
+      ingAux = allIngre.get(ingrBusq);
+      resultado = resultado + ((ingAux.getHc()*cantidad)/100);
+    }
+
+    return resultado;
+}
+
+
+float receta::calcularGrasas(ingredientes &allIngre){
+  string ingrBusq;
+  unsigned int cantidad;
+  ingrediente ingAux;
+  float resultado = 0;
+    for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit ){
+      ingrBusq = (*cit).first;
+      cantidad = (*cit).second;
+
+      ingAux = allIngre.get(ingrBusq);
+      resultado = resultado + ((ingAux.getGrasas()*cantidad)/100);
+    }
+
+    return resultado;
+}
+
+float receta::calcularProteinas(ingredientes &allIngre){
+  string ingrBusq;
+  unsigned int cantidad;
+  float resultado = 0;
+    for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit ){
+      ingrBusq = (*cit).first;
+      cantidad = (*cit).second;
+
+      ingrediente ingAux = allIngre.get(ingrBusq);
+      resultado = resultado + ((ingAux.getProteinas()*cantidad)/100);
+    }
+
+    return resultado;
+}
+
+float receta::calcularFibra(ingredientes &allIngre){
+  string ingrBusq;
+  unsigned int cantidad;
+  ingrediente ingAux;
+  float resultado = 0;
+    for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit ){
+      ingrBusq = (*cit).first;
+      cantidad = (*cit).second;
+
+      ingAux = allIngre.get(ingrBusq);
+      resultado = resultado + ((ingAux.getFibra()*cantidad)/100);
+    }
+
+    return resultado;
+}
+
+void receta::calcularNutrientes(const ingredientes &allIngre){
+  string ingrBusq;
+  unsigned int cantidad;
+  ingrediente ingAux;
+  float resultadoCal, resultadoHc, resultadoGra, resultadoPr, resultadoFib = 0;
+
+  for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit){
+    ingrBusq = (*cit).first;
+    cantidad = (*cit).second;
+    ingAux(allIngre.get(ingrBusq));
+    resultadoCal = resultadoCal + ((ingAux.getCalorias()*cantidad)/100);
+    resultadoHc = resultadoHc + ((ingAux.getHc()*cantidad)/100);
+    resultadoGra = resultadoGra + ((ingAux.getGrasas()*cantidad)/100);
+    resultadoPr = resultadoPr + ((ingAux.getProteinas()*cantidad)/100);
+    resultadoFib = resultadoFib + ((ingAux.getFibra()*cantidad)/100);
+   }
+
+   this.setCalorias(resultadoCal);
+   this.setHc(resultadoHc);
+   this.setGrasas(resultadoGra);
+   this.setProteinas(resultadoPr);
+   this.setFibra(resultadoFib);
+}

@@ -14,6 +14,9 @@
 #include <fstream>
 #include <sstream>
 #include <utility>
+#include "ingredientes.h"
+#include "ingrediente.h"
+
 
 
 using namespace std;
@@ -149,6 +152,18 @@ public:
   //Sobrecarga de entrada y salida de datos
   friend ostream & operator <<(ostream &o, const receta &rec);
   friend istream & operator >>(istream &i, receta &rec);
+
+  /////////////////////////////////////////////////////////////////////////////////
+  //////////////////////Clases para calculo de nutrientes//////////////////////////
+
+  float calcularCalorias(ingredientes &allIngre);
+  float calcularHc(ingredientes &allIngre);
+  float calcularGrasas(ingredientes &allIngre);
+  float calcularProteinas(ingredientes &allIngre);
+  float calcularFibra(ingredientes &allIngre);
+  void calcularNutrientes(const ingredientes &allIngre);
+
+
 
   ////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////Nuevas clases//////////////////////////////////////
