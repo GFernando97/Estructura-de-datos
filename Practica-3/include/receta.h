@@ -15,7 +15,7 @@
 #include <sstream>
 #include <utility>
 #include "ingredientes.h"
-#include "ingrediente.h"
+//#include "ingrediente.h"
 
 
 
@@ -159,7 +159,7 @@ public:
 
   /////////////////////////////////////////////////////////////////////////////////
   //////////////////////Métodos para calculo de nutrientes//////////////////////////
-  void calcularNutrientes(const ingredientes &allIngre);
+  void calcularNutrientes(const ingredientes &all);
   void calcularRazon();
   void imprimeValNutricionales()const;
 

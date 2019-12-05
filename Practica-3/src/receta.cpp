@@ -3,6 +3,9 @@
  * @brief Implementación de la clase receta::receta.
  */
 #include "receta.h"
+#include "ingredientes.h"
+#include <string>
+
 using namespace std;
 
 
@@ -116,37 +119,33 @@ return i;
 }
 
 
-void receta::calcularNutrientes(const ingredientes &allIngre){
-  //string ingrBusq;
-  //unsigned int cantidad;
-  //ingrediente ingAux;
+void receta::calcularNutrientes(const ingredientes &all){
+  string nombreAux;
+  unsigned int cantidad;
   float resultadoCal = 0;
   float resultadoHc = 0;
   float resultadoGra = 0;
   float resultadoPr = 0;
   float resultadoFib = 0;
-/*
-  for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit){
-    string ingrBusq;
-    unsigned int cantidad;
-    //ingrediente ingAux;
-    ingrBusq = (*cit).first;
-    cantidad = (*cit).second;
-    ingrediente ingAux = allIngre.get(ingrBusq);
-    //ingAux=allIngre.get(ingrBusq);
 
-    resultadoCal = resultadoCal + ((ingAux.getCalorias()*cantidad)/100);
-    resultadoHc = resultadoHc + ((ingAux.getHc()*cantidad)/100);
-    resultadoGra = resultadoGra + ((ingAux.getGrasas()*cantidad)/100);
-    resultadoPr = resultadoPr + ((ingAux.getProteinas()*cantidad)/100);
-    resultadoFib = resultadoFib + ((ingAux.getFibra()*cantidad)/100);
+  for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit){
+    nombreAux = (*cit).first;
+    cantidad = (*cit).second;
+    ingrediente ing=all.get(nombreAux);
+
+    resultadoCal = resultadoCal + ((ing.getCalorias()*cantidad)/100);
+    resultadoHc = resultadoHc + ((ing.getHc()*cantidad)/100);
+    resultadoGra = resultadoGra + ((ing.getGrasas()*cantidad)/100);
+    resultadoPr = resultadoPr + ((ing.getProteinas()*cantidad)/100);
+    resultadoFib = resultadoFib + ((ing.getFibra()*cantidad)/100);
   }
-*/
+
    this->setCalorias(resultadoCal);
    this->setHc(resultadoHc);
    this->setGrasas(resultadoGra);
    this->setProteinas(resultadoPr);
    this->setFibra(resultadoFib);
+   calcularRazon();
 }
 
 void receta::imprimeValNutricionales()const{
@@ -157,5 +156,6 @@ void receta::imprimeValNutricionales()const{
 }
 
 void receta::calcularRazon(){
-  
+  float nuevoValor = this->getProteinas()/this->getHc();
+  this->setRazon(nuevoValor);
 }

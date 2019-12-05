@@ -1,5 +1,7 @@
 #include "receta.h"
 #include "recetas.h"
+#include "ingredientes.h"
+#include "ingrediente.h"
 #include <fstream>
 using namespace std;
 int main(int argc,char *argv[]){
@@ -27,7 +29,7 @@ int main(int argc,char *argv[]){
 
   //Voy a calcular todos los valores nutricionales de cada receta
   recetas::const_iterator cit;
-  
+
 
 
   string aux;

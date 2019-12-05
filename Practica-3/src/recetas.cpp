@@ -66,8 +66,12 @@ ostream &operator <<(ostream & os,const pair<const string, const receta> & d){
   os<< d.first << ";" << d.second;
   return os;
 }
+/*
+list<receta> recetas::recetasAdecuadas(const float &caloriasMax){
+    float caloriasActuales = 0;
 
-/*list<receta> recetas::recetasAdecuadas(const int &caloriasMax){
+    while(caloriasActuales < caloriasMax){
 
+    }
 }
 */
