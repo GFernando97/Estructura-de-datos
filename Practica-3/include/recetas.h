@@ -32,6 +32,7 @@ recetas(){}
 recetas(const recetas &rec);
 unsigned int size(){return datos.size();}
 void borrar(string &codigo);
+//list<receta> recetasAdecuadas(const int &caloriasMax); 
 
 
 recetas &operator=(const recetas &rec);

@@ -302,7 +302,7 @@ public:
   * @return devuelve el ingrediente que tiene el nombre pasado como parametro
   * en el metodo
   **/
-  ingrediente get(string nombreIng);
+  ingrediente get(const string nombreIng)const;
 
   /**
   * @brief borrar un ingrediente segun el nombre

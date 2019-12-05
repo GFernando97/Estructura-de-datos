@@ -117,25 +117,45 @@ return i;
 
 
 void receta::calcularNutrientes(const ingredientes &allIngre){
-  string ingrBusq;
-  unsigned int cantidad;
-  ingrediente ingAux;
-  float resultadoCal, resultadoHc, resultadoGra, resultadoPr, resultadoFib = 0;
-
+  //string ingrBusq;
+  //unsigned int cantidad;
+  //ingrediente ingAux;
+  float resultadoCal = 0;
+  float resultadoHc = 0;
+  float resultadoGra = 0;
+  float resultadoPr = 0;
+  float resultadoFib = 0;
+/*
   for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit){
+    string ingrBusq;
+    unsigned int cantidad;
+    //ingrediente ingAux;
     ingrBusq = (*cit).first;
     cantidad = (*cit).second;
-    ingAux(allIngre.get(ingrBusq));
+    ingrediente ingAux = allIngre.get(ingrBusq);
+    //ingAux=allIngre.get(ingrBusq);
+
     resultadoCal = resultadoCal + ((ingAux.getCalorias()*cantidad)/100);
     resultadoHc = resultadoHc + ((ingAux.getHc()*cantidad)/100);
     resultadoGra = resultadoGra + ((ingAux.getGrasas()*cantidad)/100);
     resultadoPr = resultadoPr + ((ingAux.getProteinas()*cantidad)/100);
     resultadoFib = resultadoFib + ((ingAux.getFibra()*cantidad)/100);
-   }
+  }
+*/
+   this->setCalorias(resultadoCal);
+   this->setHc(resultadoHc);
+   this->setGrasas(resultadoGra);
+   this->setProteinas(resultadoPr);
+   this->setFibra(resultadoFib);
+}
 
-   this.setCalorias(resultadoCal);
-   this.setHc(resultadoHc);
-   this.setGrasas(resultadoGra);
-   this.setProteinas(resultadoPr);
-   this.setFibra(resultadoFib);
+void receta::imprimeValNutricionales()const{
+  cout << "Valores nutricionales de la receta " << *this << " son: " << endl;
+  cout << "Calorias " << getCalorias() << "\tHidratos de cab.\t" << getHc()
+       << "\tProteinas\t" << getProteinas() << "\tGrasas\t" << getGrasas()
+       << "\tFibra\t" << getFibra() << endl;
+}
+
+void receta::calcularRazon(){
+  
 }

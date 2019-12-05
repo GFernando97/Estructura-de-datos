@@ -44,7 +44,6 @@ ostream &operator <<(ostream &o, recetas &rec){
     o << (*cit).first <<";" << (*cit).second << endl;
 //  o << (*cit).second;
   }
-
   return o;
 }
 
@@ -60,13 +59,15 @@ istream &operator >>(istream &i, recetas &rec){
       rec.insert(recetaAux);
     }
   }
-
   return i;
-
 }
-
 
 ostream &operator <<(ostream & os,const pair<const string, const receta> & d){
   os<< d.first << ";" << d.second;
   return os;
 }
+
+/*list<receta> recetas::recetasAdecuadas(const int &caloriasMax){
+
+}
+*/

@@ -254,7 +254,7 @@ using namespace std;
    }
 //-------------------------------------------------------------------
 
-  ingrediente ingredientes:: get(string nombreIng){
+  ingrediente ingredientes:: get(const string nombreIng)const{
     ingrediente vacio;
     ingredientes::const_iterator it;
 

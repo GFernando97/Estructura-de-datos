@@ -32,6 +32,7 @@ private:
   float grasas;
   float proteinas;
   float fibra;
+  float razon;
 
   void copiar(const receta &rec);
   list<pair <string,unsigned int>> extraerIngredientes(const string &cadena);
@@ -96,12 +97,15 @@ public:
     *
     **/
 
+    int getRazon() const{return this->razon;}
+
   //SETTERS
   void setCode(string code){ this->code = code;}
   void setPlato(unsigned int plato){this->plato = plato;}
   void setIngs( list<pair<string, unsigned int>> ings){this->ings = ings;}
   void setNombre(string nombre){this->nombre = nombre;}
   void setCalorias(float valor){this->calorias = valor;}
+  void setRazon(int valor){this->razon = valor;}
   int ningredientes()const{return ings.size();}
 
   /**
@@ -156,6 +160,9 @@ public:
   /////////////////////////////////////////////////////////////////////////////////
   //////////////////////Métodos para calculo de nutrientes//////////////////////////
   void calcularNutrientes(const ingredientes &allIngre);
+  void calcularRazon();
+  void imprimeValNutricionales()const;
+
 
 
 
