@@ -19,7 +19,7 @@ ingrediente::ingrediente(const ingrediente &original){
   Copiar(original);
 }
 
-ingrediente::ingrediente(string nombre, int calorias, int hidratos, int proteinas, int grasas, int fibra, string tipo){
+ingrediente::ingrediente(string nombre, float calorias, float hidratos, float proteinas, float grasas, float fibra, string tipo){
   setNombre(nombre);
   setTipo(tipo);
   setGrasas(grasas);
@@ -76,11 +76,11 @@ istream& operator >> (istream &i, ingrediente &ing){
 
   if(nombre != ""){
     ing.setNombre(nombre);
-    ing.setCalorias(stoi(calorias, nullptr, 10));
-    ing.setHc(stoi(hc, nullptr, 10));
-    ing.setProteinas(stoi(proteinas, nullptr, 10));
-    ing.setGrasas(stoi(grasa, nullptr, 10));
-    ing.setFibra(stoi(fibra, nullptr,10));
+    ing.setCalorias(stof(calorias));
+    ing.setHc(stof(hc));
+    ing.setProteinas(stof(proteinas));
+    ing.setGrasas(stof(grasa));
+    ing.setFibra(stof(fibra));
     ing.setTipo(tipo);
   }
 

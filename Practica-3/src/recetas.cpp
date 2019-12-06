@@ -73,5 +73,4 @@ list<receta> recetas::recetasAdecuadas(const float &caloriasMax){
     while(caloriasActuales < caloriasMax){
 
     }
-}
-*/
+}*/

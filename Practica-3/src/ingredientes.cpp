@@ -255,7 +255,8 @@ using namespace std;
 //-------------------------------------------------------------------
 
   ingrediente ingredientes:: get(const string nombreIng)const{
-    ingrediente vacio;
+    string nombreVacio = "";
+    ingrediente vacio(nombreVacio, 0, 0, 0, 0, 0, nombreVacio);
     ingredientes::const_iterator it;
 
     for(it = this->cbegin(); it != this->cend(); ++it){

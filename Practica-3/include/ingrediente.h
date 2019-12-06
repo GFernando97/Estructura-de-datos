@@ -33,27 +33,27 @@ private:
   /**
   * @brief Calorias del ingrediente.
   **/
-  int calorias;
+  float calorias;
 
   /**
   * @brief Hidratos del ingrediente.
   **/
-  int hidratos;
+  float hidratos;
 
   /**
   * @brief Proteinas del ingrediente.
   **/
-  int proteinas;
+  float proteinas;
 
   /**
   * @brief Grasas del ingrediente.
   **/
-  int grasas;
+  float grasas;
 
   /**
   * @brief Fibra del ingrediente.
   **/
-  int fibra;
+  float fibra;
 
   /**
   * @brief Tipo de ingrediente.
@@ -97,7 +97,7 @@ public:
   * @post Se ha creado un ingrediente con los valores que han sido pasados como
   * argumentos en el constructor.
   **/
-  ingrediente(string nombre, int calorias, int hidratos, int proteinas, int grasas, int fibra, string tipo);
+  ingrediente(string nombre, float calorias, float hidratos, float proteinas, float grasas, float fibra, string tipo);
 
 
   /**
@@ -135,35 +135,35 @@ public:
   * @return numero de calorias del ingrediente
   *
   **/
-  int getCalorias() const{return this->calorias;}
+  float getCalorias() const{return this->calorias;}
 
   /**
   * @brief Metodo get de Hidratos
   * @return numero de Hidratos del ingrediente
   *
   **/
-  int getHc() const{return this->hidratos;}
+  float getHc() const{return this->hidratos;}
 
   /**
   * @brief Metodo get de Proteinas
   * @return numero de Proteinas del ingrediente
   *
   **/
-  int getProteinas() const{return this->proteinas;}
+  float getProteinas() const{return this->proteinas;}
 
   /**
   * @brief Metodo get de Grasas
   * @return numero de Grasas del ingrediente
   *
   **/
-  int getGrasas() const{return this->grasas;}
+  float getGrasas() const{return this->grasas;}
 
   /**
   * @brief Metodo get de Fibra
   * @return numero de fibra del ingrediente
   *
   **/
-  int getFibra() const{return this->fibra;}
+  float getFibra() const{return this->fibra;}
 
   /**
   * @brief Metodo set de Nombre
@@ -190,7 +190,7 @@ public:
   * en el metodo.
   *
   **/
-  void setCalorias(int calorias){this->calorias = calorias;}
+  void setCalorias(float calorias){this->calorias = calorias;}
 
   /**
   * @brief Metodo set de Hidratos
@@ -199,7 +199,7 @@ public:
   * en el metodo.
   *
   **/
-  void setHc(int hidratos){this->hidratos = hidratos;}
+  void setHc(float hidratos){this->hidratos = hidratos;}
 
   /**
   * @brief Metodo set de Proteinas
@@ -208,7 +208,7 @@ public:
   * en el metodo.
   *
   **/
-  void setProteinas(int proteinas){this->proteinas = proteinas;}
+  void setProteinas(float proteinas){this->proteinas = proteinas;}
 
   /**
   * @brief Metodo set de Grasas
@@ -217,7 +217,7 @@ public:
   * en el metodo.
   *
   **/
-  void setGrasas(int grasas){this->grasas = grasas;}
+  void setGrasas(float grasas){this->grasas = grasas;}
 
   /**
   * @brief Metodo set de Fibra
@@ -226,7 +226,7 @@ public:
   * en el metodo.
   *
   **/
-  void setFibra(int fibra){this->fibra = fibra;}
+  void setFibra(float fibra){this->fibra = fibra;}
 
   /**
   * @brief Sobrecarga del operardor de salida de datos

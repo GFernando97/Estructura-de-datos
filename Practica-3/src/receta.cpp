@@ -26,15 +26,15 @@ list<pair <string,unsigned int>> receta::extraerIngredientes(const string &caden
   list<pair<string, unsigned int>> tempList;
   pair<string,unsigned int> tempPair;
 
-  while(!iss.eof()){
+  while(!iss.eof() ){
     getline(iss, subcadena, ';');
     unsigned int cantidad;
     string nombre;
     istringstream issSplitter(subcadena);
-
       while(!issSplitter.eof()){
         getline(issSplitter, palabraSuelta, ' ');
-        palabrasAlmacenadas.push_back(palabraSuelta);
+        if(!palabraSuelta.empty())
+          palabrasAlmacenadas.push_back(palabraSuelta);
       }
 
       unsigned int lastIter =  palabrasAlmacenadas.size()-2;
@@ -44,8 +44,6 @@ list<pair <string,unsigned int>> receta::extraerIngredientes(const string &caden
           }
           else nombre +=  palabrasAlmacenadas[i]+" " ;
         }
-    //    cout << "la palabra que almaceno es: " <<
-      //  palabrasAlmacenadas[palabrasAlmacenadas.size()-2] << endl;
 
         if(palabrasAlmacenadas[palabrasAlmacenadas.size()-1] != "")
           cantidad = stoul(palabrasAlmacenadas[palabrasAlmacenadas.size()-1], nullptr, 10);
@@ -54,10 +52,8 @@ list<pair <string,unsigned int>> receta::extraerIngredientes(const string &caden
           cantidad = stoul(palabrasAlmacenadas[palabrasAlmacenadas.size()-2], nullptr, 10);
 
 
-    //  cout << "Cantidades añadidas: " << cantidad << endl;
       tempPair.first =  nombre;
       tempPair.second = cantidad;
-  //    cout << cantidad << " " << nombre << endl;
 
 
       tempList.push_back(tempPair);
@@ -121,23 +117,24 @@ return i;
 
 void receta::calcularNutrientes(const ingredientes &all){
   string nombreAux;
-  unsigned int cantidad;
+  float cantidad;
+  const float valorDefecto = 100.0;
   float resultadoCal = 0;
   float resultadoHc = 0;
   float resultadoGra = 0;
   float resultadoPr = 0;
   float resultadoFib = 0;
-
+  
   for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit){
     nombreAux = (*cit).first;
     cantidad = (*cit).second;
     ingrediente ing=all.get(nombreAux);
 
-    resultadoCal = resultadoCal + ((ing.getCalorias()*cantidad)/100);
-    resultadoHc = resultadoHc + ((ing.getHc()*cantidad)/100);
-    resultadoGra = resultadoGra + ((ing.getGrasas()*cantidad)/100);
-    resultadoPr = resultadoPr + ((ing.getProteinas()*cantidad)/100);
-    resultadoFib = resultadoFib + ((ing.getFibra()*cantidad)/100);
+    resultadoCal = resultadoCal + ((ing.getCalorias()*cantidad)/valorDefecto);
+    resultadoHc = resultadoHc + ((ing.getHc()*cantidad)/valorDefecto);
+    resultadoGra = resultadoGra + ((ing.getGrasas()*cantidad)/valorDefecto);
+    resultadoPr = resultadoPr + ((ing.getProteinas()*cantidad)/valorDefecto);
+    resultadoFib = resultadoFib + ((ing.getFibra()*cantidad)/valorDefecto);
   }
 
    this->setCalorias(resultadoCal);
@@ -152,7 +149,7 @@ void receta::imprimeValNutricionales()const{
   cout << "Valores nutricionales de la receta " << *this << " son: " << endl;
   cout << "Calorias " << getCalorias() << "\tHidratos de cab.\t" << getHc()
        << "\tProteinas\t" << getProteinas() << "\tGrasas\t" << getGrasas()
-       << "\tFibra\t" << getFibra() << endl;
+       << "\tFibra\t" << getFibra() << endl << endl;
 }
 
 void receta::calcularRazon(){

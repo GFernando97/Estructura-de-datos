@@ -59,35 +59,35 @@ public:
     * @return numero de calorias del ingrediente
     *
     **/
-    int getCalorias() const{return this->calorias;}
+    float getCalorias() const{return this->calorias;}
 
     /**
     * @brief Metodo get de Hidratos
     * @return numero de Hidratos del ingrediente
     *
     **/
-    int getHc() const{return this->hc;}
+    float getHc() const{return this->hc;}
 
     /**
     * @brief Metodo get de Proteinas
     * @return numero de Proteinas del ingrediente
     *
     **/
-    int getProteinas() const{return this->proteinas;}
+    float getProteinas() const{return this->proteinas;}
 
     /**
     * @brief Metodo get de Grasas
     * @return numero de Grasas del ingrediente
     *
     **/
-    int getGrasas() const{return this->grasas;}
+    float getGrasas() const{return this->grasas;}
 
     /**
     * @brief Metodo get de Fibra
     * @return numero de fibra del ingrediente
     *
     **/
-    int getFibra() const{return this->fibra;}
+    float getFibra() const{return this->fibra;}
 
     /**
     * @brief Metodo set de Nombre
@@ -97,14 +97,13 @@ public:
     *
     **/
 
-    int getRazon() const{return this->razon;}
+    float getRazon() const{return this->razon;}
 
   //SETTERS
   void setCode(string code){ this->code = code;}
   void setPlato(unsigned int plato){this->plato = plato;}
   void setIngs( list<pair<string, unsigned int>> ings){this->ings = ings;}
   void setNombre(string nombre){this->nombre = nombre;}
-  void setCalorias(float valor){this->calorias = valor;}
   void setRazon(int valor){this->razon = valor;}
   int ningredientes()const{return ings.size();}
 
@@ -115,7 +114,7 @@ public:
   * en el metodo.
   *
   **/
-  void setCalorias(int calorias){this->calorias = calorias;}
+  void setCalorias(float calorias){this->calorias = calorias;}
 
   /**
   * @brief Metodo set de Hidratos
@@ -124,7 +123,7 @@ public:
   * en el metodo.
   *
   **/
-  void setHc(int hidratos){this->hc = hidratos;}
+  void setHc(float hidratos){this->hc = hidratos;}
 
   /**
   * @brief Metodo set de Proteinas
@@ -133,7 +132,7 @@ public:
   * en el metodo.
   *
   **/
-  void setProteinas(int proteinas){this->proteinas = proteinas;}
+  void setProteinas(float proteinas){this->proteinas = proteinas;}
 
   /**
   * @brief Metodo set de Grasas
@@ -142,7 +141,7 @@ public:
   * en el metodo.
   *
   **/
-  void setGrasas(int grasas){this->grasas = grasas;}
+  void setGrasas(float grasas){this->grasas = grasas;}
 
   /**
   * @brief Metodo set de Fibra
@@ -151,7 +150,7 @@ public:
   * en el metodo.
   *
   **/
-  void setFibra(int fibra){this->fibra = fibra;}
+  void setFibra(float fibra){this->fibra = fibra;}
 
   //Sobrecarga de entrada y salida de datos
   friend ostream & operator <<(ostream &o, const receta &rec);
