@@ -4,7 +4,6 @@
  */
 #include "ingredientes.h"
 #include "ingrediente.h"
-//#include "VD.h"
 
 using namespace std;
 

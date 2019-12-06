@@ -21,8 +21,8 @@ using namespace std;
 /**
  * @brief Clase que representa un conjunto de ingredientes.
  *
- * Esta clase representa un conjunto de ingredientes valiéndose de dos vectores dispersos
- * de la clase @c vector. Los ingredientes se mantienen ordenados por nombre
+ * Esta clase representa un conjunto de ingredientes valiéndose de dos vectores de la stl @c vector.
+ * Los ingredientes se mantienen ordenados por nombre
  * en el primer vector y por nombre y tipo en el segundo.
  *
  */
@@ -411,61 +411,173 @@ public:
   **/
   vector<ingrediente> getMinimos(const ingredientes &ing);
 
+  /**
+  * @brief Metodo que comprueba si el ingrediente se encuentra dentro del objeto.
+  * @param string nombreIng que contiene el nombre del ingrediente a comprobar.
+  * @return devuelve true en el caso de que encuentre el elemento
+  * @return devuelve false en caso de que el elemento no exista dentro del objeto.
+  **/
   bool contains(const string &nombreIng);
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////Nuevas clases//////////////////////////////////////
 
 class const_iterator;
 
+/**
+ * @brief Clase iterator de ingredientes
+ *
+ * Esta clase ha sido implementada para poder utilizar iteradores para la clase
+ * @c ingredientes. Se iterará sobre el vector de ingrediente perteneciente a la
+ * clase ingredientes.
+ *
+ */
 class iterator{
 private:
+
+ /**
+  * @brief Iterador sobre el vector que almacena los ingredientes.
+  *
+  **/
   vector<ingrediente>::iterator it;
 public:
+
+  /**
+  * @brief Constructor vacio de la clase
+  *
+  **/
   iterator(){}
+
+  /**
+  * @brief Sobrecarga del operador ==
+  * @param Objeto iterator con el cual se va a realizar la comparacion
+  * @return true si ambos objetos son iguales
+  * @return false si los objetos no son iguales
+  **/
   bool operator== (const iterator &i) const {return i.it == it;}
+
+  /**
+  * @brief Sobrecarga del operador !=
+  * @param Objeto iterator con el cual se va a realizar la comparacion
+  * @return false si ambos objetos son iguales
+  * @return true si los objetos no son iguales
+  **/
   bool operator!= (const iterator &i) const {return i.it != it;}
+
+  /**
+  * @brief Sobrecarga del operador * de consulta
+  * @return Nos devuelve un puntero al objeto actual de la iteración
+  **/
   ingrediente& operator*(){ return *it;}
 
+  /**
+  * @brief Sobrecarga del operador ++
+  * @return devuelve el valor del iterador incrementado una vez
+  **/
   iterator& operator++(){++it; return *this;}
+
+  /**
+  * @brief Sobrecarga del operador --
+  * @return devuelve el valor del iterador decrementado una vez
+  **/
   iterator& operator--(){--it; return *this;}
 friend class ingredientes;
 friend  class const_iterator;
 };
 
+/**
+* @brief Clase const_iterator de ingredientes
+*
+* Esta clase ha sido implementada para poder utilizar iteradores constantes para la clase
+* @c ingredientes. Se iterará sobre el vector de ingrediente perteneciente a la
+* clase ingredientes.
+*
+*/
 class const_iterator{
 private:
+  /**
+  * @brief Iterador constante sobre el vector que almacena los ingredientes.
+  *
+  **/
   vector<ingrediente>::const_iterator it;
 
 public:
+
+  /**
+  * @brief Constructor vacio de la clase
+  *
+  **/
   const_iterator(){}
+
+  /**
+  * @brief Sobrecarga del operador ==
+  * @param Objeto iterator con el cual se va a realizar la comparacion
+  * @return true si ambos objetos son iguales
+  * @return false si los objetos no son iguales
+  **/
   bool operator== (const const_iterator &i) const{return i.it == it;}
+
+  /**
+ * @brief Sobrecarga del operador !=
+ * @param Objeto iterator con el cual se va a realizar la comparacion
+  * @return false si ambos objetos son iguales
+  * @return true si los objetos no son iguales
+  **/
   bool operator!= (const const_iterator &i) const {return i.it != it;}
 
+  /**
+  * @brief Sobrecarga del operador * de consulta
+  * @return Nos devuelve un puntero al objeto actual de la iteración
+  **/
   const ingrediente& operator*()const{return *it;}
 
+  /**
+  * @brief Sobrecarga del operador ++
+  * @return devuelve el valor del iterador incrementado una vez
+  **/
   const_iterator & operator++(){++it; return *this;}
+
+  /**
+  * @brief Sobrecarga del operador --
+  * @return devuelve el valor del iterador decrementado una vez
+  **/
   const_iterator & operator--(){--it; return *this;}
   friend class ingredientes;
 };
 
+  /**
+  * @brief metodo begin para clase ingredientes
+  * @return iterador apuntando al comienzo del vector de la clase
+  **/
   iterator begin(){
       iterator iter;
       iter.it = datos.begin();
       return iter;
     }
 
+  /**
+  * @brief metodo end para clase ingredientes
+  * @return iterador apuntando al ultimo elemento del vector de la clase
+  **/
   iterator end(){
       iterator iter;
       iter.it = datos.end();
       return iter;
     }
 
+  /**
+  * @brief metodo constante begin para clase ingredientes
+  * @return iterador constante apuntando al comienzo del vector de la clase
+  **/
   const_iterator cbegin()const{
       const_iterator citer;
       citer.it = datos.begin();
       return citer;
     }
 
+  /**
+  * @brief metodo constante end para clase ingredientes
+  * @return iterador constante apuntando al ultimo elemento del vector de la clase
+  **/
   const_iterator cend()const{
       const_iterator citer;
       citer.it = datos.end();
