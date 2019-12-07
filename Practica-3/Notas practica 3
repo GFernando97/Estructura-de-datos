@@ -1,5 +1,4 @@
-Notas practica 3
-
+/*Notas practica 3
   cambiar declaracion de ingredientes:
     class Ingredietes{
     private:
@@ -18,4 +17,221 @@ Notas practica 3
 
   vector <Ingrediente>:: iterador i;
   i= datos.begin()+posD;
-  datos
+
+
+  PARA EL ULTIMO PUNTO DE LA PRÁCTICA
+    Pseudocódigo de mochila resuelto por programación dinámica:
+
+    proc mochila(p,b:vector[1..n] de nat,cap: nat,g: vector[0..n, 0..cap] de nat)
+      var c,j: nat;
+      para c=0 hasta cap hacer g[0,c]=0 fpara;
+      para j=1 hasta n hacer g[j,0]=0 fpara;
+
+                  para j=1 hasta n hacer
+                          para c=1 hasta cap hacer
+
+                            si c<p[j] entonces
+                              g[j,c]=g[j-1,c];
+
+                            en caso contrario
+                              si g[j-1,c] >= g[j-1,c-p[j]]+b[j] entonces
+                                g[j,c]=g[j-1,c];
+                              en caso contrario
+                                  g[j,c]=g[j-1,c-p[j]]+b[j];
+                              fsi;
+                          fsi;
+                         fpara;
+                  fpara;
+    fproc;
+
+  UNA POSIBLE IMPLEMENTACIÓN PARA EL EJECICIO...
+
+        */
+
+        
+#include<vector>
+#include <iostream>
+#include<list>
+using namespace std;
+
+void AsignarValoresCalorias(vector<float> &calorias){
+/*R1-- Cal: 92.85 Razon: 0.492958
+  R10-- Cal: 939.5 Razon: 0.269606
+  R11-- Cal: 394 Razon: 14.1795
+  R12-- Cal: 322.85 Razon: 2
+  R13-- Cal: 2003.5 Razon: 2.36806
+  R14-- Cal: 957 Razon: 0.707317
+  R15-- Cal: 646.25 Razon: 2.64228
+  R16-- Cal: 635.25 Razon: 0.177622
+  R17-- Cal: 202.85 Razon: 0.1337
+  R18-- Cal: 107.2 Razon: 0.0869342
+  R19-- Cal: 198 Razon: 0.227273
+  R2-- Cal: 1173 Razon: 0.448781
+  R20-- Cal: 202 Razon: 0.12069
+  R21-- Cal: 1016.25 Razon: 0.124627
+  R3-- Cal: 338.48 Razon: 2.57692
+  R4-- Cal: 517.2 Razon: 4.53012
+  R5-- Cal: 1014.3 Razon: 0.126214
+  R6-- Cal: 244.25 Razon: 0.176815
+  R7-- Cal: 830.85 Razon: 0.675
+  R8-- Cal: 565.3 Razon: 0.118904
+  R9-- Cal: 1355.65 Razon: 0.209964
+*/
+  calorias[0] = 0.0;
+  calorias[1] = 92.85;
+  calorias[2] = 939.5;
+  calorias[3] = 394;
+  calorias[4] = 322.85;
+  calorias[5] =2003.5;
+  calorias[6] =957;
+  calorias[7] =646.25;
+  calorias[8] =635.25;
+  calorias[9] =202.85;
+  calorias[10] =107.2;
+  calorias[11] =198 ;
+  calorias[12] =1173;
+  calorias[13] =202;
+  calorias[14] =1016.25;
+  calorias[15] =338.48;
+  calorias[16] =517.2;
+  calorias[17] =1014.3 ;
+  calorias[18] =244.25;
+  calorias[19] =830.85;
+  calorias[20] =565.3;
+  calorias[21] =1355.65;
+}
+
+void AsignarValoresRazones(vector<float> &razon){
+  /*R1-- Cal: 92.85 Razon: 0.492958
+  R10-- Cal: 939.5 Razon: 0.269606
+  R11-- Cal: 394 Razon: 14.1795
+  R12-- Cal: 322.85 Razon: 2
+  R13-- Cal: 2003.5 Razon: 2.36806
+  R14-- Cal: 957 Razon: 0.707317
+  R15-- Cal: 646.25 Razon: 2.64228
+  R16-- Cal: 635.25 Razon: 0.177622
+  R17-- Cal: 202.85 Razon: 0.1337
+  R18-- Cal: 107.2 Razon: 0.0869342
+  R19-- Cal: 198 Razon: 0.227273
+  R2-- Cal: 1173 Razon: 0.448781
+  R20-- Cal: 202 Razon: 0.12069
+  R21-- Cal: 1016.25 Razon: 0.124627
+  R3-- Cal: 338.48 Razon: 2.57692
+  R4-- Cal: 517.2 Razon: 4.53012
+  R5-- Cal: 1014.3 Razon: 0.126214
+  R6-- Cal: 244.25 Razon: 0.176815
+  R7-- Cal: 830.85 Razon: 0.675
+  R8-- Cal: 565.3 Razon: 0.118904
+  R9-- Cal: 1355.65 Razon: 0.209964
+*/
+  razon[0] = 0.0;
+  razon[1] = 0.492958;
+  razon[2] = 0.269606;
+  razon[3] = 14.1795,
+  razon[4] = 2;
+  razon[5] =2.36806;
+  razon[6] =0.707317;
+  razon[7] =2.64228;
+  razon[8] =0.177622;
+  razon[9] =0.1337;
+  razon[10] =0.0869342;
+  razon[11] =0.227273;
+  razon[12] =0.448781;
+  razon[13] =0.12069;
+  razon[14] =0.124627;
+  razon[15] =2.57692;
+  razon[16] =4.53012;
+  razon[17] =0.126214;
+  razon[18] = 0.176815;
+  razon[19] =0.675;
+  razon[20] =0.118904;
+  razon[21] =0.209964;
+
+
+
+}
+
+
+using namespace std;
+
+int main(){
+  const float CaloriasMax = 501;
+  const float NRecetas = 22;
+  std::vector<vector<float> > matrix(NRecetas);
+
+  std::vector<float> calorias(NRecetas);
+  std::vector<float> razon(NRecetas);
+  AsignarValoresCalorias(calorias);
+  AsignarValoresRazones(razon);
+
+  cout << "Imprimimos las calorias generadas:\n";
+
+  for(int i = 0; i < NRecetas; i++){
+    cout << "Para R" << i << ": " << calorias[i] << endl;
+  }
+  cout << endl;
+
+  cout << "Imprimos los valores de Razon generados: \n";
+  for(int i = 0; i < NRecetas; i++){
+    cout << "Para R" << i << ": " << razon[i] << endl;
+  }
+  cout << endl;
+
+  //Generar las columnas de la matriz
+  for ( int i = 0 ; i < NRecetas ; i++ )
+    matrix[i].resize(CaloriasMax);
+
+  //La fila y columna 0 estan inicializadas a 0
+  for(int i = 0; i < CaloriasMax; i++)
+    matrix[0][i] = 0;
+
+  for(int i = 1; i < NRecetas; i++)
+    matrix[i][0] = 0;
+
+
+  cout << "Hemos llegado a generar la tabla de matrices.." << endl;
+  //Pasaremos a realizar la verdadera funcion de seleccion
+  for(int i= 1; i < NRecetas; i++ ){
+    for(int j = 1; j < CaloriasMax; j++){
+      if(calorias[i] <= j){
+        if((razon[i]+matrix[i-1][j-calorias[i]]) > matrix[i-1][j])
+          matrix[i][j]= razon[i]+matrix[i-1][j-calorias[i]];
+        else
+            matrix[i][j] = matrix[i-1][j];
+      }
+      else matrix[i][j] = matrix[i-1][j];
+      cout << "iteracion en columnas n= " << j << endl;
+    }
+    cout << "\niteracion en filas n= " << i << endl;
+  }
+
+  cout << "El mayo beneficio que podemos obtener es: " << matrix[NRecetas-1][CaloriasMax-1] << endl;
+
+  list<int> resultado;
+  int i =  NRecetas-1;
+  int j = CaloriasMax-1;
+  int iteracion = 0;
+
+  while(i > 0 and j >0){
+    cout << "iteracion numero: " << iteracion << endl;
+    iteracion++;
+    if(matrix[i][j] != matrix[i-1][j]){
+      resultado.push_back(i);
+      i = i-1;
+      cout << "valor de j: " << j << endl;
+      cout << "valor de calorias en " << i << " :" << calorias[i];
+      j = j - calorias[i-1];
+    }
+    else i = i-1;
+
+  }
+
+  list<int>::const_iterator cit;
+
+  cout << "Las recetas dentro del mismo son: " << endl;
+  for(cit = resultado.cbegin(); cit != resultado.cend(); ++cit){
+    cout << "R" << *cit << endl;
+  }
+
+
+}

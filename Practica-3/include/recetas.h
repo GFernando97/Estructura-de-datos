@@ -12,6 +12,7 @@
 #include <sstream>
 #include <map>
 #include <list>
+#include <vector>
 #include <string>
 #include "receta.h"
 
@@ -121,7 +122,7 @@ public:
   * @return Devuelve una lista que contiene las recetas más adecuadas dado un máx. de calorias
   * y en base a una razón proteinas-hidratos.
   **/
-  //list<receta> recetasAdecuadas(const float &caloriasMax);
+  list<receta> recetasAdecuadas(const float &caloriasMax);
 
 
 class const_iterator;

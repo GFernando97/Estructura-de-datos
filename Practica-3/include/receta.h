@@ -240,7 +240,7 @@ public:
   * en el metodo.
   *
   **/
-  void setRazon(int valor){this->razon = valor;}
+  void setRazon(float valor){this->razon = valor;}
 
   /**
   * @brief Metodo set de Calorias
