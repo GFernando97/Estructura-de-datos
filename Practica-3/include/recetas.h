@@ -57,6 +57,7 @@ private:
   *
   **/
   void insert(const receta &rec);
+
 public:
   /**
   * @brief consructor vacío, en este caso crea un conjunto de recetas sin valores
@@ -123,6 +124,8 @@ public:
   * y en base a una razón proteinas-hidratos.
   **/
   list<receta> recetasAdecuadas(const float &caloriasMax);
+
+  void clear(){datos.clear();}
 
 
 class const_iterator;
