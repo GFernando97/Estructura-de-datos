@@ -15,15 +15,16 @@ private:
   ArbolBinario<string> datos;
   acciones acc;
 
-  void copiar();
+  void copiar(const instrucciones &inst);
   void clear();
 
 public:
   instrucciones(){}
-  instrucciones(const instrucciones & inst);
+  instrucciones(const instrucciones &inst);
 
-  friend ostream & operator<<(ostream &o, const instrucciones &inst);
-  friend istream & operator>>(istream &i, instrucciones &inst);
+  instrucciones& operator=(const instrucciones &inst);
+  friend ostream &operator<<(ostream &o, const instrucciones &inst);
+  friend istream &operator>>(istream &i, instrucciones &inst);
 
 
 
