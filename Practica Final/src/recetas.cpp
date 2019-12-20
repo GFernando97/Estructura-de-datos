@@ -1,4 +1,7 @@
 #include "recetas.h"
+#include "color.h"
+#include <iomanip>
+
 
 
 void recetas::copiar(const recetas &rec){
@@ -40,10 +43,33 @@ recetas& recetas::operator=(const recetas &rec){
   return *this;
 }
 
+//---------------------------modificar metodo de salida de recetas----------
+/*
 ostream &operator <<(ostream &o, recetas &rec){
   for(recetas::const_iterator cit = rec.cbegin(); cit != rec.cend(); ++cit){
     o << (*cit).first <<";" << (*cit).second << endl;
 //  o << (*cit).second;
+  }
+  return o;
+}
+
+
+Por ejemplo para escribir con subrayado y en negrita podemos hacerlo
+cout<<UNDL(BOLD("Información Nutricional:"))<<endl<<endl;
+*/
+ostream &operator <<(ostream &o, recetas &rec){
+  for(recetas::const_iterator cit = rec.cbegin(); cit != rec.cend(); ++cit){
+    o << std::left
+      <<FBLU("CODE:")
+      << std::setw(5)
+      <<(*cit).first
+      <<FBLU("NOMBRE:")
+      << std::setw(5)
+      <<((*cit).second).getNombre()
+      <<FBLU("PLATO:")
+      <<((*cit).second).getPlato()
+      << std::right
+      << std::setw(10)<<endl;
   }
   return o;
 }
@@ -134,4 +160,41 @@ list<receta> recetas::recetasAdecuadas(const float &caloriasMax){
   }
 
   return recetasSeleccionadas;
+}
+
+receta recetas::fusionaRecetas(const receta &firstRecipe, const receta &secondRecipe){
+  receta newRecipe;
+  string aEliminar = "\r";
+  string code = "F_"+firstRecipe.getCode()+"_"+secondRecipe.getCode();
+  string nombre = "Fusion "+firstRecipe.getNombre()+" Y "+secondRecipe.getNombre();
+  unsigned int nPlato = firstRecipe.getPlato();
+  list<pair<string,unsigned int>> newIngList;
+
+  receta::const_iterator cit;
+  list<pair<string, unsigned int>>::iterator iter;
+
+  for(cit=firstRecipe.cbegin(); cit!=firstRecipe.cend(); ++cit){
+    newIngList.push_back(*cit);
+  }
+
+  for(cit=secondRecipe.cbegin(); cit!=secondRecipe.cend(); ++cit){
+  bool encontrado=false;
+    for(iter=newIngList.begin(); iter!=newIngList.end()&&!encontrado; ++iter){
+      if((*cit).first==(*iter).first){
+        (*iter).second = (*iter).second + (*cit).second;
+        encontrado=true;
+      }
+    }
+
+    if(!encontrado){
+      newIngList.push_back(*cit);
+    }
+  }
+
+  newRecipe.setCode(code);
+  newRecipe.setNombre(nombre);
+  newRecipe.setPlato(nPlato);
+  newRecipe.setIngs(newIngList);
+
+  return newRecipe;
 }

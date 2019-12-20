@@ -4,24 +4,29 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <map>
 #include <sstream>
 #include <utility>
-
+#include <sstream>
+#include <string>
+#include <cstring>
 using namespace std;
 
 
 class acciones{
 private:
-  map<string, unsigned char> datos;
+  map<string, string> datos;
   void copiar(const acciones & acc);
   void clear();
-  void insert(const pair<string, unsigned char> &aux);
+  void insert(const pair<string,  string> &aux);
 
 public:
   acciones(){}
   acciones(const acciones & acc);
 
-  unsigned char getAriedad(const string & key){return datos[key];}
+  string getKey(const string &key){return (*datos.find(key)).first;}
+  string getAriedad(const string & key){return (*datos.find(key)).second;}
+  bool isEmpty()const;
 
   acciones& operator=(const acciones &acc);
   friend ostream &operator<<(ostream &o, const acciones &acc);
@@ -33,11 +38,11 @@ public:
   class const_iterator;
 
   /**
-   * @brief Clase iterator de recetas
+   * @brief Clase iterator de acciones
    *
    * Esta clase ha sido implementada para poder utilizar iteradores en la clase
-   * @c recetas. Se iterará sobre el map de valores de string y receta que almacenan
-   * el código de la receta y el objeto receta correspondiente con toda la información.
+   * @c acciones. Se iterará sobre el map de valores de string y  string que almacenan
+   * el código de la  y el objeto receta correspondiente con toda la información.
    *
    */
   class iterator{
@@ -46,7 +51,7 @@ public:
     * @brief Iterador sobre el map que almacena las recetas.
     *
     **/
-    map<string, unsigned char>::iterator it;
+    map<string,  string>::iterator it;
 
   public:
 
@@ -76,7 +81,7 @@ public:
     * @brief Sobrecarga del operador * de consulta
     * @return Nos devuelve un puntero al objeto actual de la iteración
     **/
-    pair<const string, receta>& operator*(){return *it;}
+    pair<const string,  string>& operator*(){return *it;}
 
     /**
     * @brief Sobrecarga del operador ++
@@ -90,27 +95,27 @@ public:
     **/
     iterator& operator--(){--it; return *this;}
 
-    friend class recetas;
+    friend class acciones;
     friend class const_iterator;
   };
 
 
   /**
-   * @brief Clase const_iterator de recetas
+   * @brief Clase const_iterator de acciones
    *
    * Esta clase ha sido implementada para poder utilizar iteradores constantes en la clase
-   * @c recetas. Se iterará sobre el map de valores de string y receta que almacenan
-   * el código de la receta y el objeto receta correspondiente con toda la información.
+   * @c acciones. Se iterará sobre el map de valores de string y  string que almacenan
+   * el código de la acciones y el objeto  correspondiente con toda la información.
    *
    */
   class const_iterator{
   private:
 
     /**
-    * @brief Iterador constante sobre el map que almacena las recetas.
+    * @brief Iterador constante sobre el map que almacena las acciones.
     *
     **/
-    map<string, unsigned char>:: const_iterator cit;
+    map<string, string>:: const_iterator cit;
 
   public:
     /**
@@ -139,7 +144,7 @@ public:
     * @brief Sobrecarga del operador * de consulta
     * @return Nos devuelve un puntero al objeto actual de la iteración
     **/
-    const pair<const string, receta>& operator*()const{return *cit;}
+    const pair<const string, string>& operator*()const{return *cit;}
 
     /**
     * @brief Sobrecarga del operador ++
@@ -153,11 +158,11 @@ public:
     **/
     const_iterator & operator--(){--cit; return *this;}
 
-    friend class recetas;
+    friend class acciones;
   };
 
   /**
-  * @brief metodo begin para clase recetas
+  * @brief metodo begin para clase acciones
   * @return iterador apuntando al comienzo del map de la clase
   **/
   iterator begin(){
@@ -167,7 +172,7 @@ public:
   }
 
   /**
-  * @brief metodo end para clase recetas
+  * @brief metodo end para clase acciones
   * @return iterador apuntando al ultimo elemento del map de la clase
   **/
   iterator end(){
@@ -177,7 +182,7 @@ public:
   }
 
   /**
-  * @brief metodo constante begin para clase recetas
+  * @brief metodo constante begin para clase acciones
   * @return iterador constante apuntando al comienzo del map de la clase
   **/
   const_iterator cbegin()const{
@@ -187,7 +192,7 @@ public:
   }
 
   /**
-  * @brief metodo constante end para clase recetas
+  * @brief metodo constante end para clase acciones
   * @return iterador constante apuntando al ultimo elemento del map de la clase
   **/
   const_iterator cend()const{

@@ -4,6 +4,7 @@
  */
 #include "receta.h"
 #include "ingredientes.h"
+#include "color.h"
 #include <string>
 
 using namespace std;
@@ -124,7 +125,7 @@ void receta::calcularNutrientes(const ingredientes &all){
   float resultadoGra = 0;
   float resultadoPr = 0;
   float resultadoFib = 0;
-  
+
   for(receta::const_iterator cit = cbegin(); cit != cend(); ++cit){
     nombreAux = (*cit).first;
     cantidad = (*cit).second;
@@ -155,4 +156,26 @@ void receta::imprimeValNutricionales()const{
 void receta::calcularRazon(){
   float nuevoValor = this->getProteinas()/this->getHc();
   this->setRazon(nuevoValor);
+}
+
+void receta::imprimeInfoReceta()const{
+  cout <<FBLU("CODE:")<<getCode()<<"\t"
+       <<FBLU("NOMBRE:")<<getNombre()<<"\t"
+       <<FBLU("PLATO:")<<getPlato()<<endl<<endl;
+
+  cout <<UNDL(BOLD("Ingredientes:"))<<endl<<endl;
+  receta::const_iterator cit;
+  for(cit=cbegin(); cit!=cend(); ++cit){
+    cout <<"\t"<<(*cit).first <<" "<<(*cit).second<<endl;
+  }
+  cout <<endl;
+  cout <<UNDL(BOLD("Informacion Nutricional:"))<<endl<<endl;
+  cout <<"\tCalorias:"<<getCalorias()<<endl;
+  cout <<"\tHidratos de Carbono:"<<getHc()<<endl;
+  cout <<"\tGrasas:"<<getGrasas()<<endl;
+  cout <<"\tProteina:"<<getProteinas()<<endl;
+  cout <<"\tFibra:"<<getFibra()<<endl<<endl;
+
+  cout <<UNDL(BOLD("Pasos a seguir:"))<<endl<<endl;
+  cout <<"PASOS A SEGUIR TODAVIA SIN IMPLEMENTAR\n";
 }

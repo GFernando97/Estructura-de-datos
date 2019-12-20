@@ -14,6 +14,8 @@
 #include <sstream>
 #include <utility>
 #include "ingredientes.h"
+#include "instrucciones.h"
+
 
 using namespace std;
 
@@ -82,6 +84,11 @@ private:
   * @brief Razón proteina-hidratos de la receta.
   **/
   float razon;
+
+  /**
+  * @brief instReceta conjunto de instrucciones para formar la receta
+  **/
+  instrucciones instReceta;
 
 
   /**
@@ -332,6 +339,16 @@ public:
   * a los nutrientes que tiene la receta.
   **/
   void imprimeValNutricionales()const;
+
+  /**
+  * @brief Método de fusión para fusionar otra receta con la actual
+  * @post
+  * a los nutrientes que tiene la receta.
+  **/
+  receta fusionar(const receta &recFusion);
+
+  void imprimeInfoReceta()const;
+
 
 
 
