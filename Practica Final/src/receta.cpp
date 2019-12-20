@@ -159,8 +159,8 @@ void receta::calcularRazon(){
 }
 
 void receta::imprimeInfoReceta()const{
-  cout <<FBLU("CODE:")<<getCode()<<"\t"
-       <<FBLU("NOMBRE:")<<getNombre()<<"\t"
+  cout <<FBLU("CODE:")<<getCode()<<"  "
+       <<FBLU("NOMBRE:")<<getNombre()<<"  "
        <<FBLU("PLATO:")<<getPlato()<<endl<<endl;
 
   cout <<UNDL(BOLD("Ingredientes:"))<<endl<<endl;
