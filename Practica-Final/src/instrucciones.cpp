@@ -2,16 +2,11 @@
 
 void instrucciones::copiar(const instrucciones &inst){
   this->datos = inst.datos;
-  this->acc = inst.acc;
 }
 
 void instrucciones::clear(){
   this->datos.clear();
 }
-/*
-void instrucciones::createBinaryTree(istream &i){
-
-}*/
 
 instrucciones::instrucciones(const instrucciones &inst){
   this->clear();
@@ -38,25 +33,24 @@ ostream &operator<<(ostream &o, const instrucciones &inst){
 }
 
 istream &operator>>(istream &i, instrucciones &inst){
-  /*inst.clear();
+  inst.clear();
   stack<ArbolBinario> auxStack;
   ArbolBinario aux;
   string nombreAccion;
-  list<string> auxIng;
+  string auxIngr1;
+  string auxIngr2;
   string linea;
 
   while(!i.eof()){
     getline(i, linea, '\n');
-    linea = linea.stringCleaner(linea, "\r");
     istringstream iss(linea);
     getline(linea, nombreAccion,' ' );
 
 
     if(acc.getAriedad(nombreAccion)==1){
-      string aux;
-      getline(linea, aux, ' ');
+      getline(linea, auxIngr1, '\n');
       if(!aux.empty()){
-
+        aux.
       }
 
     }

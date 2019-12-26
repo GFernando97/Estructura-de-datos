@@ -76,9 +76,6 @@ receta& receta::operator=(const receta &rec){
   }
   return *this;
 }
-/*bool receta::operator==(const receta &rec){
-  if(this->getTipo)
-}*/
 
 
 ostream &operator <<(ostream &o,  const receta &rec){
@@ -177,5 +174,5 @@ void receta::imprimeInfoReceta()const{
   cout <<"\tFibra:"<<getFibra()<<endl<<endl;
 
   cout <<UNDL(BOLD("Pasos a seguir:"))<<endl<<endl;
-  cout <<"PASOS A SEGUIR TODAVIA SIN IMPLEMENTAR\n";
+  cout <<"PASOS A SEGUIR TODAVIA SIN IMPLEMENTAR\n\n\n";
 }

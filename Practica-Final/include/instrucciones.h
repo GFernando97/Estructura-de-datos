@@ -18,7 +18,6 @@ private:
 
   void copiar(const instrucciones &inst);
   void clear();
-//  void createBinaryTree();
 
 public:
   instrucciones(){}

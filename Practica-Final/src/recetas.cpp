@@ -5,6 +5,7 @@
 
 
 void recetas::copiar(const recetas &rec){
+  this->datos = rec.datos;
 
 }
 
@@ -167,7 +168,9 @@ receta recetas::fusionaRecetas(const receta &firstRecipe, const receta &secondRe
   string aEliminar = "\r";
   string code = "F_"+firstRecipe.getCode()+"_"+secondRecipe.getCode();
   string nombre = "Fusion "+firstRecipe.getNombre()+" Y "+secondRecipe.getNombre();
-  unsigned int nPlato = firstRecipe.getPlato();
+  unsigned int nPlato1 = firstRecipe.getPlato();
+  unsigned int nPlato2 = secondRecipe.getPlato();
+
   list<pair<string,unsigned int>> newIngList;
 
   receta::const_iterator cit;
@@ -193,7 +196,12 @@ receta recetas::fusionaRecetas(const receta &firstRecipe, const receta &secondRe
 
   newRecipe.setCode(code);
   newRecipe.setNombre(nombre);
-  newRecipe.setPlato(nPlato);
+
+  if(nPlato1 < nPlato2){
+    newRecipe.setPlato(nPlato1);
+  }
+
+  else newRecipe.setPlato(nPlato2);
   newRecipe.setIngs(newIngList);
 
   return newRecipe;
