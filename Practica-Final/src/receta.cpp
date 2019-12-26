@@ -3,11 +3,6 @@
  * @brief Implementación de la clase receta::receta.
  */
 #include "receta.h"
-#include "ingredientes.h"
-#include "color.h"
-#include <string>
-
-using namespace std;
 
 
 void receta::copiar(const receta &rec){

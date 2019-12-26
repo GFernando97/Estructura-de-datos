@@ -3,9 +3,7 @@
  * @brief Implementación de la clase @c ingredientes::ingredientes.
  */
 #include "ingredientes.h"
-#include "ingrediente.h"
 
-using namespace std;
 
   pair<bool, int>ingredientes::estaEnIndice(int posEnDatos) const{
     int tam = indice.size();

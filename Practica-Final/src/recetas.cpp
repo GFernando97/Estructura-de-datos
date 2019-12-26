@@ -1,7 +1,4 @@
 #include "recetas.h"
-#include "color.h"
-#include <iomanip>
-
 
 
 void recetas::copiar(const recetas &rec){

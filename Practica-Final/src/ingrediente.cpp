@@ -3,7 +3,6 @@
  * @brief Implementación de la clase ingrediente::ingrediente.
  */
 #include "ingrediente.h"
-using namespace std;
 
 void ingrediente::Copiar(const ingrediente &ing){
   setNombre(ing.getNombre());

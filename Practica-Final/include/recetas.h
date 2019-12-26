@@ -14,6 +14,8 @@
 #include <list>
 #include <vector>
 #include <string>
+#include <iomanip>
+#include "color.h"
 #include "receta.h"
 
 

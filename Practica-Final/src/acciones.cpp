@@ -1,3 +1,7 @@
+/**
+ * @file acciones.cpp
+ * @brief Implementación de la clase acciones::acciones
+ */
 #include "acciones.h"
 
 void acciones::copiar(const acciones & acc){

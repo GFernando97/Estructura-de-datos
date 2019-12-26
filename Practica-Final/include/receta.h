@@ -15,6 +15,8 @@
 #include <utility>
 #include "ingredientes.h"
 #include "instrucciones.h"
+#include "color.h"
+
 
 
 using namespace std;

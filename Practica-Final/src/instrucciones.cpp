@@ -1,4 +1,9 @@
+/**
+ * @file instrucciones.cpp
+ * @brief Implementación de la clase instrucciones::instrucciones
+ */
 #include "instrucciones.h"
+
 
 void instrucciones::copiar(const instrucciones &inst){
   this->datos = inst.datos;
@@ -33,7 +38,7 @@ ostream &operator<<(ostream &o, const instrucciones &inst){
 }
 
 istream &operator>>(istream &i, instrucciones &inst){
-  inst.clear();
+/*  inst.clear();
   stack<ArbolBinario> auxStack;
   ArbolBinario aux;
   string nombreAccion;
