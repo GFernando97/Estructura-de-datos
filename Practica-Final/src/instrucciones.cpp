@@ -5,8 +5,10 @@
 #include "instrucciones.h"
 
 
+
 void instrucciones::copiar(const instrucciones &inst){
   this->datos = inst.datos;
+  this->acc = inst.acc;
 }
 
 void instrucciones::clear(){
@@ -22,6 +24,10 @@ void instrucciones::setAcciones(const acciones &acc){
   this->acc=acc;
 }
 
+void instrucciones::setDatos(const ArbolBinario<string> &inst){
+  this->datos=inst;
+}
+
 instrucciones& instrucciones::operator=(const instrucciones &inst){
   if(this!=&inst){
     copiar(inst);
@@ -31,39 +37,101 @@ instrucciones& instrucciones::operator=(const instrucciones &inst){
 }
 
 ostream &operator<<(ostream &o, const instrucciones &inst){
-//  o << inst.datos;
-
+  o << inst.datos;
   return o;
-
 }
 
 istream &operator>>(istream &i, instrucciones &inst){
-/*  inst.clear();
-  stack<ArbolBinario> auxStack;
-  ArbolBinario aux;
+  stack<ArbolBinario<string>> stackOfTrees;
   string nombreAccion;
-  string auxIngr1;
-  string auxIngr2;
-  string linea;
+  string ariedadAccion;
+  string ingredienteAccion1;
+  string ingredienteAccion2;
 
   while(!i.eof()){
-    getline(i, linea, '\n');
+    string linea;
+    getline(i, linea,'\n');
     istringstream iss(linea);
-    getline(linea, nombreAccion,' ' );
+    while(!iss.eof()){
+      //cout << "Nueva linea\n\n";
+      getline(iss, nombreAccion, ' ');
+      getline(iss, ingredienteAccion1, '\n');
+      //cout << "Nombre de la accion: " << nombreAccion << endl;
+    //  cout << "Nombre del ingrediente: " << ingredienteAccion1 << endl;
+      if(nombreAccion != ""){
+        ariedadAccion = inst.acc.getAriedad(nombreAccion);
+        ArbolBinario<string> auxTree(nombreAccion);
+
+        if(ariedadAccion=="1"){
+          if(!ingredienteAccion1.empty()){
+            auxTree.Insertar_Hi(auxTree.getRaiz(), ingredienteAccion1);
+            stackOfTrees.push(auxTree);
+            //cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
+
+          }
+
+          else{
+            if(!stackOfTrees.empty()){
+            //  cout << "Voy a usar arboles de la pila por falta de ing...\n";
+              ArbolBinario<string> treeStack = stackOfTrees.top();
+              stackOfTrees.pop();
+              auxTree.Insertar_Hi(auxTree.getRaiz(), treeStack);
+              stackOfTrees.push(auxTree);
+            //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
+
+            }
+            else{
+              cout << "Error en la pila. Terminar Programa!!!!";
+              abort();
+            }
+          }
+        }
+
+        else if(ariedadAccion=="2"){
+          if(!ingredienteAccion1.empty()){
+            auxTree.Insertar_Hd(auxTree.getRaiz(), ingredienteAccion1);
+            ArbolBinario<string> treeStack = stackOfTrees.top();
+            stackOfTrees.pop();
+          //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size()<< endl;
+            auxTree.Insertar_Hi(auxTree.getRaiz(), treeStack);
+            stackOfTrees.push(auxTree);
+          //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
 
 
-    if(acc.getAriedad(nombreAccion)==1){
-      getline(linea, auxIngr1, '\n');
-      if(!aux.empty()){
-        aux.
+          }
+          else{
+            if(!stackOfTrees.empty()){
+              ArbolBinario<string> stackTree = stackOfTrees.top();
+              stackOfTrees.pop();
+              auxTree.Insertar_Hd(auxTree.getRaiz(), stackTree);
+              stackTree = stackOfTrees.top();
+              stackOfTrees.pop();
+              auxTree.Insertar_Hi(auxTree.getRaiz(), stackTree);
+              stackOfTrees.push(auxTree);
+            //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
+
+            }
+            else{
+              cout << "Error en la pila. Terminar Programa!!!!";
+              abort();
+            }
+          }
+        }
       }
-
+      nombreAccion.clear();
+      ingredienteAccion1.clear();
+      ingredienteAccion2.clear();
     }
-
-  }*/
+    iss.clear();
+  }
+//  cout << "\n\nTamaño de la pila despues de terminar: " << stackOfTrees.size() << endl;
+  inst.datos = stackOfTrees.top();
+  stackOfTrees.pop();
 
   return i;
 }
+
+
 /*
 string stringCleaner(string cadena_original,string cadena_a_eliminar){
 	string linea(cadena_original);

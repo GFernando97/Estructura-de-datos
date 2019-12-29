@@ -131,7 +131,7 @@ public:
 
   void clear(){datos.clear();}
 
-  receta fusionaRecetas(const receta &firstRecipe, const receta &secondRecipe);
+  receta& fusionaRecetas(receta& firstRecipe, const receta& secondRecipe, const acciones &acc);
 
 
 

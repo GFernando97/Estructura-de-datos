@@ -160,9 +160,35 @@ list<receta> recetas::recetasAdecuadas(const float &caloriasMax){
   return recetasSeleccionadas;
 }
 
-receta recetas::fusionaRecetas(const receta &firstRecipe, const receta &secondRecipe){
+receta& recetas::fusionaRecetas(receta &firstRecipe, const receta &secondRecipe, const acciones &acc){
   receta newRecipe;
-  string aEliminar = "\r";
+  instrucciones newInst;
+  instrucciones inst1;
+  instrucciones inst2;
+
+  ArbolBinario<string> joinedInst("Acompañar");
+
+  cout << "Imprimiendo valores de instrucciones de los par:\n";
+  firstRecipe.imprimeInfoReceta();
+
+  secondRecipe.imprimeInfoReceta();
+
+
+
+
+
+
+
+  ArbolBinario<string> firstInst = firstRecipe.getInstrucciones().getDatos();
+  cout  << firstRecipe.getInstrucciones().getDatos() << endl;
+  ArbolBinario<string> secondInst = secondRecipe.getInstrucciones().getDatos();
+  cout << secondRecipe.getInstrucciones().getDatos() << endl;
+  joinedInst.Insertar_Hi(joinedInst.getRaiz(), firstInst);
+  joinedInst.Insertar_Hd(joinedInst.getRaiz(), secondInst);
+  newInst.setAcciones(acc);
+  newInst.setDatos(joinedInst);
+
+  newRecipe.setInstrucciones(newInst);
   string code = "F_"+firstRecipe.getCode()+"_"+secondRecipe.getCode();
   string nombre = "Fusion "+firstRecipe.getNombre()+" Y "+secondRecipe.getNombre();
   unsigned int nPlato1 = firstRecipe.getPlato();

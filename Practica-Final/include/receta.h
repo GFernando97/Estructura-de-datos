@@ -50,7 +50,7 @@ private:
   /**
   * @brief Nombre de la receta.
   **/
-  string nombre;
+  string nombre = "Undefined";
 
   /**
   * @brief Lista de ingredientes de la receta.
@@ -200,6 +200,12 @@ public:
   float getRazon() const{return this->razon;}
 
   /**
+  * @brief Metodo get de las instrucciones de la receta
+  * @return valor de las instrucciones de la receta actual
+  **/
+  instrucciones getInstrucciones() const{return this->instReceta;}
+
+  /**
   * @brief Metodo personalizado de size de ingredientes
   * @return Tamaño de la lista de ingredientes
   *
@@ -295,6 +301,15 @@ public:
   *
   **/
   void setFibra(float fibra){this->fibra = fibra;}
+
+  /**
+  * @brief Metodo set de Instrucciones
+  * @param Instrucciones de la receta
+  * @post  ahora la receta tiene las instrucciones pasadas como argumento
+  * en el metodo.
+  *
+  **/
+  void setInstrucciones(instrucciones inst){this->instReceta = inst;}
 
   /**
   * @brief Sobrecarga del operardor de salida de datos

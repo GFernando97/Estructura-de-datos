@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <string>
 #include <fstream>
 #include "recetas.h"
@@ -17,8 +18,53 @@ datos/instrucciones
 */
 using namespace std;
 
+
+string BuscadorInstrucciones(const string &ruta, const string &recetaCode){
+  string fullNameFile = "/"+recetaCode+"m.txt";
+  string fullRoute = ruta+fullNameFile;
+  cout << fullRoute << endl << endl;
+
+  ifstream fAux(fullRoute);
+  if(!fAux){
+    fAux.close();
+    cout << "Fstream cerrado \n";
+    return "Undefined";
+  }
+  else{
+    fAux.close();
+    return fullRoute;
+  }
+}
+
+void AsignarInstrucciones(const string &rutaInstrucciones, receta &rec, const acciones &acc){
+  cout << "Voy a asignar las instrucciones a la receta\n\n";
+  string codigo = rec.getCode();
+  string rutaInst = BuscadorInstrucciones(rutaInstrucciones, codigo);
+  cout << "RUTA:\n";
+  cout << rutaInst << endl;
+  if(rutaInst == "Undefined"){
+    cout << "Instrucciones asociadas al código no encontradas\n";
+    abort();
+  }
+  else{
+    instrucciones inst;
+    cout << "Asignando Acciones....\n";
+    inst.setAcciones(acc);
+    cout << "Abriendo ruta.....\n\n";
+    ifstream fInstrucciones(rutaInst);
+    cout << "Intentando leer ruta de instrucciones...\n";
+    fInstrucciones >> inst;
+    cout << "Objeto instrucciones creado correctamente\n";
+    fInstrucciones.close();
+    cout << "Asignando instrucciones a receta....\n";
+    rec.setInstrucciones(inst);
+    cout << "ASIGNACION TERMINADA CORRECTAMENTE!!\n\n\n";
+  }
+}
+
+
 int main(int argc, char *argv[]){
-  if(argc!=4){
+  if(argc!=5){
     cout << "Faltan argumentos de entrada por insertar." << endl;
     return 0;
   }
@@ -26,14 +72,23 @@ int main(int argc, char *argv[]){
   ifstream fAcciones(argv[1]);
   ifstream fRecetas(argv[2]);
   ifstream fIngredientes(argv[3]);
-  //ifstream f5(argv[4]);
+  string ruta = argv[4];
 
-  if(!fAcciones)
+  cout << "\nLa ruta definida para los arhivos de instrucciones es: \n",
+  cout<< ruta << endl << endl;
+//Errores en caso de no encontrar los archivos pasados como parametros;
+  if(!fAcciones){
     cout << "El archivo de acciones no ha sido encontrado." << argv[1]<<endl;
-  else if(!fRecetas)
+    return 0;
+  }
+  else if(!fRecetas){
     cout << "El archivo de recetas no ha sido encontrado." << argv[2]<<endl;
-  else if(!fIngredientes)
+    return 0;
+  }
+  else if(!fIngredientes){
     cout << "El archivo de ingredientes no ha sido encontrado."<<argv[3]<<endl;
+    return 0;
+  }
 
   acciones acc;
   fAcciones >> acc;
@@ -54,13 +109,17 @@ int main(int argc, char *argv[]){
   string codigo;
   cin >> codigo;
 
+
   if (rall[codigo].getNombre()!="Undefined"){
     receta aux = rall[codigo];
+    AsignarInstrucciones(ruta, aux, acc);
     aux.calcularNutrientes(allIngre);
     aux.imprimeInfoReceta();
+
   }
   else{
     cout<<"La receta con codigo "<<codigo<<" no existe"<<endl;
+    abort();
   }
 
 
@@ -69,28 +128,33 @@ int main(int argc, char *argv[]){
   cin >> codigo;
   receta receta1 = rall[codigo];
   cout<<endl;
-/*
+
   if (rall[codigo].getNombre()!="Undefined"){
     receta receta1 = rall[codigo];
+    AsignarInstrucciones(ruta, receta1, acc);
+
   }
   else{
     cout<<"La receta con codigo "<<codigo<<" no existe"<<endl;
-  }*/
+    abort();
+  }
 
   codigo.clear();
   cout <<"Ahora introduce el codigo de la segunda receta para fusionar: ";
   cin >> codigo;
   receta receta2 = rall[codigo];
   cout<<endl;
-/*
+
   if (rall[codigo].getNombre()!="Undefined"){
     receta receta2 = rall[codigo];
+    AsignarInstrucciones(ruta, receta2, acc);
   }
   else{
     cout<<"La receta con codigo "<<codigo<<" no existe"<<endl;
-  }*/
+    abort();
+  }
 
-  receta nuevaReceta = rall.fusionaRecetas(receta1, receta2);
+  receta nuevaReceta = rall.fusionaRecetas(receta1, receta2, acc);
   rall.insert(nuevaReceta);
 
   cout << "Se ha insertado la nueva receta. Ahora se van a motrar sus valores:" << endl;

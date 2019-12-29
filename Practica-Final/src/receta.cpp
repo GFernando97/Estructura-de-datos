@@ -169,5 +169,7 @@ void receta::imprimeInfoReceta()const{
   cout <<"\tFibra:"<<getFibra()<<endl<<endl;
 
   cout <<UNDL(BOLD("Pasos a seguir:"))<<endl<<endl;
-  cout <<"PASOS A SEGUIR TODAVIA SIN IMPLEMENTAR\n\n\n";
+  //cout << this->instReceta;
+  this->instReceta.getDatos().RecorridoPostOrden(cout);
+  cout << endl << endl;
 }
