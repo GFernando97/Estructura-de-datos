@@ -168,9 +168,6 @@ string recetas::fusionaRecetas(const string &firstCode, const string &secondCode
 
   ArbolBinario<string> joinedInst("Acompañar");
 
-  cout << "Imprimiendo valores de instrucciones de los par:\n";
-
-
   joinedInst.Insertar_Hi(joinedInst.getRaiz(), this->datos[firstCode].getInstrucciones().getDatos());
   joinedInst.Insertar_Hd(joinedInst.getRaiz(), this->datos[secondCode].getInstrucciones().getDatos());
 
@@ -212,8 +209,8 @@ string recetas::fusionaRecetas(const string &firstCode, const string &secondCode
   if(nPlato1 < nPlato2){
     newRecipe.setPlato(nPlato1);
   }
-
   else newRecipe.setPlato(nPlato2);
+
   newRecipe.setIngs(newIngList);
   this->insert(newRecipe);
   return newRecipe.getCode();

@@ -10,6 +10,7 @@ void receta::copiar(const receta &rec){
   setPlato(rec.getPlato());
   setNombre(rec.getNombre());
   setIngs(rec.getIngs());
+  setInstrucciones(rec.getInstrucciones());
 }
 
 
@@ -169,8 +170,7 @@ void receta::imprimeInfoReceta()const{
   cout <<"\tFibra:"<<getFibra()<<endl<<endl;
 
   cout <<UNDL(BOLD("Pasos a seguir:"))<<endl<<endl;
-  //cout << this->instReceta;
-  this->instReceta.getDatos().RecorridoPostOrden(cout);
+  cout << this->instReceta;
   cout << endl << endl;
 }
 
