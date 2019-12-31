@@ -205,6 +205,8 @@ public:
   **/
   instrucciones getInstrucciones() const{return this->instReceta;}
 
+  instrucciones& getInstrucciones(){return this->instReceta;}
+
   /**
   * @brief Metodo personalizado de size de ingredientes
   * @return Tamaño de la lista de ingredientes
@@ -363,6 +365,16 @@ public:
   * a los nutrientes que tiene la receta.
   **/
   receta fusionar(const receta &recFusion);
+
+  /**
+  * @brief Método de insercion de instrucciones de la receta actual
+  * @param o ostream que contiene las instrucciones de la receta
+  * @post
+  * La receta cuenta ahora con instrucciones para su elabnoracion
+  **/
+  void insertarInstrucciones (istream &i, const acciones &acc);
+
+  string BuscadorInstrucciones(const string &ruta);
 
   void imprimeInfoReceta()const;
 

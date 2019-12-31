@@ -72,10 +72,15 @@ int main(int argc, char *argv[]){
   ifstream fAcciones(argv[1]);
   ifstream fRecetas(argv[2]);
   ifstream fIngredientes(argv[3]);
-  string ruta = argv[4];
+  ifstream fInstrucciones;
 
-  cout << "\nLa ruta definida para los arhivos de instrucciones es: \n",
-  cout<< ruta << endl << endl;
+  string ruta = argv[4];
+  string rutaInst;
+  string firstCode = "Undefined";
+  string secondCode = "Undefined";
+
+  /*cout << "\nLa ruta definida para los arhivos de instrucciones es: \n",
+  cout<< ruta << endl << endl;*/
 //Errores en caso de no encontrar los archivos pasados como parametros;
   if(!fAcciones){
     cout << "El archivo de acciones no ha sido encontrado." << argv[1]<<endl;
@@ -112,7 +117,11 @@ int main(int argc, char *argv[]){
 
   if (rall[codigo].getNombre()!="Undefined"){
     receta aux = rall[codigo];
-    AsignarInstrucciones(ruta, aux, acc);
+    rutaInst = aux.BuscadorInstrucciones(ruta);
+    fInstrucciones.open(rutaInst);
+    aux.insertarInstrucciones(fInstrucciones, acc);
+    fInstrucciones.clear();
+    fInstrucciones.close();
     aux.calcularNutrientes(allIngre);
     aux.imprimeInfoReceta();
 
@@ -126,12 +135,15 @@ int main(int argc, char *argv[]){
   codigo.clear();
   cout <<"Introduce el codigo de la primera receta para fusionar: ";
   cin >> codigo;
-  receta receta1 = rall[codigo];
-  cout<<endl;
 
   if (rall[codigo].getNombre()!="Undefined"){
-    receta receta1 = rall[codigo];
-    AsignarInstrucciones(ruta, receta1, acc);
+    firstCode = codigo;
+    rutaInst = rall[codigo].BuscadorInstrucciones(ruta);
+    fInstrucciones.open(rutaInst);
+    rall[codigo].insertarInstrucciones(fInstrucciones, acc);
+    fInstrucciones.clear();
+    fInstrucciones.close();
+    rall[codigo].calcularNutrientes(allIngre);
 
   }
   else{
@@ -142,25 +154,26 @@ int main(int argc, char *argv[]){
   codigo.clear();
   cout <<"Ahora introduce el codigo de la segunda receta para fusionar: ";
   cin >> codigo;
-  receta receta2 = rall[codigo];
-  cout<<endl;
 
   if (rall[codigo].getNombre()!="Undefined"){
-    receta receta2 = rall[codigo];
-    AsignarInstrucciones(ruta, receta2, acc);
+    secondCode = codigo;
+    rutaInst = rall[codigo].BuscadorInstrucciones(ruta);
+    fInstrucciones.open(rutaInst);
+    rall[codigo].insertarInstrucciones(fInstrucciones, acc);
+    fInstrucciones.clear();
+    fInstrucciones.close();
+    rall[codigo].calcularNutrientes(allIngre);
   }
   else{
     cout<<"La receta con codigo "<<codigo<<" no existe"<<endl;
     abort();
   }
 
-  receta nuevaReceta = rall.fusionaRecetas(receta1, receta2, acc);
-  rall.insert(nuevaReceta);
+  string codigoFusionado = rall.fusionaRecetas(firstCode, secondCode, acc);
 
   cout << "Se ha insertado la nueva receta. Ahora se van a motrar sus valores:" << endl;
   cout<<endl<<endl;
-  receta fusionada = rall[nuevaReceta.getCode()];
-  fusionada.calcularNutrientes(allIngre);
-  fusionada.imprimeInfoReceta();
+  rall[codigoFusionado].calcularNutrientes(allIngre);
+  rall[codigoFusionado].imprimeInfoReceta();
 
 }

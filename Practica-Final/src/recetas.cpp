@@ -160,7 +160,7 @@ list<receta> recetas::recetasAdecuadas(const float &caloriasMax){
   return recetasSeleccionadas;
 }
 
-receta& recetas::fusionaRecetas(receta &firstRecipe, const receta &secondRecipe, const acciones &acc){
+string recetas::fusionaRecetas(const string &firstCode, const string &secondCode, const acciones &acc){
   receta newRecipe;
   instrucciones newInst;
   instrucciones inst1;
@@ -169,41 +169,30 @@ receta& recetas::fusionaRecetas(receta &firstRecipe, const receta &secondRecipe,
   ArbolBinario<string> joinedInst("Acompañar");
 
   cout << "Imprimiendo valores de instrucciones de los par:\n";
-  firstRecipe.imprimeInfoReceta();
-
-  secondRecipe.imprimeInfoReceta();
 
 
+  joinedInst.Insertar_Hi(joinedInst.getRaiz(), this->datos[firstCode].getInstrucciones().getDatos());
+  joinedInst.Insertar_Hd(joinedInst.getRaiz(), this->datos[secondCode].getInstrucciones().getDatos());
 
-
-
-
-
-  ArbolBinario<string> firstInst = firstRecipe.getInstrucciones().getDatos();
-  cout  << firstRecipe.getInstrucciones().getDatos() << endl;
-  ArbolBinario<string> secondInst = secondRecipe.getInstrucciones().getDatos();
-  cout << secondRecipe.getInstrucciones().getDatos() << endl;
-  joinedInst.Insertar_Hi(joinedInst.getRaiz(), firstInst);
-  joinedInst.Insertar_Hd(joinedInst.getRaiz(), secondInst);
   newInst.setAcciones(acc);
   newInst.setDatos(joinedInst);
 
   newRecipe.setInstrucciones(newInst);
-  string code = "F_"+firstRecipe.getCode()+"_"+secondRecipe.getCode();
-  string nombre = "Fusion "+firstRecipe.getNombre()+" Y "+secondRecipe.getNombre();
-  unsigned int nPlato1 = firstRecipe.getPlato();
-  unsigned int nPlato2 = secondRecipe.getPlato();
+  string code = "F_"+this->datos[firstCode].getCode()+"_"+this->datos[secondCode].getCode();
+  string nombre = "Fusion "+this->datos[firstCode].getNombre()+" Y "+this->datos[secondCode].getNombre();
+  unsigned int nPlato1 = this->datos[firstCode].getPlato();
+  unsigned int nPlato2 = this->datos[secondCode].getPlato();
 
   list<pair<string,unsigned int>> newIngList;
 
   receta::const_iterator cit;
   list<pair<string, unsigned int>>::iterator iter;
 
-  for(cit=firstRecipe.cbegin(); cit!=firstRecipe.cend(); ++cit){
+  for(cit=this->datos[firstCode].cbegin(); cit!=this->datos[firstCode].cend(); ++cit){
     newIngList.push_back(*cit);
   }
 
-  for(cit=secondRecipe.cbegin(); cit!=secondRecipe.cend(); ++cit){
+  for(cit=this->datos[secondCode].cbegin(); cit!=this->datos[secondCode].cend(); ++cit){
   bool encontrado=false;
     for(iter=newIngList.begin(); iter!=newIngList.end()&&!encontrado; ++iter){
       if((*cit).first==(*iter).first){
@@ -226,6 +215,6 @@ receta& recetas::fusionaRecetas(receta &firstRecipe, const receta &secondRecipe,
 
   else newRecipe.setPlato(nPlato2);
   newRecipe.setIngs(newIngList);
-
-  return newRecipe;
+  this->insert(newRecipe);
+  return newRecipe.getCode();
 }

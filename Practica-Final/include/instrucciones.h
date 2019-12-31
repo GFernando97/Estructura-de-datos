@@ -28,6 +28,7 @@ public:
   void setDatos(const ArbolBinario<string> &inst);
   acciones getAcciones()const{return this->acc;}
   ArbolBinario<string> getDatos()const{return this->datos;}
+  ArbolBinario<string>& getDatos(){return this->datos;}
   instrucciones& operator=(const instrucciones &inst);
   friend ostream &operator<<(ostream &o, const instrucciones &inst);
   friend istream &operator>>(istream &i, instrucciones &inst);

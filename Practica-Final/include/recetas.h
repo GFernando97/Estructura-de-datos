@@ -94,7 +94,9 @@ public:
   * @param codigo: valor del código de la receta a la que se intenta acceder.
   * @return Devuelve la receta que tenga el código como key del map asociado.
   **/
-  receta &operator[](string codigo){return datos[codigo];}
+  receta &operator[](string codigo){return datos.at(codigo);}
+
+  receta operator[](string codigo)const{return datos.at(codigo);}
 
   /**
   * @brief Sobrecarga del operardor de salida de datos
@@ -131,7 +133,7 @@ public:
 
   void clear(){datos.clear();}
 
-  receta& fusionaRecetas(receta& firstRecipe, const receta& secondRecipe, const acciones &acc);
+  string fusionaRecetas(const string& firstCode, const string& secondCode, const acciones &acc);
 
 
 

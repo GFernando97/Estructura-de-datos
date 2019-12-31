@@ -173,3 +173,27 @@ void receta::imprimeInfoReceta()const{
   this->instReceta.getDatos().RecorridoPostOrden(cout);
   cout << endl << endl;
 }
+
+void receta::insertarInstrucciones(istream &i, const acciones &acc){
+  instrucciones aux;
+  aux.setAcciones(acc);
+  i >> aux;
+
+  this->setInstrucciones(aux);
+}
+
+string receta::BuscadorInstrucciones(const string &ruta){
+  string fullNameFile = "/"+this->getCode()+"m.txt";
+  string fullRoute = ruta+fullNameFile;
+
+  ifstream fAux(fullRoute);
+  if(!fAux){
+    fAux.close();
+    cout << "Fstream cerrado \n";
+    return "Undefined";
+  }
+  else{
+    fAux.close();
+    return fullRoute;
+  }
+}
