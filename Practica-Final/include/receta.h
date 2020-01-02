@@ -374,9 +374,20 @@ public:
   **/
   void insertarInstrucciones (istream &i, const acciones &acc);
 
+  /**
+  * @brief Método auxiliar creado para comprobar si una receta contiene un ingrediente.
+  * @param nombreIngrediente string que contiene el nombre del ingrediente.
+  * @return true si lo contiene(1).
+  * @return false  si no existe el ingrediente en la receta(0)Ç;
+  *
+  **/
+  bool contains(const string &nombreIngrediente)const;
+
   string BuscadorInstrucciones(const string &ruta);
 
   void imprimeInfoReceta()const;
+
+  void imprimeInstrucciones()const;
 
 
 

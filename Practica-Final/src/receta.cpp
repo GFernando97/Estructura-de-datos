@@ -170,7 +170,7 @@ void receta::imprimeInfoReceta()const{
   cout <<"\tFibra:"<<getFibra()<<endl<<endl;
 
   cout <<UNDL(BOLD("Pasos a seguir:"))<<endl<<endl;
-  cout << this->instReceta;
+  imprimeInstrucciones();
   cout << endl << endl;
 }
 
@@ -194,6 +194,67 @@ string receta::BuscadorInstrucciones(const string &ruta){
   }
   else{
     fAux.close();
-    return fullRoute;
+  return fullRoute;
+  }
+}
+
+bool receta::contains(const string &nombreIngrediente)const{
+  receta::const_iterator cit;
+
+  for(cit=this->cbegin(); cit!=this->cend(); ++cit){
+    if((*cit).first == nombreIngrediente){
+      return true;
+    }
+  }
+  return false;
+}
+
+void receta::imprimeInstrucciones()const{
+  ArbolBinario<string> auxTree(this->getInstrucciones().getDatos());
+  ArbolBinario<string>::postorden_iterador pit;
+  string ingr1;
+  string ingr2;
+  string singleAcc;
+  bool ingr1lleno = false;
+  bool ingr2lleno = false;
+  bool accionEncontrada = false;
+
+  for(pit = auxTree.beginpostorden(); pit != auxTree.endpostorden(); ++pit){
+    if(this->contains((*pit))){
+      if(!ingr1lleno){
+        ingr1 = (*pit);
+        ingr1lleno = true;
+      }
+      else if(!ingr2lleno && ((*pit) != ingr1)){
+        ingr2 = (*pit);
+        ingr2lleno = true;
+      }
+    }
+    else{
+      if(this->getInstrucciones().contains((*pit))){
+        singleAcc = (*pit);
+        accionEncontrada = true;
+
+      }
+      if(accionEncontrada){
+        if(ingr1lleno && ingr2lleno){
+          cout << "\t"<< singleAcc << "  " << ingr1 << " " << ingr2 << endl;
+          accionEncontrada = false;
+        }
+        else if(ingr1lleno && !ingr2lleno){
+          cout << "\t"<< singleAcc << "  " << ingr1 << endl;
+          accionEncontrada = false;
+        }
+        else if(!ingr1lleno && !ingr2lleno){
+          cout << "\t"<< singleAcc << endl;
+          accionEncontrada = false;
+        }
+        ingr2lleno = false;
+        ingr1lleno = false;
+        ingr1.clear();
+        ingr2.clear();
+        singleAcc.clear();
+      }
+    }
   }
 }

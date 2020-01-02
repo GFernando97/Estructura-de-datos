@@ -27,7 +27,7 @@ public:
   string getKey(const string &key){return (*datos.find(key)).first;}
   string getAriedad(const string & key){return (*datos.find(key)).second;}
   bool isEmpty()const;
-
+  bool contains(const string &nombreAccion)const;
   acciones& operator=(const acciones &acc);
   friend ostream &operator<<(ostream &o, const acciones &acc);
   friend istream &operator>>(istream &i, acciones &acc);

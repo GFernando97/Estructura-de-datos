@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
   string firstCode = "Undefined";
   string secondCode = "Undefined";
 
-  /*cout << "\nLa ruta definida para los arhivos de instrucciones es: \n",
+  cout << "\nLa ruta definida para los arhivos de instrucciones es: \n",
   cout<< ruta << endl << endl;*/
 //Errores en caso de no encontrar los archivos pasados como parametros;
   if(!fAcciones){
@@ -130,7 +130,6 @@ int main(int argc, char *argv[]){
     cout<<"La receta con codigo "<<codigo<<" no existe"<<endl;
     abort();
   }
-
 
   codigo.clear();
   cout <<"Introduce el codigo de la primera receta para fusionar: ";

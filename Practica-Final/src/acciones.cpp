@@ -71,3 +71,14 @@ istream &operator>>(istream &i, acciones &acc){
   }
   return i;
 }
+
+bool acciones::contains(const string &nombreAccion)const{
+  acciones::const_iterator cit;
+
+  for(cit = this->cbegin(); cit != this->cend(); ++cit ){
+    if((*cit).first == nombreAccion){
+      return true;
+    }
+  }
+  return false;
+}

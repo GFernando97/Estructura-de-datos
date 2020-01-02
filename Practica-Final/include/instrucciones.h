@@ -29,6 +29,7 @@ public:
   acciones getAcciones()const{return this->acc;}
   ArbolBinario<string> getDatos()const{return this->datos;}
   ArbolBinario<string>& getDatos(){return this->datos;}
+  bool contains(const string &accion)const{return acc.contains(accion);}
   instrucciones& operator=(const instrucciones &inst);
   friend ostream &operator<<(ostream &o, const instrucciones &inst);
   friend istream &operator>>(istream &i, instrucciones &inst);
