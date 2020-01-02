@@ -7,12 +7,11 @@ CPPFLAGS = -Wall -g -w -I$(INC) -c --std=c++11
 # Usar -w en CPPFLAGS para desactivar los mensajes de tipo Warning
 # a la hora de compilar
 
-all:$(BIN)/cocinero_integral $(BIN)/creaArbol
+all:$(BIN)/cocinero_integral
 
 # ************ Generación de documentación ******************
 documentacion:
 	doxygen doc/doxys/Doxyfile
-
 
 # ************ Compilación de módulos ************
 
@@ -31,7 +30,6 @@ $(OBJ)/recetas.o: $(SRC)/recetas.cpp $(INC)/recetas.h $(INC)/receta.h
 	$(CXX) $(CPPFLAGS)  $(SRC)/recetas.cpp -o  $(OBJ)/recetas.o
 
 
-
 $(OBJ)/cocinero_integral.o: $(SRC)/cocinero_integral.cpp $(INC)/acciones.h $(INC)/receta.h $(INC)/recetas.h $(INC)/ingrediente.h $(INC)/ingredientes.h
 	$(CXX) $(CPPFLAGS)  $(SRC)/cocinero_integral.cpp -o  $(OBJ)/cocinero_integral.o
 
@@ -41,15 +39,10 @@ $(OBJ)/instrucciones.o: $(SRC)/instrucciones.cpp $(INC)/acciones.h $(INC)/instru
 $(OBJ)/acciones.o: $(SRC)/acciones.cpp $(INC)/acciones.h
 	$(CXX) $(CPPFLAGS)  $(SRC)/acciones.cpp -o  $(OBJ)/acciones.o
 
-$(OBJ)/creaArbol.o: $(SRC)/creaArbol.cpp $(INC)/arbolbinario.h $(INC)/arbolbinario.tpp
-	$(CXX) $(CPPFLAGS)  $(SRC)/creaArbol.cpp -o  $(OBJ)/creaArbol.o
-
 
 $(BIN)/cocinero_integral: $(OBJ)/cocinero_integral.o $(OBJ)/receta.o $(OBJ)/recetas.o $(OBJ)/ingrediente.o $(OBJ)/ingredientes.o $(OBJ)/instrucciones.o $(OBJ)/acciones.o
 	$(CXX) -o $(BIN)/cocinero_integral $(OBJ)/cocinero_integral.o  $(OBJ)/receta.o $(OBJ)/recetas.o $(OBJ)/ingrediente.o $(OBJ)/ingredientes.o $(OBJ)/instrucciones.o $(OBJ)/acciones.o
 
-$(BIN)/creaArbol: $(OBJ)/creaArbol.o $(INC)/arbolbinario.h $(INC)/arbolbinario.tpp
-	$(CXX) -o $(BIN)/creaArbol  $(OBJ)/creaArbol.o $(INC)/arbolbinario.h
 
 # ************ Limpieza ************
 clean :
