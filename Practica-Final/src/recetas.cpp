@@ -1,5 +1,8 @@
+/**
+ * @file recetas.cpp
+ * @brief Implementación de la clase @c recetas::recetas.
+ */
 #include "recetas.h"
-
 
 void recetas::copiar(const recetas &rec){
   this->datos = rec.datos;
@@ -41,20 +44,6 @@ recetas& recetas::operator=(const recetas &rec){
   return *this;
 }
 
-//---------------------------modificar metodo de salida de recetas----------
-/*
-ostream &operator <<(ostream &o, recetas &rec){
-  for(recetas::const_iterator cit = rec.cbegin(); cit != rec.cend(); ++cit){
-    o << (*cit).first <<";" << (*cit).second << endl;
-//  o << (*cit).second;
-  }
-  return o;
-}
-
-
-Por ejemplo para escribir con subrayado y en negrita podemos hacerlo
-cout<<UNDL(BOLD("Información Nutricional:"))<<endl<<endl;
-*/
 ostream &operator <<(ostream &o, recetas &rec){
   for(recetas::const_iterator cit = rec.cbegin(); cit != rec.cend(); ++cit){
     o << std::left

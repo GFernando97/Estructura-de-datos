@@ -8,60 +8,7 @@
 #include "acciones.h"
 #include "arbolbinario.h"
 
-/*
-bin/cocinero_integral
-datos/Acciones.txt
-datos/recetas.txt
-datos/ingredientes.txt
-datos/instrucciones
-
-*/
 using namespace std;
-
-
-string BuscadorInstrucciones(const string &ruta, const string &recetaCode){
-  string fullNameFile = "/"+recetaCode+"m.txt";
-  string fullRoute = ruta+fullNameFile;
-  cout << fullRoute << endl << endl;
-
-  ifstream fAux(fullRoute);
-  if(!fAux){
-    fAux.close();
-    cout << "Fstream cerrado \n";
-    return "Undefined";
-  }
-  else{
-    fAux.close();
-    return fullRoute;
-  }
-}
-
-void AsignarInstrucciones(const string &rutaInstrucciones, receta &rec, const acciones &acc){
-  cout << "Voy a asignar las instrucciones a la receta\n\n";
-  string codigo = rec.getCode();
-  string rutaInst = BuscadorInstrucciones(rutaInstrucciones, codigo);
-  cout << "RUTA:\n";
-  cout << rutaInst << endl;
-  if(rutaInst == "Undefined"){
-    cout << "Instrucciones asociadas al código no encontradas\n";
-    abort();
-  }
-  else{
-    instrucciones inst;
-    cout << "Asignando Acciones....\n";
-    inst.setAcciones(acc);
-    cout << "Abriendo ruta.....\n\n";
-    ifstream fInstrucciones(rutaInst);
-    cout << "Intentando leer ruta de instrucciones...\n";
-    fInstrucciones >> inst;
-    cout << "Objeto instrucciones creado correctamente\n";
-    fInstrucciones.close();
-    cout << "Asignando instrucciones a receta....\n";
-    rec.setInstrucciones(inst);
-    cout << "ASIGNACION TERMINADA CORRECTAMENTE!!\n\n\n";
-  }
-}
-
 
 int main(int argc, char *argv[]){
   if(argc!=5){
@@ -80,8 +27,9 @@ int main(int argc, char *argv[]){
   string secondCode = "Undefined";
 
   cout << "\nLa ruta definida para los arhivos de instrucciones es: \n",
-  cout<< ruta << endl << endl;*/
-//Errores en caso de no encontrar los archivos pasados como parametros;
+  cout<< ruta << endl << endl;
+
+  //Errores en caso de no encontrar los archivos pasados como parametros;
   if(!fAcciones){
     cout << "El archivo de acciones no ha sido encontrado." << argv[1]<<endl;
     return 0;
@@ -170,8 +118,9 @@ int main(int argc, char *argv[]){
 
   string codigoFusionado = rall.fusionaRecetas(firstCode, secondCode, acc);
 
-  cout << "Se ha insertado la nueva receta. Ahora se van a motrar sus valores:" << endl;
-  cout<<endl<<endl;
+
+  cout << "\nSe ha insertado la nueva receta. Ahora se van a motrar sus valores:" << endl;
+  cout<<endl;
   rall[codigoFusionado].calcularNutrientes(allIngre);
   rall[codigoFusionado].imprimeInfoReceta();
 

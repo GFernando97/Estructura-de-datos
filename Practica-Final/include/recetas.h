@@ -96,6 +96,11 @@ public:
   **/
   receta &operator[](string codigo){return datos.at(codigo);}
 
+  /**
+  * @brief sobrecarga constante del operador de acceso []
+  * @param codigo: valor del código de la receta a la que se intenta acceder.
+  * @return Devuelve la receta de tipo constante que tenga el código como key del map asociado.
+  **/
   receta operator[](string codigo)const{return datos.at(codigo);}
 
   /**
@@ -131,8 +136,19 @@ public:
   **/
   void insert(const receta &rec);
 
+  /**
+  * @brief Elimina los elementos de recetas.
+  * @post el resultado es un objeto recetas vacío.
+  **/
   void clear(){datos.clear();}
 
+  /**
+  * @brief Metodo para fusionar recetas
+  * @param firstCode codigo de la primera receta a fusionar
+  * @param secondCode codigo de la segunda receta a fusionar
+  * @param acc acciones existentes
+  * @return Devuelve un string con el código de la receta fusionada insertada
+  **/
   string fusionaRecetas(const string& firstCode, const string& secondCode, const acciones &acc);
 
 

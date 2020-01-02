@@ -3,7 +3,7 @@ INC = include
 OBJ = obj
 BIN = bin
 CXX = g++
-CPPFLAGS = -Wall -g  -I$(INC) -c --std=c++11
+CPPFLAGS = -Wall -g -w -I$(INC) -c --std=c++11
 # Usar -w en CPPFLAGS para desactivar los mensajes de tipo Warning
 # a la hora de compilar
 
@@ -15,11 +15,6 @@ documentacion:
 
 
 # ************ Compilación de módulos ************
-
-
-
-
-
 
 
 $(OBJ)/ingredientes.o: $(SRC)/ingredientes.cpp $(INC)/ingredientes.h $(INC)/VD.h $(INC)/VD.cpp $(INC)/ingrediente.h

@@ -18,9 +18,7 @@
 #include "color.h"
 
 
-
 using namespace std;
-
 
 /**
  * @brief Clase que representa un objeto receta.
@@ -205,6 +203,10 @@ public:
   **/
   instrucciones getInstrucciones() const{return this->instReceta;}
 
+  /**
+  * @brief Metodo constante get de las instrucciones de la receta
+  * @return valor constante de las instrucciones de la receta actual
+  **/
   instrucciones& getInstrucciones(){return this->instReceta;}
 
   /**
@@ -331,10 +333,6 @@ public:
   **/
   friend istream & operator >>(istream &i, receta &rec);
 
-  /////////////////////////////////////////////////////////////////////////////////
-  //////////////////////Métodos para calculo de nutrientes//////////////////////////
-
-
   /**
   * @brief Método para el cálculo de los nutrientes correspondientes a una receta
   * @param all: Diccionario de ingredientes en el cual buscar la información necesaria
@@ -360,13 +358,6 @@ public:
   void imprimeValNutricionales()const;
 
   /**
-  * @brief Método de fusión para fusionar otra receta con la actual
-  * @post
-  * a los nutrientes que tiene la receta.
-  **/
-  receta fusionar(const receta &recFusion);
-
-  /**
   * @brief Método de insercion de instrucciones de la receta actual
   * @param o ostream que contiene las instrucciones de la receta
   * @post
@@ -378,19 +369,29 @@ public:
   * @brief Método auxiliar creado para comprobar si una receta contiene un ingrediente.
   * @param nombreIngrediente string que contiene el nombre del ingrediente.
   * @return true si lo contiene(1).
-  * @return false  si no existe el ingrediente en la receta(0)Ç;
-  *
+  * @return false  si no existe el ingrediente en la receta(0);
   **/
   bool contains(const string &nombreIngrediente)const;
 
+  /**
+  * @brief Método auxiliar creado para buscar el archivo de instrucciones dentro de una ruta
+  * @param ruta predefinida donde se encuentran almacenadas las instrucciones.
+  * @return devuelve el path completo del archivo si este existe.
+  * @return devuelve un string con valor "Undefined" si no encuentra el archivo.
+  **/
   string BuscadorInstrucciones(const string &ruta);
 
+  /**
+  * @brief Método auxiliar creado para imprimir los valores de la receta
+  * de una forma espedífica.
+  **/
   void imprimeInfoReceta()const;
 
+  /**
+  * @brief Método auxiliar creado para imprimir las instrucciones
+  * de forma correcta.
+  **/
   void imprimeInstrucciones()const;
-
-
-
 
 
   ////////////////////////////////////////////////////////////////////////////////

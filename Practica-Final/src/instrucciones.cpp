@@ -4,8 +4,6 @@
  */
 #include "instrucciones.h"
 
-
-
 void instrucciones::copiar(const instrucciones &inst){
   this->datos = inst.datos;
   this->acc = inst.acc;
@@ -57,7 +55,7 @@ istream &operator>>(istream &i, instrucciones &inst){
       getline(iss, nombreAccion, ' ');
       getline(iss, ingredienteAccion1, '\n');
       //cout << "Nombre de la accion: " << nombreAccion << endl;
-    //  cout << "Nombre del ingrediente: " << ingredienteAccion1 << endl;
+      //cout << "Nombre del ingrediente: " << ingredienteAccion1 << endl;
       if(nombreAccion != ""){
         ariedadAccion = inst.acc.getAriedad(nombreAccion);
         ArbolBinario<string> auxTree(nombreAccion);
@@ -72,12 +70,12 @@ istream &operator>>(istream &i, instrucciones &inst){
 
           else{
             if(!stackOfTrees.empty()){
-            //  cout << "Voy a usar arboles de la pila por falta de ing...\n";
+              //cout << "Voy a usar arboles de la pila por falta de ing...\n";
               ArbolBinario<string> treeStack = stackOfTrees.top();
               stackOfTrees.pop();
               auxTree.Insertar_Hi(auxTree.getRaiz(), treeStack);
               stackOfTrees.push(auxTree);
-            //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
+              //cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
 
             }
             else{
@@ -92,10 +90,10 @@ istream &operator>>(istream &i, instrucciones &inst){
             auxTree.Insertar_Hd(auxTree.getRaiz(), ingredienteAccion1);
             ArbolBinario<string> treeStack = stackOfTrees.top();
             stackOfTrees.pop();
-          //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size()<< endl;
+            //cout << "Tamaño de Pila ahora: " << stackOfTrees.size()<< endl;
             auxTree.Insertar_Hi(auxTree.getRaiz(), treeStack);
             stackOfTrees.push(auxTree);
-          //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
+            //cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
 
 
           }
@@ -108,7 +106,7 @@ istream &operator>>(istream &i, instrucciones &inst){
               stackOfTrees.pop();
               auxTree.Insertar_Hi(auxTree.getRaiz(), stackTree);
               stackOfTrees.push(auxTree);
-            //  cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
+             //cout << "Tamaño de Pila ahora: " << stackOfTrees.size() << endl;
 
             }
             else{
@@ -124,7 +122,7 @@ istream &operator>>(istream &i, instrucciones &inst){
     }
     iss.clear();
   }
-//  cout << "\n\nTamaño de la pila despues de terminar: " << stackOfTrees.size() << endl;
+  //cout << "\n\nTamaño de la pila despues de terminar: " << stackOfTrees.size() << endl;
   inst.datos = stackOfTrees.top();
   stackOfTrees.pop();
 

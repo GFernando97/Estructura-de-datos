@@ -29,7 +29,7 @@ using namespace std;
 class ingredientes{
 private:
 
- /**
+  /**
   * @brief Vector que almacena los ingredientes.
   * Este vector almacena todos los objetos @a ingrediente que maneja la clase
   *
@@ -82,14 +82,14 @@ private:
   **/
   void Clear();
 
-  /**
+  /*
   * @brief Ordena los valores de datos por nombre en orden alfabético.
   * Método implementado- pero no usado hasta el momento.
   * @post Un vector de datos ordenado alfabéticamente.
 
   void ordenarPorNombre();
-  **/
-
+  */
+  
 public:
 
   /**
