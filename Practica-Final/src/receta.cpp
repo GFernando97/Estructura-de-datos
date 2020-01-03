@@ -176,7 +176,14 @@ void receta::imprimeInfoReceta()const{
 
 void receta::insertarInstrucciones(istream &i, const acciones &acc){
   instrucciones aux;
+  receta::const_iterator cit;
+  vector<string> vAux;
+  for(cit = this->cbegin(); cit != this->cend(); ++cit)
+    vAux.push_back((*cit).first);
+
+  aux.setIngredientesIncluidos(vAux);
   aux.setAcciones(acc);
+
   i >> aux;
 
   this->setInstrucciones(aux);

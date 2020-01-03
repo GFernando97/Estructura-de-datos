@@ -12,6 +12,7 @@
 #include <string>
 #include <sstream>
 #include <stack>
+#include <vector>
 #include "acciones.h"
 #include "arbolbinario.h"
 
@@ -37,6 +38,8 @@ private:
   * En este objeto de almacenan las acciones existentes.
   **/
   acciones acc;
+
+  vector<string> ingrIncluidos;
 
   /**
   * @brief Copia los valores de un objeto en el acutal
@@ -93,6 +96,15 @@ public:
   void setDatos(const ArbolBinario<string> &inst);
 
   /**
+  * @brief Metodo set de Ingredientes
+  * @param inst ArbolBinario con los datos de las instrucciones
+  * @post  ahora las instrucciones tienen el ArbolBinario pasado como argumento
+  * en el metodo como datos.
+  *
+  **/
+  void setIngredientesIncluidos(const vector<string> &ing);
+
+  /**
    * @brief metodo get de acciones de las instrucciones
    * @return devuelve las acciones pertenecientes al objeto acciones de la clase.
   **/
@@ -111,12 +123,20 @@ public:
   ArbolBinario<string>& getDatos(){return this->datos;}
 
   /**
-  * @brief Método auxiliar creado para comprobar si una receta contiene un ingrediente.
+  * @brief Método auxiliar creado para comprobar si una instruccion contiene una accion.
   * @param nombreIngrediente string que contiene el nombre del ingrediente.
   * @return true si lo contiene(1).
   * @return false  si no existe el ingrediente en la receta(0);
   **/
   bool contains(const string &accion)const{return acc.contains(accion);}
+
+  /**
+  * @brief Método auxiliar creado para comprobar si una receta contiene un ingrediente.
+  * @param nombreIngrediente string que contiene el nombre del ingrediente.
+  * @return true si lo contiene(1).
+  * @return false  si no existe el ingrediente en la receta(0);
+  **/
+  bool containsIngr(const string &ingr);
 
   /**
   * @brief sobrecarga del operador =
