@@ -1,1 +1,1 @@
-Prácticas personales de Estructura de datos
+Prácticas de Estructura de datos de Ingeniería Informática de la Universidad de Granada.
